@@ -1,0 +1,6166 @@
+[
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "TRXF11",
+    "Nome_Fundo": "TRX Real Estate",
+    "Preco_Fechamento_R$": 72.25,
+    "Volume_Ultimo_Dia": 286097,
+    "Volume_Financeiro_R$": 20670508.25,
+    "Variacao_Dia_%": -0.8,
+    "Gestora": "TRX",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Renda Urbana / Varejo (sale-leaseback)",
+    "Preco_Min_Periodo": 70.11,
+    "Preco_Max_Periodo": 101.39,
+    "Volume_Financeiro_Medio": 21926573.570275594,
+    "Volatilidade_Retorno_Diario_pct": 1.0634501516210089,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -25.55,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 0.93,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 1.29,
+    "Dividendos_12m_R$": 10.87,
+    "DY_12m_%": 15.04,
+    "Pagamentos_12m": 11,
+    "Media_Dividendo_12m_R$": 0.9882,
+    "Media_Dividendo_3_Ult_R$": 1.12,
+    "Tendencia_Dividendo_%": 13.3,
+    "Estabilidade_CV_%": 16.5,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": -15.54,
+    "Variacao_Preco_12m_%": -26.58,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Tijolo",
+    "DY_12m_Mediana_Pares_%": 9.91,
+    "DY_12m_vs_Pares_pp": 5.13,
+    "VP_Cota": 96.62,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.75,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -4.47,
+    "Patrimonio_Liquido": 6031755593.95,
+    "Cotistas": 351702,
+    "Cotistas_Var_12m_%": 80.9,
+    "Vacancia_%": 0.0,
+    "Cap_Rate_%": 4.03,
+    "Qtd_Imoveis": 95,
+    "FFO_Yield_%": 5.77,
+    "Spread_CDI_Liquido_pp": 3.44,
+    "DY_Real_%": 10.38,
+    "P_VP_Mediana_Pares": 0.82,
+    "P_VP_vs_Pares": -0.07,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 5.13,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 3.44,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.75,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -4.47,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 13.3,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 11.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 21926573.5703,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 88,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "KNCR11",
+    "Nome_Fundo": "Kinea Rendimentos Imobiliários",
+    "Preco_Fechamento_R$": 106.03,
+    "Volume_Ultimo_Dia": 242791,
+    "Volume_Financeiro_R$": 25743129.73,
+    "Variacao_Dia_%": -0.18,
+    "Gestora": "Kinea",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI indexado ao CDI",
+    "Preco_Min_Periodo": 103.62,
+    "Preco_Max_Periodo": 108.56,
+    "Volume_Financeiro_Medio": 19322212.972834647,
+    "Volatilidade_Retorno_Diario_pct": 0.5009352348783538,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": 1.83,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 1.15,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 1.08,
+    "Dividendos_12m_R$": 14.14,
+    "DY_12m_%": 13.34,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 1.1783,
+    "Media_Dividendo_3_Ult_R$": 1.1667,
+    "Tendencia_Dividendo_%": -1.0,
+    "Estabilidade_CV_%": 8.8,
+    "Quedas_Dividendo_12m": 2,
+    "Retorno_Total_12m_%": 14.51,
+    "Variacao_Preco_12m_%": 1.04,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Papel",
+    "DY_12m_Mediana_Pares_%": 13.34,
+    "DY_12m_vs_Pares_pp": 0.0,
+    "VP_Cota": 102.64,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 1.03,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.9,
+    "Patrimonio_Liquido": 10991179817.17,
+    "Cotistas": 586131,
+    "Cotistas_Var_12m_%": 35.7,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 10.68,
+    "Spread_CDI_Liquido_pp": 1.74,
+    "DY_Real_%": 8.75,
+    "P_VP_Mediana_Pares": 0.92,
+    "P_VP_vs_Pares": 0.11,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.0,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 1.74,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 1.03,
+        "unidade": "x",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.9,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 2.0,
+        "unidade": "",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": -1.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 19322212.9728,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 73,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "XPML11",
+    "Nome_Fundo": "XP Malls",
+    "Preco_Fechamento_R$": 99.19,
+    "Volume_Ultimo_Dia": 123797,
+    "Volume_Financeiro_R$": 12279424.43,
+    "Variacao_Dia_%": 0.02,
+    "Gestora": "XP",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Shopping",
+    "Preco_Min_Periodo": 1.06,
+    "Preco_Max_Periodo": 112.0,
+    "Volume_Financeiro_Medio": 16509935.67074803,
+    "Volatilidade_Retorno_Diario_pct": 643.6976433344427,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -5.15,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 0.95,
+    "Data_Ultimo_Dividendo": "2026-09-21",
+    "DY_Ultimo_%": 0.96,
+    "Dividendos_12m_R$": 11.0694,
+    "DY_12m_%": 11.16,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.9224,
+    "Media_Dividendo_3_Ult_R$": 0.93,
+    "Tendencia_Dividendo_%": 0.8,
+    "Estabilidade_CV_%": 0.9,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 4.91,
+    "Variacao_Preco_12m_%": -5.62,
+    "Historico_Dividendos_Meses": 54,
+    "Grupo_Pares": "Shopping",
+    "DY_12m_Mediana_Pares_%": 10.46,
+    "DY_12m_vs_Pares_pp": 0.7,
+    "VP_Cota": 110.11,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.9,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 1.26,
+    "Patrimonio_Liquido": 7081112753.36,
+    "Cotistas": 733101,
+    "Cotistas_Var_12m_%": 20.4,
+    "Vacancia_%": 5.2,
+    "Cap_Rate_%": 10.44,
+    "Qtd_Imoveis": 17,
+    "FFO_Yield_%": 9.28,
+    "Spread_CDI_Liquido_pp": -0.44,
+    "DY_Real_%": 6.66,
+    "P_VP_Mediana_Pares": 0.9,
+    "P_VP_vs_Pares": 0.01,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.7,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -0.44,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.9,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 1.26,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.8,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 16509935.6707,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 5.2,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 96,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "MXRF11",
+    "Nome_Fundo": "Maxi Renda",
+    "Preco_Fechamento_R$": 9.1,
+    "Volume_Ultimo_Dia": 1670528,
+    "Volume_Financeiro_R$": 15201804.799999999,
+    "Variacao_Dia_%": 0.22,
+    "Gestora": "XP",
+    "Tipo_Gestao": "Híbrido",
+    "Segmento": "Papel predominante (CRI + cotas de FII)",
+    "Preco_Min_Periodo": 9.03,
+    "Preco_Max_Periodo": 9.99,
+    "Volume_Financeiro_Medio": 15087650.142125985,
+    "Volatilidade_Retorno_Diario_pct": 0.5602002338686372,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -7.05,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 0.1,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 1.1,
+    "Dividendos_12m_R$": 1.1943,
+    "DY_12m_%": 13.12,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.0995,
+    "Media_Dividendo_3_Ult_R$": 0.1,
+    "Tendencia_Dividendo_%": 0.5,
+    "Estabilidade_CV_%": 1.4,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 5.04,
+    "Variacao_Preco_12m_%": -7.14,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Híbrido",
+    "DY_12m_Mediana_Pares_%": 14.72,
+    "DY_12m_vs_Pares_pp": -1.6,
+    "VP_Cota": 9.26,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.98,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -2.51,
+    "Patrimonio_Liquido": 5252427199.9,
+    "Cotistas": 1529305,
+    "Cotistas_Var_12m_%": 15.4,
+    "Vacancia_%": 0.0,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 2,
+    "FFO_Yield_%": 9.38,
+    "Spread_CDI_Liquido_pp": 1.52,
+    "DY_Real_%": 8.54,
+    "P_VP_Mediana_Pares": 0.9,
+    "P_VP_vs_Pares": 0.08,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -1.6,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 1.52,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.98,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -2.51,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.5,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 15087650.1421,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 79,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "HGLG11",
+    "Nome_Fundo": "CSHG Logística",
+    "Preco_Fechamento_R$": 147.93,
+    "Volume_Ultimo_Dia": 74708,
+    "Volume_Financeiro_R$": 11051554.440000001,
+    "Variacao_Dia_%": 0.24,
+    "Gestora": "CSHG",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Logística",
+    "Preco_Min_Periodo": 145.11,
+    "Preco_Max_Periodo": 162.01,
+    "Volume_Financeiro_Medio": 14218587.069685038,
+    "Volatilidade_Retorno_Diario_pct": 0.44755378992974887,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -6.91,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 1.17,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.79,
+    "Dividendos_12m_R$": 13.34,
+    "DY_12m_%": 9.02,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 1.1117,
+    "Media_Dividendo_3_Ult_R$": 1.1467,
+    "Tendencia_Dividendo_%": 3.1,
+    "Estabilidade_CV_%": 2.3,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 0.16,
+    "Variacao_Preco_12m_%": -8.13,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Logística",
+    "DY_12m_Mediana_Pares_%": 9.76,
+    "DY_12m_vs_Pares_pp": -0.74,
+    "VP_Cota": 165.95,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.89,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 2.3,
+    "Patrimonio_Liquido": 7567668488.14,
+    "Cotistas": 608345,
+    "Cotistas_Var_12m_%": 18.8,
+    "Vacancia_%": 2.41,
+    "Cap_Rate_%": 9.13,
+    "Qtd_Imoveis": 37,
+    "FFO_Yield_%": 7.53,
+    "Spread_CDI_Liquido_pp": -2.58,
+    "DY_Real_%": 4.61,
+    "P_VP_Mediana_Pares": 0.91,
+    "P_VP_vs_Pares": -0.02,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -0.74,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -2.58,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.89,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 2.3,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 3.1,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 14218587.0697,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 2.41,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 83,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "BTLG11",
+    "Nome_Fundo": "BTG Pactual Logística",
+    "Preco_Fechamento_R$": 99.19,
+    "Volume_Ultimo_Dia": 99144,
+    "Volume_Financeiro_R$": 9834093.36,
+    "Variacao_Dia_%": -0.53,
+    "Gestora": "BTG Pactual",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Logística",
+    "Preco_Min_Periodo": 97.4,
+    "Preco_Max_Periodo": 104.35,
+    "Volume_Financeiro_Medio": 13626886.227598425,
+    "Volatilidade_Retorno_Diario_pct": 0.4169020490797374,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -2.95,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 0.81,
+    "Data_Ultimo_Dividendo": "2026-09-16",
+    "DY_Ultimo_%": 0.82,
+    "Dividendos_12m_R$": 9.607,
+    "DY_12m_%": 9.69,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.8006,
+    "Media_Dividendo_3_Ult_R$": 0.81,
+    "Tendencia_Dividendo_%": 1.2,
+    "Estabilidade_CV_%": 1.2,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 5.4,
+    "Variacao_Preco_12m_%": -3.9,
+    "Historico_Dividendos_Meses": 107,
+    "Grupo_Pares": "Logística",
+    "DY_12m_Mediana_Pares_%": 9.76,
+    "DY_12m_vs_Pares_pp": -0.07,
+    "VP_Cota": 106.69,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.93,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 2.72,
+    "Patrimonio_Liquido": 7568317626.83,
+    "Cotistas": 525374,
+    "Cotistas_Var_12m_%": 30.8,
+    "Vacancia_%": 2.16,
+    "Cap_Rate_%": 8.08,
+    "Qtd_Imoveis": 30,
+    "FFO_Yield_%": 6.63,
+    "Spread_CDI_Liquido_pp": -1.91,
+    "DY_Real_%": 5.25,
+    "P_VP_Mediana_Pares": 0.91,
+    "P_VP_vs_Pares": 0.02,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -0.07,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -1.91,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.93,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 2.72,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 1.2,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 13626886.2276,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 2.16,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 88,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "GGRC11",
+    "Nome_Fundo": "GGR Covepi Renda",
+    "Preco_Fechamento_R$": 8.91,
+    "Volume_Ultimo_Dia": 1100425,
+    "Volume_Financeiro_R$": 9804786.75,
+    "Variacao_Dia_%": -0.22,
+    "Gestora": "GGR",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Logística / Galpões Industriais",
+    "Preco_Min_Periodo": 8.91,
+    "Preco_Max_Periodo": 10.45,
+    "Volume_Financeiro_Medio": 11033489.856535433,
+    "Volatilidade_Retorno_Diario_pct": 0.5687346373943925,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -10.0,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 0.1,
+    "Data_Ultimo_Dividendo": "2026-09-02",
+    "DY_Ultimo_%": 1.12,
+    "Dividendos_12m_R$": 1.1,
+    "DY_12m_%": 12.35,
+    "Pagamentos_12m": 11,
+    "Media_Dividendo_12m_R$": 0.1,
+    "Media_Dividendo_3_Ult_R$": 0.1,
+    "Tendencia_Dividendo_%": 0.0,
+    "Estabilidade_CV_%": 0.0,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 0.0,
+    "Variacao_Preco_12m_%": -10.99,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Tijolo",
+    "DY_12m_Mediana_Pares_%": 9.91,
+    "DY_12m_vs_Pares_pp": 2.44,
+    "VP_Cota": 10.93,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.82,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -1.04,
+    "Patrimonio_Liquido": 3777611904.3,
+    "Cotistas": 411230,
+    "Cotistas_Var_12m_%": 116.2,
+    "Vacancia_%": 0.0,
+    "Cap_Rate_%": 7.74,
+    "Qtd_Imoveis": 48,
+    "FFO_Yield_%": 4.55,
+    "Spread_CDI_Liquido_pp": 0.75,
+    "DY_Real_%": 7.8,
+    "P_VP_Mediana_Pares": 0.82,
+    "P_VP_vs_Pares": 0.0,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 2.44,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 0.75,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.82,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -1.04,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 11.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 11033489.8565,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 100,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "KNIP11",
+    "Nome_Fundo": "Kinea Índices de Preços",
+    "Preco_Fechamento_R$": 89.59,
+    "Volume_Ultimo_Dia": 72787,
+    "Volume_Financeiro_R$": 6520987.33,
+    "Variacao_Dia_%": 1.06,
+    "Gestora": "Kinea",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI indexado a IPCA",
+    "Preco_Min_Periodo": 85.2,
+    "Preco_Max_Periodo": 94.8,
+    "Volume_Financeiro_Medio": 10078121.498070868,
+    "Volatilidade_Retorno_Diario_pct": 0.7860782347538783,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": 1.7,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 0.65,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.73,
+    "Dividendos_12m_R$": 10.11,
+    "DY_12m_%": 11.28,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.8425,
+    "Media_Dividendo_3_Ult_R$": 0.9067,
+    "Tendencia_Dividendo_%": 7.6,
+    "Estabilidade_CV_%": 26.6,
+    "Quedas_Dividendo_12m": 1,
+    "Retorno_Total_12m_%": 13.84,
+    "Variacao_Preco_12m_%": 2.3,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Papel",
+    "DY_12m_Mediana_Pares_%": 13.34,
+    "DY_12m_vs_Pares_pp": -2.06,
+    "VP_Cota": 93.38,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.96,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 1.85,
+    "Patrimonio_Liquido": 7478029611.87,
+    "Cotistas": 72683,
+    "Cotistas_Var_12m_%": 1.0,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 13.85,
+    "Spread_CDI_Liquido_pp": -0.32,
+    "DY_Real_%": 6.77,
+    "P_VP_Mediana_Pares": 0.92,
+    "P_VP_vs_Pares": 0.04,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -2.06,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -0.32,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.96,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 1.85,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 1.0,
+        "unidade": "",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 7.6,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 10078121.4981,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 68,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "CPTS11",
+    "Nome_Fundo": "Capitânia Securities II",
+    "Preco_Fechamento_R$": 7.5,
+    "Volume_Ultimo_Dia": 1031681,
+    "Volume_Financeiro_R$": 7737607.5,
+    "Variacao_Dia_%": 1.08,
+    "Gestora": "Capitânia",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI High Yield / Estruturado",
+    "Preco_Min_Periodo": 7.26,
+    "Preco_Max_Periodo": 8.17,
+    "Volume_Financeiro_Medio": 7913725.054448819,
+    "Volatilidade_Retorno_Diario_pct": 0.6970977114246467,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -0.4,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 0.09,
+    "Data_Ultimo_Dividendo": "2026-09-16",
+    "DY_Ultimo_%": 1.2,
+    "Dividendos_12m_R$": 1.08,
+    "DY_12m_%": 14.4,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.09,
+    "Media_Dividendo_3_Ult_R$": 0.09,
+    "Tendencia_Dividendo_%": 0.0,
+    "Estabilidade_CV_%": 0.0,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 13.34,
+    "Variacao_Preco_12m_%": -0.92,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Papel",
+    "DY_12m_Mediana_Pares_%": 13.34,
+    "DY_12m_vs_Pares_pp": 1.06,
+    "VP_Cota": 8.48,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.88,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -4.16,
+    "Patrimonio_Liquido": 3081805083.78,
+    "Cotistas": 398543,
+    "Cotistas_Var_12m_%": 11.9,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 6.06,
+    "Spread_CDI_Liquido_pp": 2.8,
+    "DY_Real_%": 9.77,
+    "P_VP_Mediana_Pares": 0.92,
+    "P_VP_vs_Pares": -0.04,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 1.06,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 2.8,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.88,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -4.16,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 7913725.0544,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 95,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "KNRI11",
+    "Nome_Fundo": "Kinea Renda Imobiliária",
+    "Preco_Fechamento_R$": 156.84,
+    "Volume_Ultimo_Dia": 26262,
+    "Volume_Financeiro_R$": 4118932.08,
+    "Variacao_Dia_%": 0.22,
+    "Gestora": "Kinea",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Híbrido: Lajes + Logística",
+    "Preco_Min_Periodo": 144.31,
+    "Preco_Max_Periodo": 171.1,
+    "Volume_Financeiro_Medio": 6983811.951614173,
+    "Volatilidade_Retorno_Diario_pct": 0.9642423974767245,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": 5.97,
+    "Classificacao_Liquidez": "Alta",
+    "Ultimo_Dividendo_R$": 1.1,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.7,
+    "Dividendos_12m_R$": 13.11,
+    "DY_12m_%": 8.36,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 1.0925,
+    "Media_Dividendo_3_Ult_R$": 1.1933,
+    "Tendencia_Dividendo_%": 9.2,
+    "Estabilidade_CV_%": 11.2,
+    "Quedas_Dividendo_12m": 1,
+    "Retorno_Total_12m_%": 15.03,
+    "Variacao_Preco_12m_%": 6.15,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Tijolo",
+    "DY_12m_Mediana_Pares_%": 9.91,
+    "DY_12m_vs_Pares_pp": -1.55,
+    "VP_Cota": 163.56,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.96,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.19,
+    "Patrimonio_Liquido": 4613026520.42,
+    "Cotistas": 313382,
+    "Cotistas_Var_12m_%": 4.9,
+    "Vacancia_%": 0.08,
+    "Cap_Rate_%": 7.82,
+    "Qtd_Imoveis": 18,
+    "FFO_Yield_%": 7.07,
+    "Spread_CDI_Liquido_pp": -3.24,
+    "DY_Real_%": 3.97,
+    "P_VP_Mediana_Pares": 0.82,
+    "P_VP_vs_Pares": 0.14,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -1.55,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -3.24,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.96,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.19,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 1.0,
+        "unidade": "",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 9.2,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 6983811.9516,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 0.08,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 67,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "VISC11",
+    "Nome_Fundo": "Vinci Shopping Centers",
+    "Preco_Fechamento_R$": 103.19,
+    "Volume_Ultimo_Dia": 54377,
+    "Volume_Financeiro_R$": 5611162.63,
+    "Variacao_Dia_%": 0.29,
+    "Gestora": "Vinci",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Shopping",
+    "Preco_Min_Periodo": 100.85,
+    "Preco_Max_Periodo": 113.2,
+    "Volume_Financeiro_Medio": 6619694.165039371,
+    "Volatilidade_Retorno_Diario_pct": 0.6610703372864932,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -4.81,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 0.84,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.81,
+    "Dividendos_12m_R$": 9.96,
+    "DY_12m_%": 9.65,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.83,
+    "Media_Dividendo_3_Ult_R$": 0.84,
+    "Tendencia_Dividendo_%": 1.2,
+    "Estabilidade_CV_%": 1.7,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 3.07,
+    "Variacao_Preco_12m_%": -6.0,
+    "Historico_Dividendos_Meses": 105,
+    "Grupo_Pares": "Shopping",
+    "DY_12m_Mediana_Pares_%": 10.46,
+    "DY_12m_vs_Pares_pp": -0.81,
+    "VP_Cota": 115.45,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.89,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -6.45,
+    "Patrimonio_Liquido": 3328225550.62,
+    "Cotistas": 345414,
+    "Cotistas_Var_12m_%": 1.1,
+    "Vacancia_%": 5.78,
+    "Cap_Rate_%": 6.89,
+    "Qtd_Imoveis": 32,
+    "FFO_Yield_%": 6.65,
+    "Spread_CDI_Liquido_pp": -1.95,
+    "DY_Real_%": 5.21,
+    "P_VP_Mediana_Pares": 0.9,
+    "P_VP_vs_Pares": -0.01,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -0.81,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -1.95,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.89,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -6.45,
+        "unidade": "%",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 1.2,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 6619694.165,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 5.78,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 79,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "XPLG11",
+    "Nome_Fundo": "XP Log",
+    "Preco_Fechamento_R$": 92.39,
+    "Volume_Ultimo_Dia": 57283,
+    "Volume_Financeiro_R$": 5292376.37,
+    "Variacao_Dia_%": -0.16,
+    "Gestora": "XP",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Logística",
+    "Preco_Min_Periodo": 88.45,
+    "Preco_Max_Periodo": 105.88,
+    "Volume_Financeiro_Medio": 6350323.864330708,
+    "Volatilidade_Retorno_Diario_pct": 0.6119434774755096,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -8.57,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 0.82,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.89,
+    "Dividendos_12m_R$": 9.84,
+    "DY_12m_%": 10.65,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.82,
+    "Media_Dividendo_3_Ult_R$": 0.82,
+    "Tendencia_Dividendo_%": 0.0,
+    "Estabilidade_CV_%": 0.0,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 1.15,
+    "Variacao_Preco_12m_%": -8.59,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Logística",
+    "DY_12m_Mediana_Pares_%": 9.76,
+    "DY_12m_vs_Pares_pp": 0.89,
+    "VP_Cota": 104.65,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.88,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -1.52,
+    "Patrimonio_Liquido": 5377779876.31,
+    "Cotistas": 366494,
+    "Cotistas_Var_12m_%": 8.8,
+    "Vacancia_%": 16.5,
+    "Cap_Rate_%": 7.71,
+    "Qtd_Imoveis": 30,
+    "FFO_Yield_%": 7.99,
+    "Spread_CDI_Liquido_pp": -0.95,
+    "DY_Real_%": 6.17,
+    "P_VP_Mediana_Pares": 0.91,
+    "P_VP_vs_Pares": -0.03,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.89,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -0.95,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.88,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -1.52,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 6350323.8643,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 16.5,
+        "unidade": "%",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 88,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "TGAR11",
+    "Nome_Fundo": "TG Ativo Real",
+    "Preco_Fechamento_R$": 43.64,
+    "Volume_Ultimo_Dia": 45752,
+    "Volume_Financeiro_R$": 1996617.28,
+    "Variacao_Dia_%": -0.37,
+    "Gestora": "TG Core",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "Crédito estruturado com garantia real",
+    "Preco_Min_Periodo": 42.85,
+    "Preco_Max_Periodo": 93.75,
+    "Volume_Financeiro_Medio": 6030095.103661417,
+    "Volatilidade_Retorno_Diario_pct": 1.8078157732480356,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -50.01,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 0.7,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 1.6,
+    "Dividendos_12m_R$": 9.73,
+    "DY_12m_%": 22.3,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.8108,
+    "Media_Dividendo_3_Ult_R$": 0.7133,
+    "Tendencia_Dividendo_%": -12.0,
+    "Estabilidade_CV_%": 16.5,
+    "Quedas_Dividendo_12m": 1,
+    "Retorno_Total_12m_%": -37.83,
+    "Variacao_Preco_12m_%": -49.17,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Papel",
+    "DY_12m_Mediana_Pares_%": 13.34,
+    "DY_12m_vs_Pares_pp": 8.96,
+    "VP_Cota": 106.64,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.41,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -2.77,
+    "Patrimonio_Liquido": 2513202336.34,
+    "Cotistas": 127101,
+    "Cotistas_Var_12m_%": -17.4,
+    "Vacancia_%": 0.0,
+    "Cap_Rate_%": 16.43,
+    "Qtd_Imoveis": 4,
+    "FFO_Yield_%": 23.02,
+    "Spread_CDI_Liquido_pp": 10.7,
+    "DY_Real_%": 17.35,
+    "P_VP_Mediana_Pares": 0.92,
+    "P_VP_vs_Pares": -0.51,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 8.96,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 10.7,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.41,
+        "unidade": "x",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -2.77,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 1.0,
+        "unidade": "",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": -12.0,
+        "unidade": "%",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 6030095.1037,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 41,
+    "Checklist_Sinal": "vermelho",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "HGRU11",
+    "Nome_Fundo": "CSHG Renda Urbana",
+    "Preco_Fechamento_R$": 114.55,
+    "Volume_Ultimo_Dia": 44463,
+    "Volume_Financeiro_R$": 5093236.649999999,
+    "Variacao_Dia_%": 0.17,
+    "Gestora": "CSHG",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Renda Urbana / Varejo",
+    "Preco_Min_Periodo": 113.09,
+    "Preco_Max_Periodo": 133.5,
+    "Volume_Financeiro_Medio": 5612912.132480315,
+    "Volatilidade_Retorno_Diario_pct": 0.6707382863670036,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -9.22,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 0.95,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.83,
+    "Dividendos_12m_R$": 10.9443,
+    "DY_12m_%": 9.55,
+    "Pagamentos_12m": 11,
+    "Media_Dividendo_12m_R$": 0.9949,
+    "Media_Dividendo_3_Ult_R$": 0.95,
+    "Tendencia_Dividendo_%": -4.5,
+    "Estabilidade_CV_%": 14.4,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": -1.15,
+    "Variacao_Preco_12m_%": -9.77,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Tijolo",
+    "DY_12m_Mediana_Pares_%": 9.91,
+    "DY_12m_vs_Pares_pp": -0.36,
+    "VP_Cota": 128.11,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.89,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.22,
+    "Patrimonio_Liquido": 3181472851.52,
+    "Cotistas": 232516,
+    "Cotistas_Var_12m_%": 5.1,
+    "Vacancia_%": 0.81,
+    "Cap_Rate_%": 9.68,
+    "Qtd_Imoveis": 98,
+    "FFO_Yield_%": 7.82,
+    "Spread_CDI_Liquido_pp": -2.05,
+    "DY_Real_%": 5.11,
+    "P_VP_Mediana_Pares": 0.82,
+    "P_VP_vs_Pares": 0.07,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -0.36,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -2.05,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.89,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.22,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": -4.5,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 11.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 5612912.1325,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 0.81,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 83,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "BRCO11",
+    "Nome_Fundo": "Bresco Logística",
+    "Preco_Fechamento_R$": 111.46,
+    "Volume_Ultimo_Dia": 44364,
+    "Volume_Financeiro_R$": 4944811.4399999995,
+    "Variacao_Dia_%": 0.96,
+    "Gestora": "Bresco",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Logística",
+    "Preco_Min_Periodo": 109.58,
+    "Preco_Max_Periodo": 124.0,
+    "Volume_Financeiro_Medio": 5383936.094724409,
+    "Volatilidade_Retorno_Diario_pct": 0.7972828527562082,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -1.8,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 0.91,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.82,
+    "Dividendos_12m_R$": 10.96,
+    "DY_12m_%": 9.83,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.9133,
+    "Media_Dividendo_3_Ult_R$": 0.9567,
+    "Tendencia_Dividendo_%": 4.8,
+    "Estabilidade_CV_%": 5.6,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 4.8,
+    "Variacao_Preco_12m_%": -4.58,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Logística",
+    "DY_12m_Mediana_Pares_%": 9.76,
+    "DY_12m_vs_Pares_pp": 0.07,
+    "VP_Cota": 114.76,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.97,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -2.52,
+    "Patrimonio_Liquido": 2068114437.96,
+    "Cotistas": 137263,
+    "Cotistas_Var_12m_%": 14.8,
+    "Vacancia_%": 9.53,
+    "Cap_Rate_%": 8.26,
+    "Qtd_Imoveis": 14,
+    "FFO_Yield_%": 7.44,
+    "Spread_CDI_Liquido_pp": -1.77,
+    "DY_Real_%": 5.38,
+    "P_VP_Mediana_Pares": 0.91,
+    "P_VP_vs_Pares": 0.06,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.07,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -1.77,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.97,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -2.52,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 4.8,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 5383936.0947,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 9.53,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 88,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "KNSC11",
+    "Nome_Fundo": "Kinea Securities",
+    "Preco_Fechamento_R$": 9.07,
+    "Volume_Ultimo_Dia": 603987,
+    "Volume_Financeiro_R$": 5478162.09,
+    "Variacao_Dia_%": 0.33,
+    "Gestora": "Kinea",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI High Yield",
+    "Preco_Min_Periodo": 8.53,
+    "Preco_Max_Periodo": 9.3,
+    "Volume_Financeiro_Medio": 5284591.501023622,
+    "Volatilidade_Retorno_Diario_pct": 0.5967360560349789,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": 4.61,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 0.09,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.99,
+    "Dividendos_12m_R$": 1.1481,
+    "DY_12m_%": 12.66,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.0957,
+    "Media_Dividendo_3_Ult_R$": 0.0999,
+    "Tendencia_Dividendo_%": 4.4,
+    "Estabilidade_CV_%": 9.0,
+    "Quedas_Dividendo_12m": 1,
+    "Retorno_Total_12m_%": 15.46,
+    "Variacao_Preco_12m_%": 2.49,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Papel",
+    "DY_12m_Mediana_Pares_%": 13.34,
+    "DY_12m_vs_Pares_pp": -0.68,
+    "VP_Cota": 8.76,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 1.04,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.0,
+    "Patrimonio_Liquido": 1788939459.44,
+    "Cotistas": 269532,
+    "Cotistas_Var_12m_%": 19.5,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 14.07,
+    "Spread_CDI_Liquido_pp": 1.06,
+    "DY_Real_%": 8.1,
+    "P_VP_Mediana_Pares": 0.92,
+    "P_VP_vs_Pares": 0.12,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -0.68,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 1.06,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 1.04,
+        "unidade": "x",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 1.0,
+        "unidade": "",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 4.4,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 5284591.501,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 73,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "RBRY11",
+    "Nome_Fundo": "RBR Alpha Multiestratégia",
+    "Preco_Fechamento_R$": 81.44,
+    "Volume_Ultimo_Dia": 35041,
+    "Volume_Financeiro_R$": 2853739.04,
+    "Variacao_Dia_%": -0.12,
+    "Gestora": "RBR",
+    "Tipo_Gestao": "Híbrido",
+    "Segmento": "Multiestratégia (papel + tijolo + FoF)",
+    "Preco_Min_Periodo": 75.6,
+    "Preco_Max_Periodo": 99.48,
+    "Volume_Financeiro_Medio": 4836326.146850393,
+    "Volatilidade_Retorno_Diario_pct": 0.7174054753755904,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -14.41,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 1.0,
+    "Data_Ultimo_Dividendo": "2026-09-11",
+    "DY_Ultimo_%": 1.23,
+    "Dividendos_12m_R$": 13.3,
+    "DY_12m_%": 16.33,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 1.1083,
+    "Media_Dividendo_3_Ult_R$": 1.0,
+    "Tendencia_Dividendo_%": -9.8,
+    "Estabilidade_CV_%": 9.9,
+    "Quedas_Dividendo_12m": 1,
+    "Retorno_Total_12m_%": -1.43,
+    "Variacao_Preco_12m_%": -15.26,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Híbrido",
+    "DY_12m_Mediana_Pares_%": 14.72,
+    "DY_12m_vs_Pares_pp": 1.61,
+    "VP_Cota": 100.43,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.81,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 2.21,
+    "Patrimonio_Liquido": 1282408329.21,
+    "Cotistas": 77075,
+    "Cotistas_Var_12m_%": 26.3,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 12.61,
+    "Spread_CDI_Liquido_pp": 4.73,
+    "DY_Real_%": 11.62,
+    "P_VP_Mediana_Pares": 0.9,
+    "P_VP_vs_Pares": -0.08,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 1.61,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 4.73,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.81,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 2.21,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 1.0,
+        "unidade": "",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": -9.8,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 4836326.1469,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": null,
+        "unidade": "%",
+        "status": "sem_dado",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 86,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 92
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "MCCI11",
+    "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
+    "Preco_Fechamento_R$": 93.97,
+    "Volume_Ultimo_Dia": 33947,
+    "Volume_Financeiro_R$": 3189999.59,
+    "Variacao_Dia_%": -0.03,
+    "Gestora": "Mauá Capital",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI High Grade",
+    "Preco_Min_Periodo": 86.11,
+    "Preco_Max_Periodo": 97.39,
+    "Volume_Financeiro_Medio": 4716043.552244094,
+    "Volatilidade_Retorno_Diario_pct": 0.7336080196670818,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": 4.16,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 1.0,
+    "Data_Ultimo_Dividendo": "2026-09-14",
+    "DY_Ultimo_%": 1.06,
+    "Dividendos_12m_R$": 12.0,
+    "DY_12m_%": 12.77,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 1.0,
+    "Media_Dividendo_3_Ult_R$": 1.0,
+    "Tendencia_Dividendo_%": 0.0,
+    "Estabilidade_CV_%": 0.0,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 16.45,
+    "Variacao_Preco_12m_%": 3.26,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "CRI High Grade",
+    "DY_12m_Mediana_Pares_%": 14.1,
+    "DY_12m_vs_Pares_pp": -1.33,
+    "VP_Cota": 94.01,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 1.0,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.7,
+    "Patrimonio_Liquido": 1594373850.45,
+    "Cotistas": 125253,
+    "Cotistas_Var_12m_%": 13.8,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 10.96,
+    "Spread_CDI_Liquido_pp": 1.17,
+    "DY_Real_%": 8.2,
+    "P_VP_Mediana_Pares": 0.86,
+    "P_VP_vs_Pares": 0.14,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -1.33,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 1.17,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 1.0,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.7,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 4716043.5522,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 91,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "PVBI11",
+    "Nome_Fundo": "VBI Prime Properties",
+    "Preco_Fechamento_R$": 65.1,
+    "Volume_Ultimo_Dia": 53698,
+    "Volume_Financeiro_R$": 3495739.8,
+    "Variacao_Dia_%": -0.02,
+    "Gestora": "VBI",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Lajes Corporativas",
+    "Preco_Min_Periodo": 63.99,
+    "Preco_Max_Periodo": 84.24,
+    "Volume_Financeiro_Medio": 4663684.808267716,
+    "Volatilidade_Retorno_Diario_pct": 1.3130125157404238,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -14.26,
+    "Classificacao_Liquidez": "Média",
+    "Ultimo_Dividendo_R$": 0.37,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.57,
+    "Dividendos_12m_R$": 5.07,
+    "DY_12m_%": 7.79,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.4225,
+    "Media_Dividendo_3_Ult_R$": 0.39,
+    "Tendencia_Dividendo_%": -7.7,
+    "Estabilidade_CV_%": 6.8,
+    "Quedas_Dividendo_12m": 1,
+    "Retorno_Total_12m_%": -8.76,
+    "Variacao_Preco_12m_%": -15.36,
+    "Historico_Dividendos_Meses": 31,
+    "Grupo_Pares": "Tijolo",
+    "DY_12m_Mediana_Pares_%": 9.91,
+    "DY_12m_vs_Pares_pp": -2.12,
+    "VP_Cota": 104.76,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.62,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -2.85,
+    "Patrimonio_Liquido": 2842168108.17,
+    "Cotistas": 179517,
+    "Cotistas_Var_12m_%": 11.4,
+    "Vacancia_%": 9.28,
+    "Cap_Rate_%": 10.1,
+    "Qtd_Imoveis": 8,
+    "FFO_Yield_%": 7.96,
+    "Spread_CDI_Liquido_pp": -3.81,
+    "DY_Real_%": 3.43,
+    "P_VP_Mediana_Pares": 0.82,
+    "P_VP_vs_Pares": -0.2,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -2.12,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -3.81,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.62,
+        "unidade": "x",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -2.85,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 1.0,
+        "unidade": "",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": -7.7,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 4663684.8083,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 9.28,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 46,
+    "Checklist_Sinal": "vermelho",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "RBRR11",
+    "Nome_Fundo": "RBR Rendimento High Grade",
+    "Preco_Fechamento_R$": 67.85,
+    "Volume_Ultimo_Dia": 54792,
+    "Volume_Financeiro_R$": 3717637.1999999997,
+    "Variacao_Dia_%": -0.18,
+    "Gestora": "RBR",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI High Grade",
+    "Preco_Min_Periodo": 67.35,
+    "Preco_Max_Periodo": 90.25,
+    "Volume_Financeiro_Medio": 4521641.041535432,
+    "Volatilidade_Retorno_Diario_pct": 0.8788921126939833,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -22.46,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.9,
+    "Data_Ultimo_Dividendo": "2026-09-11",
+    "DY_Ultimo_%": 1.33,
+    "Dividendos_12m_R$": 9.93,
+    "DY_12m_%": 14.64,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.8275,
+    "Media_Dividendo_3_Ult_R$": 0.9267,
+    "Tendencia_Dividendo_%": 12.0,
+    "Estabilidade_CV_%": 11.3,
+    "Quedas_Dividendo_12m": 1,
+    "Retorno_Total_12m_%": -11.05,
+    "Variacao_Preco_12m_%": -22.4,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "CRI High Grade",
+    "DY_12m_Mediana_Pares_%": 14.1,
+    "DY_12m_vs_Pares_pp": 0.54,
+    "VP_Cota": 92.34,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.73,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.08,
+    "Patrimonio_Liquido": 1505238923.48,
+    "Cotistas": 143056,
+    "Cotistas_Var_12m_%": 11.1,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 11.02,
+    "Spread_CDI_Liquido_pp": 3.04,
+    "DY_Real_%": 10.0,
+    "P_VP_Mediana_Pares": 0.86,
+    "P_VP_vs_Pares": -0.13,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.54,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 3.04,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.73,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.08,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 1.0,
+        "unidade": "",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 12.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 4521641.0415,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 91,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "HSML11",
+    "Nome_Fundo": "HSI Malls",
+    "Preco_Fechamento_R$": 82.4,
+    "Volume_Ultimo_Dia": 39522,
+    "Volume_Financeiro_R$": 3256612.8000000003,
+    "Variacao_Dia_%": -0.19,
+    "Gestora": "HSI",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Shopping",
+    "Preco_Min_Periodo": 81.37,
+    "Preco_Max_Periodo": 95.9,
+    "Volume_Financeiro_Medio": 4469823.649330709,
+    "Volatilidade_Retorno_Diario_pct": 0.9260004653268582,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -3.97,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.75,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.91,
+    "Dividendos_12m_R$": 8.59,
+    "DY_12m_%": 10.42,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.7158,
+    "Media_Dividendo_3_Ult_R$": 0.75,
+    "Tendencia_Dividendo_%": 4.8,
+    "Estabilidade_CV_%": 3.5,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 5.94,
+    "Variacao_Preco_12m_%": -4.06,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Shopping",
+    "DY_12m_Mediana_Pares_%": 10.46,
+    "DY_12m_vs_Pares_pp": -0.04,
+    "VP_Cota": 98.93,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.83,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -4.97,
+    "Patrimonio_Liquido": 2110218553.13,
+    "Cotistas": 186884,
+    "Cotistas_Var_12m_%": -0.0,
+    "Vacancia_%": 86.28,
+    "Cap_Rate_%": 12.05,
+    "Qtd_Imoveis": 10,
+    "FFO_Yield_%": 5.49,
+    "Spread_CDI_Liquido_pp": -1.18,
+    "DY_Real_%": 5.95,
+    "P_VP_Mediana_Pares": 0.9,
+    "P_VP_vs_Pares": -0.07,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -0.04,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -1.18,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.83,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -4.97,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 4.8,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 4469823.6493,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 86.28,
+        "unidade": "%",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 75,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "HGBS11",
+    "Nome_Fundo": "CSHG Brasil Shopping",
+    "Preco_Fechamento_R$": 18.56,
+    "Volume_Ultimo_Dia": 492418,
+    "Volume_Financeiro_R$": 9139278.08,
+    "Variacao_Dia_%": -0.16,
+    "Gestora": "CSHG",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Shopping",
+    "Preco_Min_Periodo": 18.34,
+    "Preco_Max_Periodo": 21.04,
+    "Volume_Financeiro_Medio": 4288312.295354331,
+    "Volatilidade_Retorno_Diario_pct": 0.5074013434602374,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -7.89,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.17,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.92,
+    "Dividendos_12m_R$": 1.95,
+    "DY_12m_%": 10.51,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.1625,
+    "Media_Dividendo_3_Ult_R$": 0.17,
+    "Tendencia_Dividendo_%": 4.6,
+    "Estabilidade_CV_%": 5.7,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 0.59,
+    "Variacao_Preco_12m_%": -8.97,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Shopping",
+    "DY_12m_Mediana_Pares_%": 10.46,
+    "DY_12m_vs_Pares_pp": 0.04,
+    "VP_Cota": 20.18,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.92,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -6.36,
+    "Patrimonio_Liquido": 2913123560.27,
+    "Cotistas": 202530,
+    "Cotistas_Var_12m_%": 51.2,
+    "Vacancia_%": 4.28,
+    "Cap_Rate_%": 10.82,
+    "Qtd_Imoveis": 15,
+    "FFO_Yield_%": 8.54,
+    "Spread_CDI_Liquido_pp": -1.09,
+    "DY_Real_%": 6.04,
+    "P_VP_Mediana_Pares": 0.9,
+    "P_VP_vs_Pares": 0.03,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.04,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -1.09,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.92,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -6.36,
+        "unidade": "%",
+        "status": "vermelho",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 4.6,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 4288312.2954,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 4.28,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 88,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "HGCR11",
+    "Nome_Fundo": "CSHG Recebíveis Imobiliários",
+    "Preco_Fechamento_R$": 94.04,
+    "Volume_Ultimo_Dia": 24594,
+    "Volume_Financeiro_R$": 2312819.7600000002,
+    "Variacao_Dia_%": -0.22,
+    "Gestora": "CSHG",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI High Grade",
+    "Preco_Min_Periodo": 88.49,
+    "Preco_Max_Periodo": 99.68,
+    "Volume_Financeiro_Medio": 3281687.655551181,
+    "Volatilidade_Retorno_Diario_pct": 0.7779970514942585,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -0.24,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 1.0,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 1.06,
+    "Dividendos_12m_R$": 11.75,
+    "DY_12m_%": 12.49,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.9792,
+    "Media_Dividendo_3_Ult_R$": 0.9833,
+    "Tendencia_Dividendo_%": 0.4,
+    "Estabilidade_CV_%": 3.3,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 11.33,
+    "Variacao_Preco_12m_%": -1.03,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "CRI High Grade",
+    "DY_12m_Mediana_Pares_%": 14.1,
+    "DY_12m_vs_Pares_pp": -1.61,
+    "VP_Cota": 97.84,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.96,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 1.12,
+    "Patrimonio_Liquido": 1508480185.02,
+    "Cotistas": 100918,
+    "Cotistas_Var_12m_%": 0.5,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 11.39,
+    "Spread_CDI_Liquido_pp": 0.89,
+    "DY_Real_%": 7.94,
+    "P_VP_Mediana_Pares": 0.86,
+    "P_VP_vs_Pares": 0.1,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": -1.61,
+        "unidade": "p.p.",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 0.89,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.96,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 1.12,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.4,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 3281687.6556,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 82,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "RECR11",
+    "Nome_Fundo": "REC Recebíveis Imobiliários",
+    "Preco_Fechamento_R$": 73.48,
+    "Volume_Ultimo_Dia": 28980,
+    "Volume_Financeiro_R$": 2129450.4,
+    "Variacao_Dia_%": 0.25,
+    "Gestora": "REC",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI High Grade",
+    "Preco_Min_Periodo": 55.31,
+    "Preco_Max_Periodo": 83.59,
+    "Volume_Financeiro_Medio": 3068573.50023622,
+    "Volatilidade_Retorno_Diario_pct": 3.236051774019272,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -9.4,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.7373,
+    "Data_Ultimo_Dividendo": "2026-09-09",
+    "DY_Ultimo_%": 1.0,
+    "Dividendos_12m_R$": 10.6282,
+    "DY_12m_%": 14.46,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.8857,
+    "Media_Dividendo_3_Ult_R$": 0.9706,
+    "Tendencia_Dividendo_%": 9.6,
+    "Estabilidade_CV_%": 20.2,
+    "Quedas_Dividendo_12m": 2,
+    "Retorno_Total_12m_%": 4.5,
+    "Variacao_Preco_12m_%": -8.71,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "CRI High Grade",
+    "DY_12m_Mediana_Pares_%": 14.1,
+    "DY_12m_vs_Pares_pp": 0.36,
+    "VP_Cota": 87.7,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.84,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -1.29,
+    "Patrimonio_Liquido": 2318894217.75,
+    "Cotistas": 173041,
+    "Cotistas_Var_12m_%": -0.1,
+    "Vacancia_%": 100.0,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 1,
+    "FFO_Yield_%": 14.53,
+    "Spread_CDI_Liquido_pp": 2.86,
+    "DY_Real_%": 9.83,
+    "P_VP_Mediana_Pares": 0.86,
+    "P_VP_vs_Pares": -0.02,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.36,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 2.86,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.84,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -1.29,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 2.0,
+        "unidade": "",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 9.6,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 3068573.5002,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 82,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "PCIP11",
+    "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
+    "Preco_Fechamento_R$": 72.99,
+    "Volume_Ultimo_Dia": 27610,
+    "Volume_Financeiro_R$": 2015253.9,
+    "Variacao_Dia_%": -0.42,
+    "Gestora": "Patria",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI indexado a IPCA",
+    "Preco_Min_Periodo": 69.31,
+    "Preco_Max_Periodo": 88.81,
+    "Volume_Financeiro_Medio": 2978163.5386614176,
+    "Volatilidade_Retorno_Diario_pct": 0.9967767285304835,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -11.83,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.8,
+    "Data_Ultimo_Dividendo": "2026-09-10",
+    "DY_Ultimo_%": 1.1,
+    "Dividendos_12m_R$": 9.74,
+    "DY_12m_%": 13.34,
+    "Pagamentos_12m": 11,
+    "Media_Dividendo_12m_R$": 0.8855,
+    "Media_Dividendo_3_Ult_R$": 0.9567,
+    "Tendencia_Dividendo_%": 8.0,
+    "Estabilidade_CV_%": 9.0,
+    "Quedas_Dividendo_12m": 2,
+    "Retorno_Total_12m_%": -0.06,
+    "Variacao_Preco_12m_%": -11.83,
+    "Historico_Dividendos_Meses": 53,
+    "Grupo_Pares": "Papel",
+    "DY_12m_Mediana_Pares_%": 13.34,
+    "DY_12m_vs_Pares_pp": 0.0,
+    "VP_Cota": 93.29,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.78,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.45,
+    "Patrimonio_Liquido": 1587101203.64,
+    "Cotistas": 112550,
+    "Cotistas_Var_12m_%": 34.4,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 15.37,
+    "Spread_CDI_Liquido_pp": 1.74,
+    "DY_Real_%": 8.75,
+    "P_VP_Mediana_Pares": 0.92,
+    "P_VP_vs_Pares": -0.14,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.0,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 1.74,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.78,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.45,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 2.0,
+        "unidade": "",
+        "status": "vermelho",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 8.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 11.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 2978163.5387,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 82,
+    "Checklist_Sinal": "amarelo",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "ALZR11",
+    "Nome_Fundo": "Alianza Trust Renda Imobiliária",
+    "Preco_Fechamento_R$": 9.94,
+    "Volume_Ultimo_Dia": 256288,
+    "Volume_Financeiro_R$": 2547502.7199999997,
+    "Variacao_Dia_%": 0.51,
+    "Gestora": "Alianza/AZ Quest",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Renda Urbana / Industrial (sale-leaseback)",
+    "Preco_Min_Periodo": 9.7,
+    "Preco_Max_Periodo": 10.83,
+    "Volume_Financeiro_Medio": 2528548.1152362204,
+    "Volatilidade_Retorno_Diario_pct": 0.5442974654073462,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -5.33,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.084,
+    "Data_Ultimo_Dividendo": "2026-09-21",
+    "DY_Ultimo_%": 0.85,
+    "Dividendos_12m_R$": 1.0042,
+    "DY_12m_%": 10.1,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.0837,
+    "Media_Dividendo_3_Ult_R$": 0.0838,
+    "Tendencia_Dividendo_%": 0.1,
+    "Estabilidade_CV_%": 0.6,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 3.74,
+    "Variacao_Preco_12m_%": -5.78,
+    "Historico_Dividendos_Meses": 54,
+    "Grupo_Pares": "Tijolo",
+    "DY_12m_Mediana_Pares_%": 9.91,
+    "DY_12m_vs_Pares_pp": 0.19,
+    "VP_Cota": 10.7,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.93,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": 0.21,
+    "Patrimonio_Liquido": 1758690658.65,
+    "Cotistas": 209909,
+    "Cotistas_Var_12m_%": 25.3,
+    "Vacancia_%": 0.0,
+    "Cap_Rate_%": 8.58,
+    "Qtd_Imoveis": 20,
+    "FFO_Yield_%": 8.51,
+    "Spread_CDI_Liquido_pp": -1.5,
+    "DY_Real_%": 5.64,
+    "P_VP_Mediana_Pares": 0.82,
+    "P_VP_vs_Pares": 0.11,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.19,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -1.5,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.93,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": 0.21,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.1,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 2528548.1152,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 96,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "HGRE11",
+    "Nome_Fundo": "CSHG Real Estate",
+    "Preco_Fechamento_R$": 116.07,
+    "Volume_Ultimo_Dia": 12925,
+    "Volume_Financeiro_R$": 1500204.75,
+    "Variacao_Dia_%": -0.03,
+    "Gestora": "CSHG",
+    "Tipo_Gestao": "Tijolo",
+    "Segmento": "Lajes Corporativas",
+    "Preco_Min_Periodo": 112.45,
+    "Preco_Max_Periodo": 131.55,
+    "Volume_Financeiro_Medio": 2330357.687874016,
+    "Volatilidade_Retorno_Diario_pct": 1.0579113758139096,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -2.54,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.85,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.73,
+    "Dividendos_12m_R$": 11.5,
+    "DY_12m_%": 9.91,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.9583,
+    "Media_Dividendo_3_Ult_R$": 1.0667,
+    "Tendencia_Dividendo_%": 11.3,
+    "Estabilidade_CV_%": 25.3,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 3.96,
+    "Variacao_Preco_12m_%": -5.41,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "Tijolo",
+    "DY_12m_Mediana_Pares_%": 9.91,
+    "DY_12m_vs_Pares_pp": 0.0,
+    "VP_Cota": 150.56,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.77,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -3.32,
+    "Patrimonio_Liquido": 1779304317.73,
+    "Cotistas": 143912,
+    "Cotistas_Var_12m_%": 2.0,
+    "Vacancia_%": 5.93,
+    "Cap_Rate_%": 10.77,
+    "Qtd_Imoveis": 12,
+    "FFO_Yield_%": 7.75,
+    "Spread_CDI_Liquido_pp": -1.69,
+    "DY_Real_%": 5.46,
+    "P_VP_Mediana_Pares": 0.82,
+    "P_VP_vs_Pares": -0.05,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.0,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": -1.69,
+        "unidade": "p.p.",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.77,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -3.32,
+        "unidade": "%",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 11.3,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 2330357.6879,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      },
+      {
+        "id": "vacancia",
+        "nome": "Vacância (Fundamentus)",
+        "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho.",
+        "valor": 5.93,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 7
+        },
+        "amarelo": {
+          "min": null,
+          "max": 15
+        }
+      }
+    ],
+    "Checklist_Nota": 92,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "VRTA11",
+    "Nome_Fundo": "Fator Verità",
+    "Preco_Fechamento_R$": 72.32,
+    "Volume_Ultimo_Dia": 19836,
+    "Volume_Financeiro_R$": 1434539.5199999998,
+    "Variacao_Dia_%": 1.32,
+    "Gestora": "Fator",
+    "Tipo_Gestao": "Papel",
+    "Segmento": "CRI High Grade",
+    "Preco_Min_Periodo": 68.2,
+    "Preco_Max_Periodo": 82.6,
+    "Volume_Financeiro_Medio": 1703197.231062992,
+    "Volatilidade_Retorno_Diario_pct": 0.756227911657448,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": -6.8,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.85,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 1.18,
+    "Dividendos_12m_R$": 10.2,
+    "DY_12m_%": 14.1,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.85,
+    "Media_Dividendo_3_Ult_R$": 0.85,
+    "Tendencia_Dividendo_%": 0.0,
+    "Estabilidade_CV_%": 0.0,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 4.15,
+    "Variacao_Preco_12m_%": -8.72,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "CRI High Grade",
+    "DY_12m_Mediana_Pares_%": 14.1,
+    "DY_12m_vs_Pares_pp": 0.0,
+    "VP_Cota": 83.62,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.86,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -0.14,
+    "Patrimonio_Liquido": 1303872308.41,
+    "Cotistas": 100313,
+    "Cotistas_Var_12m_%": -9.3,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 14.42,
+    "Spread_CDI_Liquido_pp": 2.5,
+    "DY_Real_%": 9.48,
+    "P_VP_Mediana_Pares": 0.86,
+    "P_VP_vs_Pares": 0.0,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.0,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 2.5,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.86,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -0.14,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 0.0,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 1703197.2311,
+        "unidade": "R$",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 100,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  },
+  {
+    "Data_Coleta": "2026-09-30",
+    "Data_Pregao": "2026-09-29",
+    "Ticker": "BCIA11",
+    "Nome_Fundo": "Brasil Capital Real Estate FoF",
+    "Preco_Fechamento_R$": 86.96,
+    "Volume_Ultimo_Dia": 5939,
+    "Volume_Financeiro_R$": 516455.43999999994,
+    "Variacao_Dia_%": -0.29,
+    "Gestora": "Brasil Capital",
+    "Tipo_Gestao": "FoF",
+    "Segmento": "Fundo de Fundos",
+    "Preco_Min_Periodo": 82.51,
+    "Preco_Max_Periodo": 97.51,
+    "Volume_Financeiro_Medio": 453044.0927559055,
+    "Volatilidade_Retorno_Diario_pct": 0.8195005012722199,
+    "Qtde_Pregoes_Coletados": 254,
+    "Variacao_Periodo_%": 2.45,
+    "Classificacao_Liquidez": "Baixa",
+    "Ultimo_Dividendo_R$": 0.86,
+    "Data_Ultimo_Dividendo": "2026-09-01",
+    "DY_Ultimo_%": 0.99,
+    "Dividendos_12m_R$": 10.41,
+    "DY_12m_%": 11.97,
+    "Pagamentos_12m": 12,
+    "Media_Dividendo_12m_R$": 0.8675,
+    "Media_Dividendo_3_Ult_R$": 0.8967,
+    "Tendencia_Dividendo_%": 3.4,
+    "Estabilidade_CV_%": 3.6,
+    "Quedas_Dividendo_12m": 0,
+    "Retorno_Total_12m_%": 14.54,
+    "Variacao_Preco_12m_%": 2.29,
+    "Historico_Dividendos_Meses": 106,
+    "Grupo_Pares": "FoF",
+    "DY_12m_Mediana_Pares_%": 11.97,
+    "DY_12m_vs_Pares_pp": 0.0,
+    "VP_Cota": 96.34,
+    "Data_Ref_VP": "2026-08-01",
+    "P_VP": 0.9,
+    "Fonte_P_VP": "CVM",
+    "VP_Var_12m_%": -1.82,
+    "Patrimonio_Liquido": 358301388.4,
+    "Cotistas": 18963,
+    "Cotistas_Var_12m_%": -11.9,
+    "Vacancia_%": null,
+    "Cap_Rate_%": null,
+    "Qtd_Imoveis": 0,
+    "FFO_Yield_%": 12.75,
+    "Spread_CDI_Liquido_pp": 0.37,
+    "DY_Real_%": 7.44,
+    "P_VP_Mediana_Pares": 0.9,
+    "P_VP_vs_Pares": 0.0,
+    "Checklist": [
+      {
+        "id": "dy_vs_pares",
+        "nome": "DY 12m vs. pares",
+        "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor.",
+        "valor": 0.0,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": 4
+        },
+        "amarelo": {
+          "min": -1.5,
+          "max": 7
+        }
+      },
+      {
+        "id": "spread_cdi",
+        "nome": "DY 12m − CDI líquido",
+        "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?",
+        "valor": 0.37,
+        "unidade": "p.p.",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0,
+          "max": null
+        },
+        "amarelo": {
+          "min": -2.5,
+          "max": null
+        }
+      },
+      {
+        "id": "p_vp",
+        "nome": "P/VP",
+        "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema.",
+        "valor": 0.9,
+        "unidade": "x",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "amarelo": {
+          "min": 0.5,
+          "max": 1.1
+        }
+      },
+      {
+        "id": "vp_12m",
+        "nome": "VP por cota em 12m",
+        "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira.",
+        "valor": -1.82,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -2,
+          "max": null
+        },
+        "amarelo": {
+          "min": -6,
+          "max": null
+        }
+      },
+      {
+        "id": "quedas",
+        "nome": "Quedas de rendimento em 12m",
+        "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente.",
+        "valor": 0.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 2.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": null,
+          "max": 0
+        },
+        "amarelo": {
+          "min": null,
+          "max": 1
+        }
+      },
+      {
+        "id": "tendencia",
+        "nome": "Tendência da renda",
+        "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses.",
+        "valor": 3.4,
+        "unidade": "%",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": -3,
+          "max": null
+        },
+        "amarelo": {
+          "min": -10,
+          "max": null
+        }
+      },
+      {
+        "id": "regularidade",
+        "nome": "Pagamentos em 12m",
+        "descricao": "O fundo paga todo mês?",
+        "valor": 12.0,
+        "unidade": "",
+        "status": "verde",
+        "peso": 1.0,
+        "eliminatorio": false,
+        "verde": {
+          "min": 11,
+          "max": null
+        },
+        "amarelo": {
+          "min": 6,
+          "max": null
+        }
+      },
+      {
+        "id": "liquidez",
+        "nome": "Liquidez média diária",
+        "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório.",
+        "valor": 453044.0928,
+        "unidade": "R$",
+        "status": "amarelo",
+        "peso": 1.0,
+        "eliminatorio": true,
+        "verde": {
+          "min": 1000000,
+          "max": null
+        },
+        "amarelo": {
+          "min": 300000,
+          "max": null
+        }
+      }
+    ],
+    "Checklist_Nota": 95,
+    "Checklist_Sinal": "verde",
+    "Checklist_Cobertura_%": 100
+  }
+]

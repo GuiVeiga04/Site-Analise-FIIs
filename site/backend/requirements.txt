@@ -1,0 +1,13 @@
+# Backend do site (FastAPI). Os scripts da raiz (atualizador/gerar_dados_site)
+# usam pandas/numpy/yfinance, que também estão aqui para rodar tudo num venv só.
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pandas>=2.0
+numpy>=1.26
+yfinance>=0.2.40
+pydantic>=2.6
+anthropic>=0.40      # diagnóstico de IA (Claude)
+lxml>=5.0          # pd.read_html (testar_fontes.py / Fundamentus)
+# testes
+pytest>=8.0
+httpx>=0.27

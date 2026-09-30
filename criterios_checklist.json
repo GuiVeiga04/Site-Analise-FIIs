@@ -1,0 +1,175 @@
+{
+  "_comentario": "Critérios do checklist de triagem. Edite à vontade: cada critério olha um campo do snapshot e dá VERDE se o valor estiver na faixa 'verde', AMARELO se estiver na faixa 'amarelo' e VERMELHO fora das duas. 'min'/'max' vazios (null) = sem limite. 'peso' define quanto o critério conta na nota (0 a 100). 'eliminatorio': true faz o sinal geral ficar vermelho sempre que esse critério ficar vermelho. 'aplica_a' limita o critério a tipos de gestão (null = todos). Não é recomendação de investimento: serve para separar o que merece uma análise mais cuidadosa.",
+  "regras_sinal": {
+    "verde_nota_minima": 85,
+    "vermelho_nota_abaixo_de": 60,
+    "cobertura_minima": 0.6
+  },
+  "criterios": [
+    {
+      "id": "dy_vs_pares",
+      "nome": "DY 12m vs. pares",
+      "campo": "DY_12m_vs_Pares_pp",
+      "unidade": "p.p.",
+      "verde": {
+        "min": 0,
+        "max": 4
+      },
+      "amarelo": {
+        "min": -1.5,
+        "max": 7
+      },
+      "peso": 2,
+      "eliminatorio": false,
+      "aplica_a": null,
+      "descricao": "O fundo rende pelo menos a mediana dos fundos parecidos? DY muito acima dos pares (mais de 7 p.p.) também fica vermelho: costuma ser preço derrubado por algum problema, não renda melhor."
+    },
+    {
+      "id": "spread_cdi",
+      "nome": "DY 12m − CDI líquido",
+      "campo": "Spread_CDI_Liquido_pp",
+      "unidade": "p.p.",
+      "verde": {
+        "min": 0,
+        "max": null
+      },
+      "amarelo": {
+        "min": -2.5,
+        "max": null
+      },
+      "peso": 1,
+      "eliminatorio": false,
+      "aplica_a": null,
+      "descricao": "A renda compensa frente à renda fixa (CDI já descontado o IR)?"
+    },
+    {
+      "id": "p_vp",
+      "nome": "P/VP",
+      "campo": "P_VP",
+      "unidade": "x",
+      "verde": {
+        "min": 0.7,
+        "max": 1.0
+      },
+      "amarelo": {
+        "min": 0.5,
+        "max": 1.1
+      },
+      "peso": 2,
+      "eliminatorio": false,
+      "aplica_a": null,
+      "descricao": "Preço até o valor patrimonial. Desconto grande demais (abaixo de 0,7) também pede cuidado: o mercado pode estar vendo um problema."
+    },
+    {
+      "id": "vp_12m",
+      "nome": "VP por cota em 12m",
+      "campo": "VP_Var_12m_%",
+      "unidade": "%",
+      "verde": {
+        "min": -2,
+        "max": null
+      },
+      "amarelo": {
+        "min": -6,
+        "max": null
+      },
+      "peso": 1,
+      "eliminatorio": false,
+      "aplica_a": null,
+      "descricao": "O patrimônio por cota está se mantendo? Queda contínua indica reavaliação negativa ou perdas na carteira."
+    },
+    {
+      "id": "quedas",
+      "nome": "Quedas de rendimento em 12m",
+      "campo": "Quedas_Dividendo_12m",
+      "unidade": "",
+      "verde": {
+        "min": null,
+        "max": 0
+      },
+      "amarelo": {
+        "min": null,
+        "max": 1
+      },
+      "peso": 2,
+      "eliminatorio": false,
+      "aplica_a": null,
+      "descricao": "Quantas vezes o rendimento caiu mais de 10% em relação ao padrão recente."
+    },
+    {
+      "id": "tendencia",
+      "nome": "Tendência da renda",
+      "campo": "Tendencia_Dividendo_%",
+      "unidade": "%",
+      "verde": {
+        "min": -3,
+        "max": null
+      },
+      "amarelo": {
+        "min": -10,
+        "max": null
+      },
+      "peso": 1,
+      "eliminatorio": false,
+      "aplica_a": null,
+      "descricao": "Média dos 3 últimos rendimentos contra a média de 12 meses."
+    },
+    {
+      "id": "regularidade",
+      "nome": "Pagamentos em 12m",
+      "campo": "Pagamentos_12m",
+      "unidade": "",
+      "verde": {
+        "min": 11,
+        "max": null
+      },
+      "amarelo": {
+        "min": 6,
+        "max": null
+      },
+      "peso": 1,
+      "eliminatorio": false,
+      "aplica_a": null,
+      "descricao": "O fundo paga todo mês?"
+    },
+    {
+      "id": "liquidez",
+      "nome": "Liquidez média diária",
+      "campo": "Volume_Financeiro_Medio",
+      "unidade": "R$",
+      "verde": {
+        "min": 1000000,
+        "max": null
+      },
+      "amarelo": {
+        "min": 300000,
+        "max": null
+      },
+      "peso": 1,
+      "eliminatorio": true,
+      "aplica_a": null,
+      "descricao": "Dá para comprar e vender sem mexer no preço? Abaixo de R$ 300 mil/dia o critério é eliminatório."
+    },
+    {
+      "id": "vacancia",
+      "nome": "Vacância (Fundamentus)",
+      "campo": "Vacancia_%",
+      "unidade": "%",
+      "verde": {
+        "min": null,
+        "max": 7
+      },
+      "amarelo": {
+        "min": null,
+        "max": 15
+      },
+      "peso": 1,
+      "eliminatorio": false,
+      "aplica_a": [
+        "Tijolo",
+        "Híbrido"
+      ],
+      "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho."
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo — Power BI FIIs</title>
+<style>
+  :root{
+    --bg-app: #f3f2f1;
+    --bg-canvas: #ffffff;
+    --border: #e1dfdd;
+    --border-strong: #c8c6c4;
+    --text-primary: #201f1e;
+    --text-secondary: #605e5c;
+    --text-muted: #8a8886;
+    --pbi-blue: #118DFF;
+    --pbi-navy: #12239E;
+    --pbi-orange: #E66C37;
+    --pbi-purple: #6B007B;
+    --pbi-pink: #E044A7;
+    --pbi-violet: #744EC2;
+    --pbi-gold: #D9B300;
+    --pbi-red: #D64550;
+    --good: #107C10;
+    --warn: #C19C00;
+    --crit: #D13438;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg-app); color:var(--text-primary);
+    font-family:"Segoe UI", "Segoe UI Web", system-ui, -apple-system, Arial, sans-serif;
+    font-size:14px;
+  }
+  .note-banner{
+    background:#FFF4CE; border-bottom:1px solid #f2d98c; color:#5c4a00;
+    padding:9px 20px; font-size:13px; text-align:center;
+  }
+  .note-banner b{font-weight:600;}
+
+  .pbi-topbar{
+    background:#ffffff; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:16px; padding:0 20px; height:48px;
+  }
+  .pbi-topbar .title{font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px;}
+  .pbi-topbar .title .ico{width:18px;height:18px;border-radius:3px;background:var(--pbi-blue);flex:none;}
+  .pbi-topbar .actions{margin-left:auto; display:flex; gap:18px; color:var(--text-secondary); font-size:13px;}
+
+  .wrap{max-width:1320px; margin:0 auto; padding:18px 20px 8px;}
+
+  .filterbar{
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+    background:var(--bg-canvas); border:1px solid var(--border); border-radius:4px;
+    padding:10px 14px; margin-bottom:14px; box-shadow:0 1px 2px rgba(0,0,0,0.04);
+  }
+  .filterbar .flabel{font-size:12px; color:var(--text-muted); margin-right:2px;}
+  .chip-group{display:flex; gap:6px; flex-wrap:wrap;}
+  .chip{
+    padding:5px 12px; border-radius:3px; border:1px solid var(--border-strong);
+    font-size:12.5px; color:var(--text-secondary); background:#fff; cursor:default;
+  }
+  .chip.active{background:var(--pbi-blue); border-color:var(--pbi-blue); color:#fff; font-weight:600;}
+  .dropdown{
+    padding:6px 12px; border-radius:3px; border:1px solid var(--border-strong);
+    font-size:12.5px; color:var(--text-secondary); background:#fff; display:flex; align-items:center; gap:8px;
+  }
+  .dropdown::after{content:"▾"; font-size:10px; color:var(--text-muted);}
+
+  .grid{display:grid; gap:12px; grid-template-columns:repeat(4,1fr); margin-bottom:12px;}
+  .grid.two{grid-template-columns:1fr 1fr;}
+  @media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr);} .grid.two{grid-template-columns:1fr;} }
+  @media (max-width:520px){ .grid{grid-template-columns:1fr;} }
+
+  .visual{
+    background:var(--bg-canvas); border:1px solid var(--border); border-radius:2px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+    padding:14px 16px;
+  }
+  .visual h3{
+    margin:0 0 10px; font-size:12px; font-weight:600; color:var(--text-secondary);
+    text-transform:none; letter-spacing:0;
+  }
+  .card .big{font-size:30px; font-weight:600; color:var(--text-primary); line-height:1.1;}
+  .card .cap{font-size:11.5px; color:var(--text-muted); margin-top:6px;}
+  .card .big.blue{color:var(--pbi-blue);}
+  .card .big.good{color:var(--good);}
+
+  .bars-h{display:grid; gap:7px;}
+  .bar-row{display:grid; grid-template-columns:56px 1fr 62px; align-items:center; gap:8px; font-size:11.5px;}
+  .bar-row .lbl{font-weight:600; color:var(--text-secondary); text-align:right; font-family:Consolas,monospace;}
+  .bar-track{background:#f0f0f0; border-radius:2px; height:15px; position:relative;}
+  .bar-fill{background:var(--pbi-blue); height:100%; border-radius:2px;}
+  .bar-row .val{color:var(--text-secondary); font-variant-numeric:tabular-nums;}
+
+  .colbars{display:flex; align-items:flex-end; gap:18px; height:150px; padding:0 6px;}
+  .colbars .col{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end;}
+  .colbars .col .v{width:100%; border-radius:2px 2px 0 0;}
+  .colbars .col .cap{font-size:11px; color:var(--text-secondary); text-align:center;}
+  .colbars .col .num{font-size:11px; color:var(--text-primary); font-weight:600;}
+
+  table.matrix{width:100%; border-collapse:collapse; font-size:12px;}
+  table.matrix th{
+    text-align:left; background:#faf9f8; color:var(--text-secondary); font-weight:600;
+    padding:7px 10px; border-bottom:2px solid var(--border-strong); white-space:nowrap;
+  }
+  table.matrix td{padding:6px 10px; border-bottom:1px solid var(--border); white-space:nowrap;}
+  table.matrix td.num, table.matrix th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  table.matrix tbody tr:nth-child(even){background:#faf9f8;}
+  .tk{font-family:Consolas,monospace; font-weight:600;}
+  .tag{padding:1px 8px; border-radius:10px; font-size:10.5px; font-weight:600;}
+  .tag-alta{background:#dff6dd; color:var(--good);}
+  .tag-media{background:#fff4ce; color:#7a6100;}
+  .tag-baixa{background:#fde7e9; color:var(--crit);}
+  .up{color:var(--good);} .down{color:var(--crit);}
+
+  .scatter-wrap svg{display:block; width:100%; height:auto;}
+  .legend-row{display:flex; gap:14px; font-size:11.5px; color:var(--text-secondary); margin-top:8px;}
+  .legend-row .sw{display:inline-block; width:9px;height:9px;border-radius:2px;margin-right:5px;}
+
+  .pagebar{
+    display:flex; gap:2px; background:#fff; border-top:1px solid var(--border);
+    padding:0 20px; margin-top:6px;
+  }
+  .pagebar .tab{
+    padding:9px 18px; font-size:12.5px; color:var(--text-secondary); border-bottom:3px solid transparent; cursor:default;
+  }
+  .pagebar .tab.active{color:var(--pbi-blue); font-weight:600; border-bottom-color:var(--pbi-blue);}
+</style>
+</head>
+<body>
+
+  <div class="note-banner"><b>Protótipo estático</b> — visual de referência de como o relatório ficaria publicado no Power BI Service. Não é interativo; os números são os mesmos 29 fundos já validados no painel HTML.</div>
+
+  <div class="pbi-topbar">
+    <div class="title"><span class="ico"></span> Painel de FIIs — B3.pbix</div>
+    <div class="actions"><span>↻ Atualizar</span><span>↗ Compartilhar</span><span>✎ Editar</span></div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="filterbar">
+      <span class="flabel">Tipo de gestão</span>
+      <div class="chip-group">
+        <span class="chip active">Todos</span>
+        <span class="chip">Papel</span>
+        <span class="chip">Tijolo</span>
+        <span class="chip">Híbrido</span>
+        <span class="chip">FoF</span>
+      </div>
+      <div class="dropdown" style="margin-left:10px">Segmento: Todos</div>
+      <div class="dropdown">Liquidez: Todas</div>
+    </div>
+
+    <div class="grid">
+      <div class="visual card"><h3>FUNDOS MONITORADOS</h3><div class="big">29</div><div class="cap">15 Tijolo · 11 Papel · 2 Híbrido · 1 FoF</div></div>
+      <div class="visual card"><h3>LIQUIDEZ TOTAL DO GRUPO</h3><div class="big blue">R$ 167,7 mi</div><div class="cap">soma do volume financeiro médio/pregão</div></div>
+      <div class="visual card"><h3>VARIAÇÃO MÉDIA DO PERÍODO</h3><div class="big">-0,16%</div><div class="cap">10 em alta · 15 em baixa · 4 estáveis</div></div>
+      <div class="visual card"><h3>CONCENTRAÇÃO DE LIQUIDEZ</h3><div class="big good">48%</div><div class="cap">do volume nos 5 fundos mais líquidos</div></div>
+    </div>
+
+    <div class="grid two">
+      <div class="visual">
+        <h3>LIQUIDEZ TOTAL POR TIPO DE GESTÃO</h3>
+        <div class="colbars">
+          <div class="col"><div class="num">R$ 47 mi</div><div class="v" style="height:47%; background:var(--pbi-blue);"></div><div class="cap">Papel</div></div>
+          <div class="col"><div class="num">R$ 100,6 mi</div><div class="v" style="height:100%; background:var(--pbi-orange);"></div><div class="cap">Tijolo</div></div>
+          <div class="col"><div class="num">R$ 20,1 mi</div><div class="v" style="height:20%; background:var(--pbi-purple);"></div><div class="cap">Híbrido</div></div>
+          <div class="col"><div class="num">R$ 57 mil</div><div class="v" style="height:2%; background:var(--pbi-gold);"></div><div class="cap">FoF</div></div>
+        </div>
+      </div>
+      <div class="visual">
+        <h3>RANKING DE LIQUIDEZ — TOP 8</h3>
+        <div class="bars-h" id="ranking"></div>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr;">
+      <div class="visual">
+        <h3>LIQUIDEZ × VARIAÇÃO NO PERÍODO</h3>
+        <div class="scatter-wrap" id="scatter"></div>
+        <div class="legend-row">
+          <span><span class="sw" style="background:var(--pbi-blue)"></span>Papel</span>
+          <span><span class="sw" style="background:var(--pbi-orange)"></span>Tijolo</span>
+          <span><span class="sw" style="background:var(--pbi-purple)"></span>Outros</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns:1fr;">
+      <div class="visual">
+        <h3>DETALHE POR FUNDO</h3>
+        <div style="overflow-x:auto">
+        <table class="matrix">
+          <thead><tr>
+            <th>Ticker</th><th>Fundo</th><th>Tipo</th><th>Segmento</th>
+            <th class="num">Preço</th><th class="num">Variação</th><th class="num">Liquidez méd.</th><th>Classe</th>
+          </tr></thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pagebar">
+    <div class="tab active">Visão Geral</div>
+    <div class="tab">Detalhe por Fundo</div>
+    <div class="tab">Metodologia</div>
+  </div>
+
+<script>
+const DATA = [{"Ticker":"KNCR11","Nome_Fundo":"Kinea Rendimentos Imobiliários","Gestora":"Kinea","Tipo_Gestao":"Papel","Segmento":"CRI indexado ao CDI","Preco_Fechamento_R$":106.4,"Variacao_Periodo_%":-0.39,"Volume_Ultimo_Dia":225039,"Volume_Financeiro_Medio":17548452.67,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"MXRF11","Nome_Fundo":"Maxi Renda","Gestora":"XP","Tipo_Gestao":"Híbrido","Segmento":"Papel predominante (CRI + cotas de FII)","Preco_Fechamento_R$":9.14,"Variacao_Periodo_%":0.0,"Volume_Ultimo_Dia":2369344,"Volume_Financeiro_Medio":16907747.82,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"HGLG11","Nome_Fundo":"CSHG Logística","Gestora":"CSHG","Tipo_Gestao":"Tijolo","Segmento":"Logística","Preco_Fechamento_R$":146.0,"Variacao_Periodo_%":-0.17,"Volume_Ultimo_Dia":132195,"Volume_Financeiro_Medio":16729978.125,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"TRXF11","Nome_Fundo":"TRX Real Estate","Gestora":"TRX","Tipo_Gestao":"Tijolo","Segmento":"Renda Urbana / Varejo (sale-leaseback)","Preco_Fechamento_R$":72.93,"Variacao_Periodo_%":1.45,"Volume_Ultimo_Dia":264130,"Volume_Financeiro_Medio":16505766.030000001,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"BTLG11","Nome_Fundo":"BTG Pactual Logística","Gestora":"BTG Pactual","Tipo_Gestao":"Tijolo","Segmento":"Logística","Preco_Fechamento_R$":101.31,"Variacao_Periodo_%":1.08,"Volume_Ultimo_Dia":152455,"Volume_Financeiro_Medio":12403649.715,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"XPML11","Nome_Fundo":"XP Malls","Gestora":"XP","Tipo_Gestao":"Tijolo","Segmento":"Shopping","Preco_Fechamento_R$":102.65,"Variacao_Periodo_%":-1.04,"Volume_Ultimo_Dia":140486,"Volume_Financeiro_Medio":10200513.065000001,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"GGRC11","Nome_Fundo":"GGR Covepi Renda","Gestora":"GGR","Tipo_Gestao":"Tijolo","Segmento":"Logística / Galpões Industriais","Preco_Fechamento_R$":8.99,"Variacao_Periodo_%":0.0,"Volume_Ultimo_Dia":958043,"Volume_Financeiro_Medio":8115187.595000001,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"HSML11","Nome_Fundo":"HSI Malls","Gestora":"HSI","Tipo_Gestao":"Tijolo","Segmento":"Shopping","Preco_Fechamento_R$":83.01,"Variacao_Periodo_%":0.31,"Volume_Ultimo_Dia":32437,"Volume_Financeiro_Medio":5760058.5600000005,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"HGRU11","Nome_Fundo":"CSHG Renda Urbana","Gestora":"CSHG","Tipo_Gestao":"Tijolo","Segmento":"Renda Urbana / Varejo","Preco_Fechamento_R$":115.0,"Variacao_Periodo_%":0.66,"Volume_Ultimo_Dia":59116,"Volume_Financeiro_Medio":5506682.625,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"KNIP11","Nome_Fundo":"Kinea Índices de Preços","Gestora":"Kinea","Tipo_Gestao":"Papel","Segmento":"CRI indexado a IPCA","Preco_Fechamento_R$":89.0,"Variacao_Periodo_%":-0.29,"Volume_Ultimo_Dia":65050,"Volume_Financeiro_Medio":4945250.35,"Classificacao_Liquidez":"Alta","Data_Pregao":"2026-09-11"},{"Ticker":"BRCO11","Nome_Fundo":"Bresco Logística","Gestora":"Bresco","Tipo_Gestao":"Tijolo","Segmento":"Logística","Preco_Fechamento_R$":110.05,"Variacao_Periodo_%":-0.33,"Volume_Ultimo_Dia":53773,"Volume_Financeiro_Medio":4368795.024999999,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"VISC11","Nome_Fundo":"Vinci Shopping Centers","Gestora":"Vinci","Tipo_Gestao":"Tijolo","Segmento":"Shopping","Preco_Fechamento_R$":104.83,"Variacao_Periodo_%":0.88,"Volume_Ultimo_Dia":44864,"Volume_Financeiro_Medio":4047053.3200000003,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"XPLG11","Nome_Fundo":"XP Log","Gestora":"XP","Tipo_Gestao":"Tijolo","Segmento":"Logística","Preco_Fechamento_R$":91.65,"Variacao_Periodo_%":0.0,"Volume_Ultimo_Dia":45124,"Volume_Financeiro_Medio":3938108.85,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"MCCI11","Nome_Fundo":"Mauá Capital Recebíveis Imobiliários","Gestora":"Mauá Capital","Tipo_Gestao":"Papel","Segmento":"CRI High Grade","Preco_Fechamento_R$":94.65,"Variacao_Periodo_%":-0.24,"Volume_Ultimo_Dia":45876,"Volume_Financeiro_Medio":3530142.8200000003,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"RBRR11","Nome_Fundo":"RBR Rendimento High Grade","Gestora":"RBR","Tipo_Gestao":"Papel","Segmento":"CRI High Grade","Preco_Fechamento_R$":70.13,"Variacao_Periodo_%":-2.48,"Volume_Ultimo_Dia":66683,"Volume_Financeiro_Medio":3521446.535,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"KNRI11","Nome_Fundo":"Kinea Renda Imobiliária","Gestora":"Kinea","Tipo_Gestao":"Tijolo","Segmento":"Híbrido: Lajes + Logística","Preco_Fechamento_R$":157.4,"Variacao_Periodo_%":-0.16,"Volume_Ultimo_Dia":25681,"Volume_Financeiro_Medio":3505542.43,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"RBRY11","Nome_Fundo":"RBR Alpha Multiestratégia","Gestora":"RBR","Tipo_Gestao":"Híbrido","Segmento":"Multiestratégia (papel + tijolo + FoF)","Preco_Fechamento_R$":81.45,"Variacao_Periodo_%":-1.73,"Volume_Ultimo_Dia":52995,"Volume_Financeiro_Medio":3233713.695,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"KNSC11","Nome_Fundo":"Kinea Securities","Gestora":"Kinea","Tipo_Gestao":"Papel","Segmento":"CRI High Yield","Preco_Fechamento_R$":8.96,"Variacao_Periodo_%":-0.33,"Volume_Ultimo_Dia":471643,"Volume_Financeiro_Medio":3166754.955,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"HGBS11","Nome_Fundo":"CSHG Brasil Shopping","Gestora":"CSHG","Tipo_Gestao":"Tijolo","Segmento":"Shopping","Preco_Fechamento_R$":18.68,"Variacao_Periodo_%":0.0,"Volume_Ultimo_Dia":211776,"Volume_Financeiro_Medio":2964319.8600000003,"Classificacao_Liquidez":"Média","Data_Pregao":"2026-09-11"},{"Ticker":"TGAR11","Nome_Fundo":"TG Ativo Real","Gestora":"TG Core","Tipo_Gestao":"Papel","Segmento":"Crédito estruturado com garantia real","Preco_Fechamento_R$":43.9,"Variacao_Periodo_%":0.05,"Volume_Ultimo_Dia":65643,"Volume_Financeiro_Medio":2856673.99,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"CPTS11","Nome_Fundo":"Capitânia Securities II","Gestora":"Capitânia","Tipo_Gestao":"Papel","Segmento":"CRI High Yield / Estruturado","Preco_Fechamento_R$":7.5,"Variacao_Periodo_%":0.4,"Volume_Ultimo_Dia":440549,"Volume_Financeiro_Medio":2796623.355,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"HGCR11","Nome_Fundo":"CSHG Recebíveis Imobiliários","Gestora":"CSHG","Tipo_Gestao":"Papel","Segmento":"CRI High Grade","Preco_Fechamento_R$":95.63,"Variacao_Periodo_%":-0.7,"Volume_Ultimo_Dia":29650,"Volume_Financeiro_Medio":2572207.3,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"RECR11","Nome_Fundo":"REC Recebíveis Imobiliários","Gestora":"REC","Tipo_Gestao":"Papel","Segmento":"CRI High Grade","Preco_Fechamento_R$":74.95,"Variacao_Periodo_%":-0.01,"Volume_Ultimo_Dia":36116,"Volume_Financeiro_Medio":2488603.8600000003,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"PVBI11","Nome_Fundo":"VBI Prime Properties","Gestora":"VBI","Tipo_Gestao":"Tijolo","Segmento":"Lajes Corporativas","Preco_Fechamento_R$":68.9,"Variacao_Periodo_%":0.04,"Volume_Ultimo_Dia":42865,"Volume_Financeiro_Medio":2327312.62,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"HGRE11","Nome_Fundo":"CSHG Real Estate","Gestora":"CSHG","Tipo_Gestao":"Tijolo","Segmento":"Lajes Corporativas","Preco_Fechamento_R$":113.69,"Variacao_Periodo_%":0.37,"Volume_Ultimo_Dia":21901,"Volume_Financeiro_Medio":2273567.215,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"PCIP11","Nome_Fundo":"Patria Crédito Imobiliário Índice de Preços (ex-CVBI11)","Gestora":"Patria","Tipo_Gestao":"Papel","Segmento":"CRI indexado a IPCA","Preco_Fechamento_R$":72.27,"Variacao_Periodo_%":-1.39,"Volume_Ultimo_Dia":32515,"Volume_Financeiro_Medio":1956017.7,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"ALZR11","Nome_Fundo":"Alianza Trust Renda Imobiliária","Gestora":"Alianza/AZ Quest","Tipo_Gestao":"Tijolo","Segmento":"Renda Urbana / Industrial (sale-leaseback)","Preco_Fechamento_R$":10.0,"Variacao_Periodo_%":0.3,"Volume_Ultimo_Dia":240772,"Volume_Financeiro_Medio":1944087.635,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"VRTA11","Nome_Fundo":"Fator Verità","Gestora":"Fator","Tipo_Gestao":"Papel","Segmento":"CRI High Grade","Preco_Fechamento_R$":70.55,"Variacao_Periodo_%":-0.62,"Volume_Ultimo_Dia":30950,"Volume_Financeiro_Medio":1570872.76,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"},{"Ticker":"BCIA11","Nome_Fundo":"Brasil Capital Real Estate FoF","Gestora":"Brasil Capital","Tipo_Gestao":"FoF","Segmento":"Fundo de Fundos","Preco_Fechamento_R$":88.0,"Variacao_Periodo_%":-0.4,"Volume_Ultimo_Dia":589,"Volume_Financeiro_Medio":57456.95,"Classificacao_Liquidez":"Baixa","Data_Pregao":"2026-09-11"}];
+
+function fmtR$(v,c){ return "R$ " + v.toLocaleString("pt-BR",{minimumFractionDigits:c??2,maximumFractionDigits:c??2}); }
+function fmtCompacto(v){
+  if (Math.abs(v)>=1e6) return "R$ "+(v/1e6).toLocaleString("pt-BR",{maximumFractionDigits:1})+" mi";
+  if (Math.abs(v)>=1e3) return "R$ "+(v/1e3).toLocaleString("pt-BR",{maximumFractionDigits:0})+" mil";
+  return fmtR$(v,0);
+}
+function fmtPct(v){ return (v>0?"+":"")+v.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})+"%"; }
+const GRUPO3 = t => (t==="Papel"||t==="Tijolo") ? t : "Outros";
+const COR3 = {Papel:"var(--pbi-blue)", Tijolo:"var(--pbi-orange)", Outros:"var(--pbi-purple)"};
+const TAGCLS = {Alta:"tag-alta", "Média":"tag-media", Baixa:"tag-baixa"};
+
+// Ranking top 8
+const top8 = [...DATA].sort((a,b)=>b.Volume_Financeiro_Medio-a.Volume_Financeiro_Medio).slice(0,8);
+const maxV = top8[0].Volume_Financeiro_Medio;
+document.getElementById("ranking").innerHTML = top8.map(f=>`
+  <div class="bar-row">
+    <span class="lbl">${f.Ticker}</span>
+    <span class="bar-track"><span class="bar-fill" style="width:${(f.Volume_Financeiro_Medio/maxV*100).toFixed(1)}%"></span></span>
+    <span class="val">${fmtCompacto(f.Volume_Financeiro_Medio)}</span>
+  </div>`).join("");
+
+// Matrix (top 12 by liquidity, representative slice)
+const top12 = [...DATA].sort((a,b)=>b.Volume_Financeiro_Medio-a.Volume_Financeiro_Medio).slice(0,12);
+document.getElementById("matrix-body").innerHTML = top12.map(f=>`
+  <tr>
+    <td class="tk">${f.Ticker}</td>
+    <td>${f.Nome_Fundo}</td>
+    <td>${f.Tipo_Gestao}</td>
+    <td>${f.Segmento}</td>
+    <td class="num">${fmtR$(f["Preco_Fechamento_R$"])}</td>
+    <td class="num ${f["Variacao_Periodo_%"]>=0?'up':'down'}">${fmtPct(f["Variacao_Periodo_%"])}</td>
+    <td class="num">${fmtR$(f.Volume_Financeiro_Medio,0)}</td>
+    <td><span class="tag ${TAGCLS[f.Classificacao_Liquidez]}">${f.Classificacao_Liquidez}</span></td>
+  </tr>`).join("");
+
+// Scatter
+(function(){
+  const W=1080,H=280,padL=50,padR=20,padT=14,padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const xs = DATA.map(f=>f.Volume_Financeiro_Medio);
+  const ys = DATA.map(f=>f["Variacao_Periodo_%"]);
+  const xMin=Math.log10(Math.max(Math.min(...xs)*0.7,1000)), xMax=Math.log10(Math.max(...xs)*1.3);
+  const yAbs=Math.max(1,Math.ceil(Math.max(...ys.map(Math.abs))*1.3*10)/10);
+  const xPos = v => padL + ((Math.log10(v)-xMin)/(xMax-xMin))*plotW;
+  const yPos = v => padT + plotH/2 - (v/yAbs)*(plotH/2);
+  let grid="";
+  [-yAbs,0,yAbs].forEach(v=>{
+    const y=yPos(v);
+    grid += `<line x1="${padL}" y1="${y}" x2="${padL+plotW}" y2="${y}" stroke="${v===0?'#c8c6c4':'#eeeeee'}" stroke-width="1" stroke-dasharray="${v===0?'3 3':'0'}"/>`;
+    grid += `<text x="${padL-8}" y="${y+3.5}" font-size="10" fill="#8a8886" text-anchor="end">${v.toFixed(1)}%</text>`;
+  });
+  let dots="";
+  DATA.forEach(f=>{
+    const x=xPos(Math.max(f.Volume_Financeiro_Medio,1000));
+    const y=yPos(Math.max(-yAbs,Math.min(yAbs,f["Variacao_Periodo_%"])));
+    dots += `<circle cx="${x}" cy="${y}" r="5" fill="${COR3[GRUPO3(f.Tipo_Gestao)]}" stroke="#fff" stroke-width="1.5"/>`;
+  });
+  document.getElementById("scatter").innerHTML = `<svg viewBox="0 0 ${W} ${H}">${grid}${dots}</svg>`;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+// =====================================================================
+// MEDIDAS DAX — Painel de FIIs (B3)
+// Projeto: Base FIIs  |  Complemento de blueprint_powerbi.md
+// =====================================================================
+//
+// COMO USAR
+// 1. No Power BI Desktop, crie uma tabela vazia para guardar as medidas:
+//    Página Inicial > Inserir Dados > nomeie como "_Medidas" > Carregar.
+//    (Mantém o painel de campos organizado; medidas não precisam morar
+//    na tabela de fatos.)
+// 2. Para cada bloco abaixo: Modelagem > Nova Medida, e cole o conteúdo
+//    (o nome da medida vem antes do "=", como está escrito aqui).
+// 3. Aplique o formato sugerido no comentário de cada medida
+//    (Ferramentas de Medida > Formato).
+//
+// PREMISSAS DO MODELO (conforme blueprint_powerbi.md)
+//   FIIsHistorico : Ticker, Data_Coleta, Data_Pregao, Nome_Fundo,
+//                   Preco_Fechamento_R$, Volume_Ultimo_Dia
+//                   (1 linha por fundo por pregão, já deduplicada no M)
+//   FIIsConfig    : ticker, nome, gestora, tipo_gestao, segmento
+//   Relacionamento: FIIsConfig[ticker] 1 --> * FIIsHistorico[Ticker]
+//
+// Se você renomear a coluna Preco_Fechamento_R$ para algo sem o "$"
+// (recomendado, evita confusão), faça um localizar/substituir neste
+// arquivo antes de colar as medidas.
+//
+// ÍNDICE
+//   1. Base e contagens
+//   2. Preço
+//   3. Variação
+//   4. Liquidez (volume financeiro)
+//   5. Classificação e ranking
+//   6. Medidas de cartão (nível grupo)
+//   7. Risco
+//   8. Formatação condicional
+// =====================================================================
+
+
+// =====================================================================
+// 1. BASE E CONTAGENS
+// =====================================================================
+
+// Data do pregão mais recente no contexto atual.
+// Formato: Data Abreviada
+Último Pregão =
+MAX ( FIIsHistorico[Data_Pregao] )
+
+
+// Data do pregão mais antigo no contexto atual — início da janela de
+// comparação usada em "Variação Período %".
+// Formato: Data Abreviada
+Primeiro Pregão =
+MIN ( FIIsHistorico[Data_Pregao] )
+
+
+// Quantos dias de pregão distintos já foram coletados.
+// Útil como "termômetro" da base: com poucos pregões, variação e
+// volatilidade ainda dizem pouco.
+// Formato: Número inteiro
+Qtde Pregões =
+DISTINCTCOUNT ( FIIsHistorico[Data_Pregao] )
+
+
+// Quantos fundos existem no contexto atual (respeita os slicers).
+// Formato: Número inteiro
+Fundos Monitorados =
+DISTINCTCOUNT ( FIIsHistorico[Ticker] )
+
+
+// =====================================================================
+// 2. PREÇO
+// =====================================================================
+//
+// Todas as medidas de preço devolvem BLANK quando há mais de um fundo no
+// contexto — somar o preço de cotas de fundos diferentes não significa
+// nada, então é melhor a linha de total ficar vazia do que exibir um
+// número sem sentido.
+
+// Preço de fechamento no pregão mais recente.
+// Formato: Moeda, 2 casas (R$ pt-BR)
+Preço Atual =
+IF (
+    HASONEVALUE ( FIIsHistorico[Ticker] ),
+    VAR UltimaData = MAX ( FIIsHistorico[Data_Pregao] )
+    RETURN
+        CALCULATE (
+            SUM ( FIIsHistorico[Preco_Fechamento_R$] ),
+            FIIsHistorico[Data_Pregao] = UltimaData
+        )
+)
+
+
+// Preço de fechamento no primeiro pregão da janela — base da variação.
+// Formato: Moeda, 2 casas
+Preço no Primeiro Pregão =
+IF (
+    HASONEVALUE ( FIIsHistorico[Ticker] ),
+    VAR PrimeiraData = MIN ( FIIsHistorico[Data_Pregao] )
+    RETURN
+        CALCULATE (
+            SUM ( FIIsHistorico[Preco_Fechamento_R$] ),
+            FIIsHistorico[Data_Pregao] = PrimeiraData
+        )
+)
+
+
+// Menor e maior fechamento dentro da janela coletada.
+// Formato: Moeda, 2 casas
+Preço Mínimo Período =
+IF ( HASONEVALUE ( FIIsHistorico[Ticker] ), MIN ( FIIsHistorico[Preco_Fechamento_R$] ) )
+
+Preço Máximo Período =
+IF ( HASONEVALUE ( FIIsHistorico[Ticker] ), MAX ( FIIsHistorico[Preco_Fechamento_R$] ) )
+
+
+// Distância entre máxima e mínima do período, em %. Uma leitura rápida
+// de "quanto esse fundo balançou" mesmo quando começo e fim ficaram
+// parecidos.
+// Formato: Percentual, 2 casas
+Amplitude Período % =
+DIVIDE (
+    [Preço Máximo Período] - [Preço Mínimo Período],
+    [Preço Mínimo Período]
+)
+
+
+// =====================================================================
+// 3. VARIAÇÃO
+// =====================================================================
+
+// Variação do preço entre o primeiro e o último pregão da janela.
+// ATENÇÃO: é variação de PREÇO, não retorno total — não inclui os
+// rendimentos (dividendos) distribuídos pelo fundo no período.
+// Formato: Percentual, 2 casas  (sugestão de string: +0,00%;-0,00%;0,00%)
+Variação Período % =
+DIVIDE (
+    [Preço Atual] - [Preço no Primeiro Pregão],
+    [Preço no Primeiro Pregão]
+)
+
+
+// Variação do último pregão contra o pregão imediatamente anterior
+// presente na base (não contra "ontem" do calendário — se a coleta é
+// semanal, o pregão anterior pode ser de dias atrás).
+// Formato: Percentual, 2 casas
+Variação Dia % =
+IF (
+    HASONEVALUE ( FIIsHistorico[Ticker] ),
+    VAR UltimaData = MAX ( FIIsHistorico[Data_Pregao] )
+    VAR DatasAnteriores =
+        FILTER (
+            ALLSELECTED ( FIIsHistorico[Data_Pregao] ),
+            FIIsHistorico[Data_Pregao] < UltimaData
+        )
+    VAR DataAnterior = MAXX ( DatasAnteriores, FIIsHistorico[Data_Pregao] )
+    VAR PrecoAtual =
+        CALCULATE (
+            SUM ( FIIsHistorico[Preco_Fechamento_R$] ),
+            FIIsHistorico[Data_Pregao] = UltimaData
+        )
+    VAR PrecoAnterior =
+        CALCULATE (
+            SUM ( FIIsHistorico[Preco_Fechamento_R$] ),
+            FIIsHistorico[Data_Pregao] = DataAnterior
+        )
+    RETURN
+        DIVIDE ( PrecoAtual - PrecoAnterior, PrecoAnterior )
+)
+
+
+// =====================================================================
+// 4. LIQUIDEZ (VOLUME FINANCEIRO)
+// =====================================================================
+//
+// O CSV traz Volume_Ultimo_Dia = QUANTIDADE DE COTAS negociadas, não um
+// valor em reais. Como cada fundo tem cota de preço diferente, comparar
+// quantidade de cotas entre fundos engana. A métrica comparável é o
+// volume financeiro: preço x quantidade.
+
+// Volume financeiro somado em todas as linhas do contexto.
+// Formato: Moeda, 0 casas
+Volume Financeiro =
+SUMX (
+    FIIsHistorico,
+    FIIsHistorico[Preco_Fechamento_R$] * FIIsHistorico[Volume_Ultimo_Dia]
+)
+
+
+// Média de volume financeiro por dia de pregão — a medida-base de
+// liquidez usada em todo o relatório.
+// Formato: Moeda, 0 casas
+Volume Financeiro Médio por Pregão =
+DIVIDE (
+    [Volume Financeiro],
+    DISTINCTCOUNT ( FIIsHistorico[Data_Pregao] )
+)
+
+
+// Mesma ideia, mas em quantidade de cotas. Serve para comparar um fundo
+// com ele mesmo ao longo do tempo (não entre fundos diferentes).
+// Formato: Número inteiro, separador de milhar
+Volume Cotas Médio por Pregão =
+DIVIDE (
+    SUM ( FIIsHistorico[Volume_Ultimo_Dia] ),
+    DISTINCTCOUNT ( FIIsHistorico[Data_Pregao] )
+)
+
+
+// Soma da liquidez média de todos os fundos do contexto.
+// Somamos a média de cada fundo (em vez de usar direto a medida acima no
+// total) para que o número continue certo mesmo se algum fundo tiver
+// menos pregões coletados que os outros.
+// Formato: Moeda, 0 casas
+Liquidez Total do Grupo =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Liquidez", CALCULATE ( [Volume Financeiro Médio por Pregão] )
+    )
+RETURN
+    SUMX ( TabelaFundos, [@Liquidez] )
+
+
+// =====================================================================
+// 5. CLASSIFICAÇÃO E RANKING
+// =====================================================================
+//
+// Os cortes de liquidez são tercis calculados sobre TODOS os fundos
+// visíveis nos slicers (ALLSELECTED), não sobre a linha atual — senão
+// cada fundo seria comparado só consigo mesmo e cairia sempre na mesma
+// faixa.
+//
+// Se você preferir que a régua seja SEMPRE os 29 fundos (sem reagir aos
+// slicers de segmento/tipo), troque ALLSELECTED por ALL nas duas
+// medidas de percentil abaixo.
+
+// Corte inferior: 33º percentil da liquidez média entre os fundos.
+// Formato: Moeda, 0 casas (medida auxiliar, pode ficar oculta no relatório)
+P33 Liquidez =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Liquidez", CALCULATE ( [Volume Financeiro Médio por Pregão] )
+    )
+RETURN
+    PERCENTILEX.INC ( TabelaFundos, [@Liquidez], 0.33 )
+
+
+// Corte superior: 66º percentil.
+// Formato: Moeda, 0 casas (auxiliar)
+P66 Liquidez =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Liquidez", CALCULATE ( [Volume Financeiro Médio por Pregão] )
+    )
+RETURN
+    PERCENTILEX.INC ( TabelaFundos, [@Liquidez], 0.66 )
+
+
+// Alta / Média / Baixa — mesma lógica da classificação em Python.
+// É liquidez RELATIVA a esta carteira, não uma régua absoluta de
+// mercado: um fundo "Baixa" aqui pode ser líquido frente ao universo
+// completo de FIIs da B3.
+// Formato: Texto
+Classificação de Liquidez =
+VAR ValorFundo = [Volume Financeiro Médio por Pregão]
+VAR Corte33 = [P33 Liquidez]
+VAR Corte66 = [P66 Liquidez]
+RETURN
+    SWITCH (
+        TRUE (),
+        ISBLANK ( ValorFundo ), "Sem dados",
+        ValorFundo >= Corte66, "Alta",
+        ValorFundo >= Corte33, "Média",
+        "Baixa"
+    )
+
+
+// Posição do fundo no ranking de liquidez (1 = mais líquido).
+// Use como campo de ordenação em visuais de barras ou na tabela.
+// Formato: Número inteiro
+Ranking de Liquidez =
+IF (
+    HASONEVALUE ( FIIsHistorico[Ticker] ),
+    RANKX (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        CALCULATE ( [Volume Financeiro Médio por Pregão] ),
+        ,
+        DESC,
+        DENSE
+    )
+)
+
+
+// =====================================================================
+// 6. MEDIDAS DE CARTÃO (NÍVEL GRUPO)
+// =====================================================================
+//
+// Estas olham o conjunto de fundos, não a linha atual. Em um cartão,
+// mostram o número do grupo; se você jogar numa tabela por ticker, vão
+// repetir o mesmo valor em todas as linhas — é esperado, não é bug.
+
+// Fatia da liquidez concentrada nos 5 fundos mais negociados.
+// Quanto maior, mais dependente de poucos nomes é a carteira monitorada.
+// Formato: Percentual, 0 casas
+Concentração Top 5 % =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Liquidez", CALCULATE ( [Volume Financeiro Médio por Pregão] )
+    )
+VAR LiquidezTop5 =
+    SUMX ( TOPN ( 5, TabelaFundos, [@Liquidez], DESC ), [@Liquidez] )
+VAR LiquidezTotal =
+    SUMX ( TabelaFundos, [@Liquidez] )
+RETURN
+    DIVIDE ( LiquidezTop5, LiquidezTotal )
+
+
+// Média simples da variação de preço entre os fundos (não ponderada por
+// tamanho — cada fundo pesa igual).
+// Formato: Percentual, 2 casas
+Variação Média do Período =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Var", CALCULATE ( [Variação Período %] )
+    )
+RETURN
+    AVERAGEX ( TabelaFundos, [@Var] )
+
+
+// Contagens de fundos por direção no período. O arredondamento para 2
+// casas garante que um resíduo numérico irrelevante (0,0001%) não faça
+// um fundo parado aparecer como "em alta".
+// Formato: Número inteiro
+Fundos em Alta =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Var", ROUND ( CALCULATE ( [Variação Período %] ) * 100, 2 )
+    )
+RETURN
+    COALESCE ( COUNTROWS ( FILTER ( TabelaFundos, [@Var] > 0 ) ), 0 )
+
+
+Fundos em Baixa =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Var", ROUND ( CALCULATE ( [Variação Período %] ) * 100, 2 )
+    )
+RETURN
+    COALESCE ( COUNTROWS ( FILTER ( TabelaFundos, [@Var] < 0 ) ), 0 )
+
+
+Fundos Estáveis =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Var", ROUND ( CALCULATE ( [Variação Período %] ) * 100, 2 )
+    )
+RETURN
+    COALESCE ( COUNTROWS ( FILTER ( TabelaFundos, [@Var] = 0 ) ), 0 )
+
+
+// Ticker do fundo mais líquido do contexto — bom para um cartão de
+// destaque ou para o subtítulo de uma página.
+// Formato: Texto
+Fundo Mais Líquido =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Liquidez", CALCULATE ( [Volume Financeiro Médio por Pregão] )
+    )
+RETURN
+    CONCATENATEX ( TOPN ( 1, TabelaFundos, [@Liquidez], DESC ), FIIsConfig[ticker], ", " )
+
+
+// Ticker + variação do fundo que mais subiu e do que mais caiu.
+// Formato: Texto
+Maior Alta do Período =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Var", CALCULATE ( [Variação Período %] )
+    )
+RETURN
+    CONCATENATEX (
+        TOPN ( 1, TabelaFundos, [@Var], DESC ),
+        FIIsConfig[ticker] & " (" & FORMAT ( [@Var], "+0.00%;-0.00%;0.00%" ) & ")",
+        ", "
+    )
+
+
+Maior Queda do Período =
+VAR TabelaFundos =
+    ADDCOLUMNS (
+        ALLSELECTED ( FIIsConfig[ticker] ),
+        "@Var", CALCULATE ( [Variação Período %] )
+    )
+RETURN
+    CONCATENATEX (
+        TOPN ( 1, TabelaFundos, [@Var], ASC ),
+        FIIsConfig[ticker] & " (" & FORMAT ( [@Var], "+0.00%;-0.00%;0.00%" ) & ")",
+        ", "
+    )
+
+
+// =====================================================================
+// 7. RISCO
+// =====================================================================
+
+// Desvio padrão dos retornos diários do fundo (mesma conta do
+// gerar_dados_site.py). Precisa de pelo menos 3 pregões coletados para
+// devolver algo: com 2 pregões existe só 1 retorno, e desvio padrão de
+// um único valor é indefinido — a medida fica em branco, o que é o
+// comportamento correto.
+// Formato: Percentual, 2 casas
+Volatilidade Retorno Diário % =
+IF (
+    HASONEVALUE ( FIIsHistorico[Ticker] ),
+    VAR Datas = VALUES ( FIIsHistorico[Data_Pregao] )
+    VAR Retornos =
+        ADDCOLUMNS (
+            Datas,
+            "@Retorno",
+            VAR DataAtual = FIIsHistorico[Data_Pregao]
+            VAR PrecoAtual = CALCULATE ( SUM ( FIIsHistorico[Preco_Fechamento_R$] ) )
+            VAR DataAnterior =
+                MAXX (
+                    FILTER ( Datas, FIIsHistorico[Data_Pregao] < DataAtual ),
+                    FIIsHistorico[Data_Pregao]
+                )
+            VAR PrecoAnterior =
+                CALCULATE (
+                    SUM ( FIIsHistorico[Preco_Fechamento_R$] ),
+                    FIIsHistorico[Data_Pregao] = DataAnterior
+                )
+            RETURN
+                DIVIDE ( PrecoAtual - PrecoAnterior, PrecoAnterior )
+        )
+    RETURN
+        STDEVX.S ( FILTER ( Retornos, NOT ISBLANK ( [@Retorno] ) ), [@Retorno] )
+)
+
+
+// =====================================================================
+// 8. FORMATAÇÃO CONDICIONAL
+// =====================================================================
+//
+// Para usar: no visual, Formatar > Cor da fonte (ou Cor de fundo) >
+// Formatação condicional > Formatar por: Valor do campo > escolha a
+// medida correspondente.
+
+// Verde para alta, vermelho para queda, cinza para estável.
+// Formato: Texto
+Cor Variação =
+VAR V = ROUND ( [Variação Período %] * 100, 2 )
+RETURN
+    SWITCH (
+        TRUE (),
+        V > 0, "#107C10",
+        V < 0, "#D13438",
+        "#605E5C"
+    )
+
+
+// Cores do semáforo de liquidez, alinhadas com o protótipo.
+// Formato: Texto
+Cor Liquidez =
+SWITCH (
+    [Classificação de Liquidez],
+    "Alta", "#107C10",
+    "Média", "#C19C00",
+    "Baixa", "#D13438",
+    "#605E5C"
+)
+
+
+// =====================================================================
+// FIM
+// Referência de layout e do Power Query: blueprint_powerbi.md
+// =====================================================================

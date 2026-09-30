@@ -1,0 +1,20 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+site/backend/fiis.db
+
+# Node
+site/frontend/node_modules/
+site/frontend/dist/
+site/frontend/public/data/
+
+# Arquivos locais que não vão para o repositório
+*.pbix
+*.xlsx
+~$*
+.vscode/
+.venv2/
+.pytest_cache/
+*.tsbuildinfo
+testar_fontes_resultado.txt

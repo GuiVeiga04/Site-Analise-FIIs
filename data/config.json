@@ -1,0 +1,224 @@
+{
+  "fundos": [
+    {
+      "ticker": "KNIP11",
+      "nome": "Kinea Índices de Preços",
+      "gestora": "Kinea",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI indexado a IPCA"
+    },
+    {
+      "ticker": "CPTS11",
+      "nome": "Capitânia Securities II",
+      "gestora": "Capitânia",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI High Yield / Estruturado"
+    },
+    {
+      "ticker": "KNCR11",
+      "nome": "Kinea Rendimentos Imobiliários",
+      "gestora": "Kinea",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI indexado ao CDI"
+    },
+    {
+      "ticker": "MCCI11",
+      "nome": "Mauá Capital Recebíveis Imobiliários",
+      "gestora": "Mauá Capital",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI High Grade"
+    },
+    {
+      "ticker": "RBRY11",
+      "nome": "RBR Alpha Multiestratégia",
+      "gestora": "RBR",
+      "tipo_gestao": "Híbrido",
+      "segmento": "Multiestratégia (papel + tijolo + FoF)"
+    },
+    {
+      "ticker": "HGCR11",
+      "nome": "CSHG Recebíveis Imobiliários",
+      "gestora": "CSHG",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI High Grade"
+    },
+    {
+      "ticker": "VRTA11",
+      "nome": "Fator Verità",
+      "gestora": "Fator",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI High Grade"
+    },
+    {
+      "ticker": "RECR11",
+      "nome": "REC Recebíveis Imobiliários",
+      "gestora": "REC",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI High Grade"
+    },
+    {
+      "ticker": "KNSC11",
+      "nome": "Kinea Securities",
+      "gestora": "Kinea",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI High Yield"
+    },
+    {
+      "ticker": "PCIP11",
+      "nome": "Patria Crédito Imobiliário (ex-CVBI11)",
+      "gestora": "Patria",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI indexado a IPCA",
+      "cnpj": "28.729.197/0001-13"
+    },
+    {
+      "ticker": "HGLG11",
+      "nome": "CSHG Logística",
+      "gestora": "CSHG",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Logística"
+    },
+    {
+      "ticker": "BTLG11",
+      "nome": "BTG Pactual Logística",
+      "gestora": "BTG Pactual",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Logística"
+    },
+    {
+      "ticker": "XPML11",
+      "nome": "XP Malls",
+      "gestora": "XP",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Shopping"
+    },
+    {
+      "ticker": "XPLG11",
+      "nome": "XP Log",
+      "gestora": "XP",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Logística"
+    },
+    {
+      "ticker": "VISC11",
+      "nome": "Vinci Shopping Centers",
+      "gestora": "Vinci",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Shopping"
+    },
+    {
+      "ticker": "HSML11",
+      "nome": "HSI Malls",
+      "gestora": "HSI",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Shopping"
+    },
+    {
+      "ticker": "PVBI11",
+      "nome": "VBI Prime Properties",
+      "gestora": "VBI",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Lajes Corporativas"
+    },
+    {
+      "ticker": "BRCO11",
+      "nome": "Bresco Logística",
+      "gestora": "Bresco",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Logística"
+    },
+    {
+      "ticker": "HGRE11",
+      "nome": "CSHG Real Estate",
+      "gestora": "CSHG",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Lajes Corporativas"
+    },
+    {
+      "ticker": "HGBS11",
+      "nome": "CSHG Brasil Shopping",
+      "gestora": "CSHG",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Shopping"
+    },
+    {
+      "ticker": "MXRF11",
+      "nome": "Maxi Renda",
+      "gestora": "XP",
+      "tipo_gestao": "Híbrido",
+      "segmento": "Papel predominante (CRI + cotas de FII)"
+    },
+    {
+      "ticker": "KNRI11",
+      "nome": "Kinea Renda Imobiliária",
+      "gestora": "Kinea",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Híbrido: Lajes + Logística"
+    },
+    {
+      "ticker": "TRXF11",
+      "nome": "TRX Real Estate",
+      "gestora": "TRX",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Renda Urbana / Varejo (sale-leaseback)",
+      "cnpj": "28.548.288/0001-52"
+    },
+    {
+      "ticker": "HGRU11",
+      "nome": "CSHG Renda Urbana",
+      "gestora": "CSHG",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Renda Urbana / Varejo"
+    },
+    {
+      "ticker": "ALZR11",
+      "nome": "Alianza Trust Renda Imobiliária",
+      "gestora": "Alianza/AZ Quest",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Renda Urbana / Industrial (sale-leaseback)"
+    },
+    {
+      "ticker": "TGAR11",
+      "nome": "TG Ativo Real",
+      "gestora": "TG Core",
+      "tipo_gestao": "Papel",
+      "segmento": "Crédito estruturado com garantia real"
+    },
+    {
+      "ticker": "GGRC11",
+      "nome": "GGR Covepi Renda",
+      "gestora": "GGR",
+      "tipo_gestao": "Tijolo",
+      "segmento": "Logística / Galpões Industriais"
+    },
+    {
+      "ticker": "RBRR11",
+      "nome": "RBR Rendimento High Grade",
+      "gestora": "RBR",
+      "tipo_gestao": "Papel",
+      "segmento": "CRI High Grade"
+    },
+    {
+      "ticker": "BCIA11",
+      "nome": "Brasil Capital Real Estate FoF",
+      "gestora": "Brasil Capital",
+      "tipo_gestao": "FoF",
+      "segmento": "Fundo de Fundos"
+    }
+  ],
+  "indicadores": {
+    "CDI_aa": {
+      "valor": 13.65,
+      "data": "2026-09-25"
+    },
+    "IPCA_12m": {
+      "valor": 4.22,
+      "data": "2026-08-01"
+    },
+    "Selic_meta_aa": {
+      "valor": 13.75,
+      "data": "2026-09-30"
+    }
+  },
+  "gerado_em": "2026-09-30T09:06:37.522718"
+}
