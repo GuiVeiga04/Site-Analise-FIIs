@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { api } from "../api/client";
 import { BarraFiltros, FiltroSinal, useFiltros } from "../components/Filtros";
 import { DispersaoDYPVP, DispersaoLiquidez, LiquidezPorTipo, RankingDY, RankingLiquidez } from "../components/Graficos";
-import { Insights } from "../components/Insights";
 import { TabelaFundos } from "../components/TabelaFundos";
 import { Estado, KpiCard } from "../components/ui";
 import { kpis } from "../lib/agregados";
@@ -73,8 +72,6 @@ export default function VisaoGeral() {
         <KpiCard label="Concentração top 5" value={k.concentracaoTop5 == null ? "—" : `${k.concentracaoTop5.toFixed(0)}%`}
           sub="da liquidez nos 5 mais negociados" />
       </section>
-
-      <Insights fundos={filtrados} />
 
       <section className="grid-2">
         <LiquidezPorTipo fundos={filtrados} />

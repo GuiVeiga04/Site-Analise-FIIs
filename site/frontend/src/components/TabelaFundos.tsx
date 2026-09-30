@@ -2,8 +2,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { FundoSnapshot } from "../api/types";
 import { brl, brlDiv, data, mult, taxa } from "../lib/format";
-import { useHistoricos } from "../lib/useHistoricos";
-import { Delta, LiquidezBadge, SinalBadge, Sparkline, TipoPill } from "./ui";
+import { Delta, LiquidezBadge, SinalBadge, TipoPill } from "./ui";
 
 type Chave = "ticker" | "checklist_nota" | "segmento" | "preco" | "p_vp" | "dy_12m_pct" | "ultimo_dividendo" | "variacao_periodo_pct"
   | "volume_financeiro_medio" | "rank_liquidez";
@@ -24,7 +23,6 @@ const COLUNAS: { chave: Chave; titulo: string; num?: boolean }[] = [
 export function TabelaFundos({ fundos }: { fundos: FundoSnapshot[] }) {
   const nav = useNavigate();
   const [ord, setOrd] = useState<{ chave: Chave; dir: 1 | -1 }>({ chave: "volume_financeiro_medio", dir: -1 });
-  const historicos = useHistoricos(useMemo(() => fundos.map((f) => f.ticker), [fundos]));
 
   const linhas = useMemo(() => [...fundos].sort((a, b) => {
     const va = a[ord.chave] ?? -Infinity, vb = b[ord.chave] ?? -Infinity;
@@ -61,7 +59,7 @@ export function TabelaFundos({ fundos }: { fundos: FundoSnapshot[] }) {
               </td>
               <td><SinalBadge sinal={f.checklist_sinal} nota={f.checklist_nota} compacto /></td>
               <td>{f.segmento}</td>
-              <td className="r num">{brl(f.preco)}<Sparkline serie={historicos[f.ticker]} /></td>
+              <td className="r num">{brl(f.preco)}</td>
               <td className="r num" title={f.p_vp_mediana_pares != null ? `Mediana dos pares (${f.grupo_pares}): ${mult(f.p_vp_mediana_pares)}` : undefined}>
                 {mult(f.p_vp)}
               </td>
