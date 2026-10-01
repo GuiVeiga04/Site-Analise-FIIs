@@ -4,203 +4,203 @@
       "Ticker": "TRXF11",
       "Nome_Fundo": "TRX Real Estate",
       "Segmento": "Renda Urbana / Varejo (sale-leaseback)",
-      "Volume_Financeiro_Medio": 21849665.104117647,
+      "Volume_Financeiro_Medio": 21936628.79537255,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "KNCR11",
       "Nome_Fundo": "Kinea Rendimentos Imobiliários",
       "Segmento": "CRI indexado ao CDI",
-      "Volume_Financeiro_Medio": 19252729.07835294,
+      "Volume_Financeiro_Medio": 19367116.799607843,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "XPML11",
       "Nome_Fundo": "XP Malls",
       "Segmento": "Shopping",
-      "Volume_Financeiro_Medio": 16452706.015999999,
+      "Volume_Financeiro_Medio": 16506135.33792157,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "MXRF11",
       "Nome_Fundo": "Maxi Renda",
       "Segmento": "Papel predominante (CRI + cotas de FII)",
-      "Volume_Financeiro_Medio": 15033623.601568628,
+      "Volume_Financeiro_Medio": 15094109.843647059,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "HGLG11",
       "Nome_Fundo": "CSHG Logística",
       "Segmento": "Logística",
-      "Volume_Financeiro_Medio": 14171746.471294116,
+      "Volume_Financeiro_Medio": 14230583.782941177,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "BTLG11",
       "Nome_Fundo": "BTG Pactual Logística",
       "Segmento": "Logística",
-      "Volume_Financeiro_Medio": 13575475.903960785,
+      "Volume_Financeiro_Medio": 13636343.034078432,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "GGRC11",
       "Nome_Fundo": "GGR Covepi Renda",
       "Segmento": "Logística / Galpões Industriais",
-      "Volume_Financeiro_Medio": 10991593.786745097,
+      "Volume_Financeiro_Medio": 11035179.518509803,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "KNIP11",
       "Nome_Fundo": "Kinea Índices de Preços",
       "Segmento": "CRI indexado a IPCA",
-      "Volume_Financeiro_Medio": 10039539.720039217,
+      "Volume_Financeiro_Medio": 10062310.561999999,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "CPTS11",
       "Nome_Fundo": "Capitânia Securities II",
       "Segmento": "CRI High Yield / Estruturado",
-      "Volume_Financeiro_Medio": 7886244.4366666665,
+      "Volume_Financeiro_Medio": 7904502.207019608,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "KNRI11",
       "Nome_Fundo": "Kinea Renda Imobiliária",
       "Segmento": "Híbrido: Lajes + Logística",
-      "Volume_Financeiro_Medio": 6956871.601843137,
+      "Volume_Financeiro_Medio": 6984572.344549019,
       "Classificacao_Liquidez": "Alta"
     },
     {
       "Ticker": "VISC11",
       "Nome_Fundo": "Vinci Shopping Centers",
       "Segmento": "Shopping",
-      "Volume_Financeiro_Medio": 6594202.366666666,
+      "Volume_Financeiro_Medio": 6619638.878117647,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "XPLG11",
       "Nome_Fundo": "XP Log",
       "Segmento": "Logística",
-      "Volume_Financeiro_Medio": 6325902.878078432,
+      "Volume_Financeiro_Medio": 6351018.694666667,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "TGAR11",
       "Nome_Fundo": "TG Ativo Real",
       "Segmento": "Crédito estruturado com garantia real",
-      "Volume_Financeiro_Medio": 6007048.502862745,
+      "Volume_Financeiro_Medio": 6021628.537764707,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "HGRU11",
       "Nome_Fundo": "CSHG Renda Urbana",
       "Segmento": "Renda Urbana / Varejo",
-      "Volume_Financeiro_Medio": 5593606.55517647,
+      "Volume_Financeiro_Medio": 5619500.92745098,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "BRCO11",
       "Nome_Fundo": "Bresco Logística",
       "Segmento": "Logística",
-      "Volume_Financeiro_Medio": 5363018.947294118,
+      "Volume_Financeiro_Medio": 5378989.144901961,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "KNSC11",
       "Nome_Fundo": "Kinea Securities",
       "Segmento": "CRI High Yield",
-      "Volume_Financeiro_Medio": 5264303.1129019605,
+      "Volume_Financeiro_Medio": 5298483.463411765,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "RBRY11",
       "Nome_Fundo": "RBR Alpha Multiestratégia",
       "Segmento": "Multiestratégia (papel + tijolo + FoF)",
-      "Volume_Financeiro_Medio": 4817409.968627451,
+      "Volume_Financeiro_Medio": 4833710.836470588,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "MCCI11",
       "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "Volume_Financeiro_Medio": 4697843.099098039,
+      "Volume_Financeiro_Medio": 4720618.679490196,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "PVBI11",
       "Nome_Fundo": "VBI Prime Properties",
       "Segmento": "Lajes Corporativas",
-      "Volume_Financeiro_Medio": 4645747.713137254,
+      "Volume_Financeiro_Medio": 4660056.579764705,
       "Classificacao_Liquidez": "Média"
     },
     {
       "Ticker": "RBRR11",
       "Nome_Fundo": "RBR Rendimento High Grade",
       "Segmento": "CRI High Grade",
-      "Volume_Financeiro_Medio": 4504786.68745098,
+      "Volume_Financeiro_Medio": 4521447.942549019,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "HSML11",
       "Nome_Fundo": "HSI Malls",
       "Segmento": "Shopping",
-      "Volume_Financeiro_Medio": 4453552.6246274505,
+      "Volume_Financeiro_Medio": 4463583.801137255,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "HGBS11",
       "Nome_Fundo": "CSHG Brasil Shopping",
       "Segmento": "Shopping",
-      "Volume_Financeiro_Medio": 4273647.7221176475,
+      "Volume_Financeiro_Medio": 4287604.822980392,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "HGCR11",
       "Nome_Fundo": "CSHG Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "Volume_Financeiro_Medio": 3268932.7070196075,
+      "Volume_Financeiro_Medio": 3280365.0708235297,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "RECR11",
       "Nome_Fundo": "REC Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "Volume_Financeiro_Medio": 3056823.8727843133,
+      "Volume_Financeiro_Medio": 3067301.0935686277,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "PCIP11",
       "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
       "Segmento": "CRI indexado a IPCA",
-      "Volume_Financeiro_Medio": 2966635.6445490196,
+      "Volume_Financeiro_Medio": 2975719.091843137,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "ALZR11",
       "Nome_Fundo": "Alianza Trust Renda Imobiliária",
       "Segmento": "Renda Urbana / Industrial (sale-leaseback)",
-      "Volume_Financeiro_Medio": 2518898.437372549,
+      "Volume_Financeiro_Medio": 2532870.2572941175,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "HGRE11",
       "Nome_Fundo": "CSHG Real Estate",
       "Segmento": "Lajes Corporativas",
-      "Volume_Financeiro_Medio": 2322097.4436862743,
+      "Volume_Financeiro_Medio": 2327961.0139607848,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "VRTA11",
       "Nome_Fundo": "Fator Verità",
       "Segmento": "CRI High Grade",
-      "Volume_Financeiro_Medio": 1696613.3774117648,
+      "Volume_Financeiro_Medio": 1700797.7655294116,
       "Classificacao_Liquidez": "Baixa"
     },
     {
       "Ticker": "BCIA11",
       "Nome_Fundo": "Brasil Capital Real Estate FoF",
       "Segmento": "Fundo de Fundos",
-      "Volume_Financeiro_Medio": 451301.1403137255,
+      "Volume_Financeiro_Medio": 452298.8157254902,
       "Classificacao_Liquidez": "Baixa"
     }
   ],
@@ -209,119 +209,119 @@
       "Ticker": "TGAR11",
       "Nome_Fundo": "TG Ativo Real",
       "Segmento": "Crédito estruturado com garantia real",
-      "DY_12m_%": 22.19,
+      "DY_12m_%": 22.27,
       "DY_Ultimo_%": 1.6,
-      "DY_12m_vs_Pares_pp": 8.9
+      "DY_12m_vs_Pares_pp": 8.96
     },
     {
       "Ticker": "RBRY11",
       "Nome_Fundo": "RBR Alpha Multiestratégia",
       "Segmento": "Multiestratégia (papel + tijolo + FoF)",
-      "DY_12m_%": 16.23,
-      "DY_Ultimo_%": 1.22,
-      "DY_12m_vs_Pares_pp": 1.55
+      "DY_12m_%": 16.02,
+      "DY_Ultimo_%": 1.2,
+      "DY_12m_vs_Pares_pp": 1.5
     },
     {
       "Ticker": "TRXF11",
       "Nome_Fundo": "TRX Real Estate",
       "Segmento": "Renda Urbana / Varejo (sale-leaseback)",
-      "DY_12m_%": 15.08,
-      "DY_Ultimo_%": 1.29,
-      "DY_12m_vs_Pares_pp": 5.25
+      "DY_12m_%": 15.14,
+      "DY_Ultimo_%": 1.3,
+      "DY_12m_vs_Pares_pp": 5.32
     },
     {
       "Ticker": "RBRR11",
       "Nome_Fundo": "RBR Rendimento High Grade",
       "Segmento": "CRI High Grade",
-      "DY_12m_%": 14.53,
-      "DY_Ultimo_%": 1.32,
-      "DY_12m_vs_Pares_pp": 0.39
-    },
-    {
-      "Ticker": "RECR11",
-      "Nome_Fundo": "REC Recebíveis Imobiliários",
-      "Segmento": "CRI High Grade",
-      "DY_12m_%": 14.53,
-      "DY_Ultimo_%": 1.01,
-      "DY_12m_vs_Pares_pp": 0.39
+      "DY_12m_%": 14.4,
+      "DY_Ultimo_%": 1.31,
+      "DY_12m_vs_Pares_pp": 0.3
     },
     {
       "Ticker": "CPTS11",
       "Nome_Fundo": "Capitânia Securities II",
       "Segmento": "CRI High Yield / Estruturado",
-      "DY_12m_%": 14.36,
+      "DY_12m_%": 14.34,
       "DY_Ultimo_%": 1.2,
-      "DY_12m_vs_Pares_pp": 1.06
+      "DY_12m_vs_Pares_pp": 1.04
+    },
+    {
+      "Ticker": "RECR11",
+      "Nome_Fundo": "REC Recebíveis Imobiliários",
+      "Segmento": "CRI High Grade",
+      "DY_12m_%": 14.29,
+      "DY_Ultimo_%": 0.99,
+      "DY_12m_vs_Pares_pp": 0.19
     },
     {
       "Ticker": "VRTA11",
       "Nome_Fundo": "Fator Verità",
       "Segmento": "CRI High Grade",
-      "DY_12m_%": 14.14,
-      "DY_Ultimo_%": 1.18,
+      "DY_12m_%": 14.1,
+      "DY_Ultimo_%": 1.17,
       "DY_12m_vs_Pares_pp": 0.0
-    },
-    {
-      "Ticker": "KNCR11",
-      "Nome_Fundo": "Kinea Rendimentos Imobiliários",
-      "Segmento": "CRI indexado ao CDI",
-      "DY_12m_%": 13.3,
-      "DY_Ultimo_%": 1.08,
-      "DY_12m_vs_Pares_pp": 0.01
     },
     {
       "Ticker": "PCIP11",
       "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
       "Segmento": "CRI indexado a IPCA",
-      "DY_12m_%": 13.29,
+      "DY_12m_%": 13.32,
       "DY_Ultimo_%": 1.09,
-      "DY_12m_vs_Pares_pp": -0.01
+      "DY_12m_vs_Pares_pp": 0.02
+    },
+    {
+      "Ticker": "KNCR11",
+      "Nome_Fundo": "Kinea Rendimentos Imobiliários",
+      "Segmento": "CRI indexado ao CDI",
+      "DY_12m_%": 13.29,
+      "DY_Ultimo_%": 1.08,
+      "DY_12m_vs_Pares_pp": -0.02
     },
     {
       "Ticker": "MXRF11",
       "Nome_Fundo": "Maxi Renda",
       "Segmento": "Papel predominante (CRI + cotas de FII)",
-      "DY_12m_%": 13.12,
-      "DY_Ultimo_%": 1.1,
-      "DY_12m_vs_Pares_pp": -1.56
+      "DY_12m_%": 13.02,
+      "DY_Ultimo_%": 1.09,
+      "DY_12m_vs_Pares_pp": -1.5
     },
     {
       "Ticker": "MCCI11",
       "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "DY_12m_%": 12.81,
-      "DY_Ultimo_%": 1.07,
-      "DY_12m_vs_Pares_pp": -1.33
+      "DY_12m_%": 12.68,
+      "DY_Ultimo_%": 1.06,
+      "DY_12m_vs_Pares_pp": -1.42
     },
     {
       "Ticker": "KNSC11",
       "Nome_Fundo": "Kinea Securities",
       "Segmento": "CRI High Yield",
-      "DY_12m_%": 12.63,
+      "DY_12m_%": 12.66,
       "DY_Ultimo_%": 0.99,
-      "DY_12m_vs_Pares_pp": -0.66
+      "DY_12m_vs_Pares_pp": -0.64
     },
     {
       "Ticker": "HGCR11",
       "Nome_Fundo": "CSHG Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "DY_12m_%": 12.44,
-      "DY_Ultimo_%": 1.06,
-      "DY_12m_vs_Pares_pp": -1.7
+      "DY_12m_%": 12.39,
+      "DY_Ultimo_%": 1.05,
+      "DY_12m_vs_Pares_pp": -1.71
     },
     {
       "Ticker": "GGRC11",
       "Nome_Fundo": "GGR Covepi Renda",
       "Segmento": "Logística / Galpões Industriais",
-      "DY_12m_%": 12.3,
-      "DY_Ultimo_%": 1.12,
-      "DY_12m_vs_Pares_pp": 2.47
+      "DY_12m_%": 12.24,
+      "DY_Ultimo_%": 1.11,
+      "DY_12m_vs_Pares_pp": 2.42
     },
     {
       "Ticker": "BCIA11",
       "Nome_Fundo": "Brasil Capital Real Estate FoF",
       "Segmento": "Fundo de Fundos",
-      "DY_12m_%": 12.0,
+      "DY_12m_%": 11.93,
       "DY_Ultimo_%": 0.99,
       "DY_12m_vs_Pares_pp": 0.0
     },
@@ -329,41 +329,41 @@
       "Ticker": "KNIP11",
       "Nome_Fundo": "Kinea Índices de Preços",
       "Segmento": "CRI indexado a IPCA",
-      "DY_12m_%": 11.27,
-      "DY_Ultimo_%": 0.72,
-      "DY_12m_vs_Pares_pp": -2.03
+      "DY_12m_%": 11.33,
+      "DY_Ultimo_%": 0.73,
+      "DY_12m_vs_Pares_pp": -1.97
     },
     {
       "Ticker": "XPML11",
       "Nome_Fundo": "XP Malls",
       "Segmento": "Shopping",
-      "DY_12m_%": 11.08,
+      "DY_12m_%": 11.11,
       "DY_Ultimo_%": 0.95,
-      "DY_12m_vs_Pares_pp": 0.65
+      "DY_12m_vs_Pares_pp": 0.72
     },
     {
       "Ticker": "XPLG11",
       "Nome_Fundo": "XP Log",
       "Segmento": "Logística",
-      "DY_12m_%": 10.63,
+      "DY_12m_%": 10.64,
       "DY_Ultimo_%": 0.89,
-      "DY_12m_vs_Pares_pp": 0.88
+      "DY_12m_vs_Pares_pp": 0.89
     },
     {
       "Ticker": "HGBS11",
       "Nome_Fundo": "CSHG Brasil Shopping",
       "Segmento": "Shopping",
-      "DY_12m_%": 10.48,
-      "DY_Ultimo_%": 0.91,
-      "DY_12m_vs_Pares_pp": 0.05
+      "DY_12m_%": 10.5,
+      "DY_Ultimo_%": 0.92,
+      "DY_12m_vs_Pares_pp": 0.11
     },
     {
       "Ticker": "HSML11",
       "Nome_Fundo": "HSI Malls",
       "Segmento": "Shopping",
-      "DY_12m_%": 10.37,
-      "DY_Ultimo_%": 0.91,
-      "DY_12m_vs_Pares_pp": -0.06
+      "DY_12m_%": 10.28,
+      "DY_Ultimo_%": 0.9,
+      "DY_12m_vs_Pares_pp": -0.11
     },
     {
       "Ticker": "ALZR11",
@@ -371,31 +371,31 @@
       "Segmento": "Renda Urbana / Industrial (sale-leaseback)",
       "DY_12m_%": 10.1,
       "DY_Ultimo_%": 0.85,
-      "DY_12m_vs_Pares_pp": 0.27
-    },
-    {
-      "Ticker": "BRCO11",
-      "Nome_Fundo": "Bresco Logística",
-      "Segmento": "Logística",
-      "DY_12m_%": 9.83,
-      "DY_Ultimo_%": 0.82,
-      "DY_12m_vs_Pares_pp": 0.08
+      "DY_12m_vs_Pares_pp": 0.28
     },
     {
       "Ticker": "HGRE11",
       "Nome_Fundo": "CSHG Real Estate",
       "Segmento": "Lajes Corporativas",
-      "DY_12m_%": 9.83,
+      "DY_12m_%": 9.82,
       "DY_Ultimo_%": 0.73,
       "DY_12m_vs_Pares_pp": 0.0
+    },
+    {
+      "Ticker": "BRCO11",
+      "Nome_Fundo": "Bresco Logística",
+      "Segmento": "Logística",
+      "DY_12m_%": 9.79,
+      "DY_Ultimo_%": 0.81,
+      "DY_12m_vs_Pares_pp": 0.04
     },
     {
       "Ticker": "BTLG11",
       "Nome_Fundo": "BTG Pactual Logística",
       "Segmento": "Logística",
-      "DY_12m_%": 9.67,
+      "DY_12m_%": 9.71,
       "DY_Ultimo_%": 0.82,
-      "DY_12m_vs_Pares_pp": -0.08
+      "DY_12m_vs_Pares_pp": -0.04
     },
     {
       "Ticker": "VISC11",
@@ -403,39 +403,39 @@
       "Segmento": "Shopping",
       "DY_12m_%": 9.67,
       "DY_Ultimo_%": 0.82,
-      "DY_12m_vs_Pares_pp": -0.76
+      "DY_12m_vs_Pares_pp": -0.72
     },
     {
       "Ticker": "HGRU11",
       "Nome_Fundo": "CSHG Renda Urbana",
       "Segmento": "Renda Urbana / Varejo",
-      "DY_12m_%": 9.52,
+      "DY_12m_%": 9.55,
       "DY_Ultimo_%": 0.83,
-      "DY_12m_vs_Pares_pp": -0.31
+      "DY_12m_vs_Pares_pp": -0.27
     },
     {
       "Ticker": "HGLG11",
       "Nome_Fundo": "CSHG Logística",
       "Segmento": "Logística",
-      "DY_12m_%": 9.01,
+      "DY_12m_%": 9.02,
       "DY_Ultimo_%": 0.79,
-      "DY_12m_vs_Pares_pp": -0.74
+      "DY_12m_vs_Pares_pp": -0.73
     },
     {
       "Ticker": "KNRI11",
       "Nome_Fundo": "Kinea Renda Imobiliária",
       "Segmento": "Híbrido: Lajes + Logística",
-      "DY_12m_%": 8.32,
+      "DY_12m_%": 8.35,
       "DY_Ultimo_%": 0.7,
-      "DY_12m_vs_Pares_pp": -1.51
+      "DY_12m_vs_Pares_pp": -1.47
     },
     {
       "Ticker": "PVBI11",
       "Nome_Fundo": "VBI Prime Properties",
       "Segmento": "Lajes Corporativas",
-      "DY_12m_%": 7.76,
-      "DY_Ultimo_%": 0.57,
-      "DY_12m_vs_Pares_pp": -2.07
+      "DY_12m_%": 7.68,
+      "DY_Ultimo_%": 0.56,
+      "DY_12m_vs_Pares_pp": -2.14
     }
   ],
   "por_checklist": [
@@ -496,14 +496,6 @@
       "Checklist_Cobertura_%": 100
     },
     {
-      "Ticker": "MCCI11",
-      "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
-      "Segmento": "CRI High Grade",
-      "Checklist_Sinal": "verde",
-      "Checklist_Nota": 91,
-      "Checklist_Cobertura_%": 100
-    },
-    {
       "Ticker": "RBRR11",
       "Nome_Fundo": "RBR Rendimento High Grade",
       "Segmento": "CRI High Grade",
@@ -512,16 +504,24 @@
       "Checklist_Cobertura_%": 100
     },
     {
-      "Ticker": "XPLG11",
-      "Nome_Fundo": "XP Log",
+      "Ticker": "BRCO11",
+      "Nome_Fundo": "Bresco Logística",
       "Segmento": "Logística",
       "Checklist_Sinal": "verde",
       "Checklist_Nota": 88,
       "Checklist_Cobertura_%": 100
     },
     {
-      "Ticker": "BRCO11",
-      "Nome_Fundo": "Bresco Logística",
+      "Ticker": "BTLG11",
+      "Nome_Fundo": "BTG Pactual Logística",
+      "Segmento": "Logística",
+      "Checklist_Sinal": "verde",
+      "Checklist_Nota": 88,
+      "Checklist_Cobertura_%": 100
+    },
+    {
+      "Ticker": "XPLG11",
+      "Nome_Fundo": "XP Log",
       "Segmento": "Logística",
       "Checklist_Sinal": "verde",
       "Checklist_Nota": 88,
@@ -536,9 +536,9 @@
       "Checklist_Cobertura_%": 100
     },
     {
-      "Ticker": "BTLG11",
-      "Nome_Fundo": "BTG Pactual Logística",
-      "Segmento": "Logística",
+      "Ticker": "MXRF11",
+      "Nome_Fundo": "Maxi Renda",
+      "Segmento": "Papel predominante (CRI + cotas de FII)",
       "Checklist_Sinal": "verde",
       "Checklist_Nota": 88,
       "Checklist_Cobertura_%": 100
@@ -560,17 +560,17 @@
       "Checklist_Cobertura_%": 92
     },
     {
-      "Ticker": "HGLG11",
-      "Nome_Fundo": "CSHG Logística",
-      "Segmento": "Logística",
+      "Ticker": "HGRU11",
+      "Nome_Fundo": "CSHG Renda Urbana",
+      "Segmento": "Renda Urbana / Varejo",
       "Checklist_Sinal": "amarelo",
       "Checklist_Nota": 83,
       "Checklist_Cobertura_%": 100
     },
     {
-      "Ticker": "HGRU11",
-      "Nome_Fundo": "CSHG Renda Urbana",
-      "Segmento": "Renda Urbana / Varejo",
+      "Ticker": "HGLG11",
+      "Nome_Fundo": "CSHG Logística",
+      "Segmento": "Logística",
       "Checklist_Sinal": "amarelo",
       "Checklist_Nota": 83,
       "Checklist_Cobertura_%": 100
@@ -584,6 +584,14 @@
       "Checklist_Cobertura_%": 100
     },
     {
+      "Ticker": "PCIP11",
+      "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
+      "Segmento": "CRI indexado a IPCA",
+      "Checklist_Sinal": "amarelo",
+      "Checklist_Nota": 82,
+      "Checklist_Cobertura_%": 100
+    },
+    {
       "Ticker": "HGCR11",
       "Nome_Fundo": "CSHG Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
@@ -592,11 +600,11 @@
       "Checklist_Cobertura_%": 100
     },
     {
-      "Ticker": "MXRF11",
-      "Nome_Fundo": "Maxi Renda",
-      "Segmento": "Papel predominante (CRI + cotas de FII)",
+      "Ticker": "MCCI11",
+      "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
+      "Segmento": "CRI High Grade",
       "Checklist_Sinal": "amarelo",
-      "Checklist_Nota": 79,
+      "Checklist_Nota": 82,
       "Checklist_Cobertura_%": 100
     },
     {
@@ -616,25 +624,17 @@
       "Checklist_Cobertura_%": 100
     },
     {
+      "Ticker": "KNRI11",
+      "Nome_Fundo": "Kinea Renda Imobiliária",
+      "Segmento": "Híbrido: Lajes + Logística",
+      "Checklist_Sinal": "amarelo",
+      "Checklist_Nota": 75,
+      "Checklist_Cobertura_%": 100
+    },
+    {
       "Ticker": "KNSC11",
       "Nome_Fundo": "Kinea Securities",
       "Segmento": "CRI High Yield",
-      "Checklist_Sinal": "amarelo",
-      "Checklist_Nota": 73,
-      "Checklist_Cobertura_%": 100
-    },
-    {
-      "Ticker": "PCIP11",
-      "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
-      "Segmento": "CRI indexado a IPCA",
-      "Checklist_Sinal": "amarelo",
-      "Checklist_Nota": 73,
-      "Checklist_Cobertura_%": 100
-    },
-    {
-      "Ticker": "KNCR11",
-      "Nome_Fundo": "Kinea Rendimentos Imobiliários",
-      "Segmento": "CRI indexado ao CDI",
       "Checklist_Sinal": "amarelo",
       "Checklist_Nota": 73,
       "Checklist_Cobertura_%": 100
@@ -648,11 +648,11 @@
       "Checklist_Cobertura_%": 100
     },
     {
-      "Ticker": "KNRI11",
-      "Nome_Fundo": "Kinea Renda Imobiliária",
-      "Segmento": "Híbrido: Lajes + Logística",
+      "Ticker": "KNCR11",
+      "Nome_Fundo": "Kinea Rendimentos Imobiliários",
+      "Segmento": "CRI indexado ao CDI",
       "Checklist_Sinal": "amarelo",
-      "Checklist_Nota": 67,
+      "Checklist_Nota": 64,
       "Checklist_Cobertura_%": 100
     },
     {
@@ -679,31 +679,39 @@
       "Segmento": "Crédito estruturado com garantia real",
       "P_VP": 0.41,
       "P_VP_vs_Pares": -0.52,
-      "DY_12m_%": 22.19
+      "DY_12m_%": 22.27
     },
     {
       "Ticker": "PVBI11",
       "Nome_Fundo": "VBI Prime Properties",
       "Segmento": "Lajes Corporativas",
-      "P_VP": 0.62,
-      "P_VP_vs_Pares": -0.2,
-      "DY_12m_%": 7.76
-    },
-    {
-      "Ticker": "RBRR11",
-      "Nome_Fundo": "RBR Rendimento High Grade",
-      "Segmento": "CRI High Grade",
-      "P_VP": 0.74,
-      "P_VP_vs_Pares": -0.12,
-      "DY_12m_%": 14.53
+      "P_VP": 0.63,
+      "P_VP_vs_Pares": -0.19,
+      "DY_12m_%": 7.68
     },
     {
       "Ticker": "TRXF11",
       "Nome_Fundo": "TRX Real Estate",
       "Segmento": "Renda Urbana / Varejo (sale-leaseback)",
+      "P_VP": 0.74,
+      "P_VP_vs_Pares": -0.08,
+      "DY_12m_%": 15.14
+    },
+    {
+      "Ticker": "RBRR11",
+      "Nome_Fundo": "RBR Rendimento High Grade",
+      "Segmento": "CRI High Grade",
       "P_VP": 0.75,
-      "P_VP_vs_Pares": -0.07,
-      "DY_12m_%": 15.08
+      "P_VP_vs_Pares": -0.12,
+      "DY_12m_%": 14.4
+    },
+    {
+      "Ticker": "PCIP11",
+      "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
+      "Segmento": "CRI indexado a IPCA",
+      "P_VP": 0.78,
+      "P_VP_vs_Pares": -0.15,
+      "DY_12m_%": 13.32
     },
     {
       "Ticker": "HGRE11",
@@ -711,15 +719,7 @@
       "Segmento": "Lajes Corporativas",
       "P_VP": 0.78,
       "P_VP_vs_Pares": -0.04,
-      "DY_12m_%": 9.83
-    },
-    {
-      "Ticker": "PCIP11",
-      "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
-      "Segmento": "CRI indexado a IPCA",
-      "P_VP": 0.79,
-      "P_VP_vs_Pares": -0.14,
-      "DY_12m_%": 13.29
+      "DY_12m_%": 9.82
     },
     {
       "Ticker": "GGRC11",
@@ -727,23 +727,15 @@
       "Segmento": "Logística / Galpões Industriais",
       "P_VP": 0.82,
       "P_VP_vs_Pares": 0.0,
-      "DY_12m_%": 12.3
+      "DY_12m_%": 12.24
     },
     {
       "Ticker": "RBRY11",
       "Nome_Fundo": "RBR Alpha Multiestratégia",
       "Segmento": "Multiestratégia (papel + tijolo + FoF)",
-      "P_VP": 0.82,
-      "P_VP_vs_Pares": -0.08,
-      "DY_12m_%": 16.23
-    },
-    {
-      "Ticker": "RECR11",
-      "Nome_Fundo": "REC Recebíveis Imobiliários",
-      "Segmento": "CRI High Grade",
       "P_VP": 0.83,
-      "P_VP_vs_Pares": -0.03,
-      "DY_12m_%": 14.53
+      "P_VP_vs_Pares": -0.08,
+      "DY_12m_%": 16.02
     },
     {
       "Ticker": "HSML11",
@@ -751,15 +743,23 @@
       "Segmento": "Shopping",
       "P_VP": 0.84,
       "P_VP_vs_Pares": -0.06,
-      "DY_12m_%": 10.37
+      "DY_12m_%": 10.28
+    },
+    {
+      "Ticker": "RECR11",
+      "Nome_Fundo": "REC Recebíveis Imobiliários",
+      "Segmento": "CRI High Grade",
+      "P_VP": 0.85,
+      "P_VP_vs_Pares": -0.02,
+      "DY_12m_%": 14.29
     },
     {
       "Ticker": "VRTA11",
       "Nome_Fundo": "Fator Verità",
       "Segmento": "CRI High Grade",
-      "P_VP": 0.86,
+      "P_VP": 0.87,
       "P_VP_vs_Pares": 0.0,
-      "DY_12m_%": 14.14
+      "DY_12m_%": 14.1
     },
     {
       "Ticker": "XPLG11",
@@ -767,7 +767,7 @@
       "Segmento": "Logística",
       "P_VP": 0.88,
       "P_VP_vs_Pares": -0.03,
-      "DY_12m_%": 10.63
+      "DY_12m_%": 10.64
     },
     {
       "Ticker": "CPTS11",
@@ -775,7 +775,7 @@
       "Segmento": "CRI High Yield / Estruturado",
       "P_VP": 0.89,
       "P_VP_vs_Pares": -0.04,
-      "DY_12m_%": 14.36
+      "DY_12m_%": 14.34
     },
     {
       "Ticker": "VISC11",
@@ -791,39 +791,39 @@
       "Segmento": "Logística",
       "P_VP": 0.89,
       "P_VP_vs_Pares": -0.02,
-      "DY_12m_%": 9.01
+      "DY_12m_%": 9.02
     },
     {
       "Ticker": "HGRU11",
       "Nome_Fundo": "CSHG Renda Urbana",
       "Segmento": "Renda Urbana / Varejo",
-      "P_VP": 0.9,
-      "P_VP_vs_Pares": 0.08,
-      "DY_12m_%": 9.52
-    },
-    {
-      "Ticker": "BCIA11",
-      "Nome_Fundo": "Brasil Capital Real Estate FoF",
-      "Segmento": "Fundo de Fundos",
-      "P_VP": 0.9,
-      "P_VP_vs_Pares": 0.0,
-      "DY_12m_%": 12.0
+      "P_VP": 0.89,
+      "P_VP_vs_Pares": 0.07,
+      "DY_12m_%": 9.55
     },
     {
       "Ticker": "XPML11",
       "Nome_Fundo": "XP Malls",
       "Segmento": "Shopping",
-      "P_VP": 0.91,
+      "P_VP": 0.9,
       "P_VP_vs_Pares": 0.01,
-      "DY_12m_%": 11.08
+      "DY_12m_%": 11.11
+    },
+    {
+      "Ticker": "BCIA11",
+      "Nome_Fundo": "Brasil Capital Real Estate FoF",
+      "Segmento": "Fundo de Fundos",
+      "P_VP": 0.91,
+      "P_VP_vs_Pares": 0.0,
+      "DY_12m_%": 11.93
     },
     {
       "Ticker": "HGBS11",
       "Nome_Fundo": "CSHG Brasil Shopping",
       "Segmento": "Shopping",
       "P_VP": 0.92,
-      "P_VP_vs_Pares": 0.02,
-      "DY_12m_%": 10.48
+      "P_VP_vs_Pares": 0.03,
+      "DY_12m_%": 10.5
     },
     {
       "Ticker": "ALZR11",
@@ -839,7 +839,7 @@
       "Segmento": "Logística",
       "P_VP": 0.93,
       "P_VP_vs_Pares": 0.02,
-      "DY_12m_%": 9.67
+      "DY_12m_%": 9.71
     },
     {
       "Ticker": "KNIP11",
@@ -847,7 +847,7 @@
       "Segmento": "CRI indexado a IPCA",
       "P_VP": 0.96,
       "P_VP_vs_Pares": 0.03,
-      "DY_12m_%": 11.27
+      "DY_12m_%": 11.33
     },
     {
       "Ticker": "KNRI11",
@@ -855,39 +855,39 @@
       "Segmento": "Híbrido: Lajes + Logística",
       "P_VP": 0.96,
       "P_VP_vs_Pares": 0.14,
-      "DY_12m_%": 8.32
-    },
-    {
-      "Ticker": "BRCO11",
-      "Nome_Fundo": "Bresco Logística",
-      "Segmento": "Logística",
-      "P_VP": 0.97,
-      "P_VP_vs_Pares": 0.06,
-      "DY_12m_%": 9.83
+      "DY_12m_%": 8.35
     },
     {
       "Ticker": "HGCR11",
       "Nome_Fundo": "CSHG Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
       "P_VP": 0.97,
-      "P_VP_vs_Pares": 0.11,
-      "DY_12m_%": 12.44
+      "P_VP_vs_Pares": 0.1,
+      "DY_12m_%": 12.39
+    },
+    {
+      "Ticker": "BRCO11",
+      "Nome_Fundo": "Bresco Logística",
+      "Segmento": "Logística",
+      "P_VP": 0.98,
+      "P_VP_vs_Pares": 0.07,
+      "DY_12m_%": 9.79
     },
     {
       "Ticker": "MXRF11",
       "Nome_Fundo": "Maxi Renda",
       "Segmento": "Papel predominante (CRI + cotas de FII)",
-      "P_VP": 0.98,
+      "P_VP": 0.99,
       "P_VP_vs_Pares": 0.08,
-      "DY_12m_%": 13.12
+      "DY_12m_%": 13.02
     },
     {
       "Ticker": "MCCI11",
       "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "P_VP": 1.0,
+      "P_VP": 1.01,
       "P_VP_vs_Pares": 0.14,
-      "DY_12m_%": 12.81
+      "DY_12m_%": 12.68
     },
     {
       "Ticker": "KNCR11",
@@ -895,7 +895,7 @@
       "Segmento": "CRI indexado ao CDI",
       "P_VP": 1.04,
       "P_VP_vs_Pares": 0.12,
-      "DY_12m_%": 13.3
+      "DY_12m_%": 13.29
     },
     {
       "Ticker": "KNSC11",
@@ -903,7 +903,7 @@
       "Segmento": "CRI High Yield",
       "P_VP": 1.04,
       "P_VP_vs_Pares": 0.12,
-      "DY_12m_%": 12.63
+      "DY_12m_%": 12.66
     }
   ],
   "por_variacao_periodo": [
@@ -911,85 +911,85 @@
       "Ticker": "KNRI11",
       "Nome_Fundo": "Kinea Renda Imobiliária",
       "Segmento": "Híbrido: Lajes + Logística",
-      "Variacao_Periodo_%": 6.4
-    },
-    {
-      "Ticker": "KNSC11",
-      "Nome_Fundo": "Kinea Securities",
-      "Segmento": "CRI High Yield",
-      "Variacao_Periodo_%": 4.84
+      "Variacao_Periodo_%": 6.08
     },
     {
       "Ticker": "MCCI11",
       "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "Variacao_Periodo_%": 3.81
+      "Variacao_Periodo_%": 4.85
+    },
+    {
+      "Ticker": "KNSC11",
+      "Nome_Fundo": "Kinea Securities",
+      "Segmento": "CRI High Yield",
+      "Variacao_Periodo_%": 4.61
     },
     {
       "Ticker": "BCIA11",
       "Nome_Fundo": "Brasil Capital Real Estate FoF",
       "Segmento": "Fundo de Fundos",
-      "Variacao_Periodo_%": 2.24
+      "Variacao_Periodo_%": 2.77
     },
     {
       "Ticker": "KNCR11",
       "Nome_Fundo": "Kinea Rendimentos Imobiliários",
       "Segmento": "CRI indexado ao CDI",
-      "Variacao_Periodo_%": 2.13
+      "Variacao_Periodo_%": 2.19
     },
     {
       "Ticker": "KNIP11",
       "Nome_Fundo": "Kinea Índices de Preços",
       "Segmento": "CRI indexado a IPCA",
-      "Variacao_Periodo_%": 1.83
+      "Variacao_Periodo_%": 1.26
     },
     {
       "Ticker": "HGCR11",
       "Nome_Fundo": "CSHG Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "Variacao_Periodo_%": 0.16
+      "Variacao_Periodo_%": 0.62
     },
     {
       "Ticker": "CPTS11",
       "Nome_Fundo": "Capitânia Securities II",
       "Segmento": "CRI High Yield / Estruturado",
-      "Variacao_Periodo_%": -0.13
-    },
-    {
-      "Ticker": "HGRE11",
-      "Nome_Fundo": "CSHG Real Estate",
-      "Segmento": "Lajes Corporativas",
-      "Variacao_Periodo_%": -1.74
+      "Variacao_Periodo_%": 0.0
     },
     {
       "Ticker": "BRCO11",
       "Nome_Fundo": "Bresco Logística",
       "Segmento": "Logística",
-      "Variacao_Periodo_%": -1.76
+      "Variacao_Periodo_%": -1.33
     },
     {
-      "Ticker": "BTLG11",
-      "Nome_Fundo": "BTG Pactual Logística",
-      "Segmento": "Logística",
-      "Variacao_Periodo_%": -2.84
+      "Ticker": "HGRE11",
+      "Nome_Fundo": "CSHG Real Estate",
+      "Segmento": "Lajes Corporativas",
+      "Variacao_Periodo_%": -1.63
     },
     {
       "Ticker": "HSML11",
       "Nome_Fundo": "HSI Malls",
       "Segmento": "Shopping",
-      "Variacao_Periodo_%": -3.45
+      "Variacao_Periodo_%": -2.6
+    },
+    {
+      "Ticker": "BTLG11",
+      "Nome_Fundo": "BTG Pactual Logística",
+      "Segmento": "Logística",
+      "Variacao_Periodo_%": -3.19
     },
     {
       "Ticker": "XPML11",
       "Nome_Fundo": "XP Malls",
       "Segmento": "Shopping",
-      "Variacao_Periodo_%": -4.47
+      "Variacao_Periodo_%": -4.72
     },
     {
       "Ticker": "VISC11",
       "Nome_Fundo": "Vinci Shopping Centers",
       "Segmento": "Shopping",
-      "Variacao_Periodo_%": -4.97
+      "Variacao_Periodo_%": -4.98
     },
     {
       "Ticker": "ALZR11",
@@ -998,88 +998,88 @@
       "Variacao_Periodo_%": -5.33
     },
     {
-      "Ticker": "HGLG11",
-      "Nome_Fundo": "CSHG Logística",
-      "Segmento": "Logística",
-      "Variacao_Periodo_%": -6.79
+      "Ticker": "MXRF11",
+      "Nome_Fundo": "Maxi Renda",
+      "Segmento": "Papel predominante (CRI + cotas de FII)",
+      "Variacao_Periodo_%": -6.33
     },
     {
       "Ticker": "VRTA11",
       "Nome_Fundo": "Fator Verità",
       "Segmento": "CRI High Grade",
-      "Variacao_Periodo_%": -7.02
+      "Variacao_Periodo_%": -6.75
     },
     {
-      "Ticker": "MXRF11",
-      "Nome_Fundo": "Maxi Renda",
-      "Segmento": "Papel predominante (CRI + cotas de FII)",
-      "Variacao_Periodo_%": -7.05
+      "Ticker": "HGLG11",
+      "Nome_Fundo": "CSHG Logística",
+      "Segmento": "Logística",
+      "Variacao_Periodo_%": -6.9
     },
     {
       "Ticker": "HGBS11",
       "Nome_Fundo": "CSHG Brasil Shopping",
       "Segmento": "Shopping",
-      "Variacao_Periodo_%": -7.64
-    },
-    {
-      "Ticker": "XPLG11",
-      "Nome_Fundo": "XP Log",
-      "Segmento": "Logística",
-      "Variacao_Periodo_%": -8.43
-    },
-    {
-      "Ticker": "HGRU11",
-      "Nome_Fundo": "CSHG Renda Urbana",
-      "Segmento": "Renda Urbana / Varejo",
-      "Variacao_Periodo_%": -8.89
-    },
-    {
-      "Ticker": "GGRC11",
-      "Nome_Fundo": "GGR Covepi Renda",
-      "Segmento": "Logística / Galpões Industriais",
-      "Variacao_Periodo_%": -9.7
+      "Variacao_Periodo_%": -7.84
     },
     {
       "Ticker": "RECR11",
       "Nome_Fundo": "REC Recebíveis Imobiliários",
       "Segmento": "CRI High Grade",
-      "Variacao_Periodo_%": -9.8
+      "Variacao_Periodo_%": -8.32
+    },
+    {
+      "Ticker": "XPLG11",
+      "Nome_Fundo": "XP Log",
+      "Segmento": "Logística",
+      "Variacao_Periodo_%": -8.45
+    },
+    {
+      "Ticker": "GGRC11",
+      "Nome_Fundo": "GGR Covepi Renda",
+      "Segmento": "Logística / Galpões Industriais",
+      "Variacao_Periodo_%": -9.19
+    },
+    {
+      "Ticker": "HGRU11",
+      "Nome_Fundo": "CSHG Renda Urbana",
+      "Segmento": "Renda Urbana / Varejo",
+      "Variacao_Periodo_%": -9.22
     },
     {
       "Ticker": "PCIP11",
       "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
       "Segmento": "CRI indexado a IPCA",
-      "Variacao_Periodo_%": -11.46
+      "Variacao_Periodo_%": -11.67
     },
     {
       "Ticker": "RBRY11",
       "Nome_Fundo": "RBR Alpha Multiestratégia",
       "Segmento": "Multiestratégia (papel + tijolo + FoF)",
-      "Variacao_Periodo_%": -13.88
+      "Variacao_Periodo_%": -12.77
     },
     {
       "Ticker": "PVBI11",
       "Nome_Fundo": "VBI Prime Properties",
       "Segmento": "Lajes Corporativas",
-      "Variacao_Periodo_%": -13.93
+      "Variacao_Periodo_%": -13.04
     },
     {
       "Ticker": "RBRR11",
       "Nome_Fundo": "RBR Rendimento High Grade",
       "Segmento": "CRI High Grade",
-      "Variacao_Periodo_%": -21.91
+      "Variacao_Periodo_%": -21.19
     },
     {
       "Ticker": "TRXF11",
       "Nome_Fundo": "TRX Real Estate",
       "Segmento": "Renda Urbana / Varejo (sale-leaseback)",
-      "Variacao_Periodo_%": -25.71
+      "Variacao_Periodo_%": -26.03
     },
     {
       "Ticker": "TGAR11",
       "Nome_Fundo": "TG Ativo Real",
       "Segmento": "Crédito estruturado com garantia real",
-      "Variacao_Periodo_%": -49.77
+      "Variacao_Periodo_%": -49.94
     }
   ],
   "por_segmento": {
@@ -1087,41 +1087,41 @@
       {
         "Ticker": "MCCI11",
         "Nome_Fundo": "Mauá Capital Recebíveis Imobiliários",
-        "Preco_Fechamento_R$": 93.66,
-        "Variacao_Periodo_%": 3.81,
-        "DY_12m_%": 12.81,
+        "Preco_Fechamento_R$": 94.6,
+        "Variacao_Periodo_%": 4.85,
+        "DY_12m_%": 12.68,
         "Classificacao_Liquidez": "Média"
       },
       {
         "Ticker": "RBRR11",
         "Nome_Fundo": "RBR Rendimento High Grade",
-        "Preco_Fechamento_R$": 68.33,
-        "Variacao_Periodo_%": -21.91,
-        "DY_12m_%": 14.53,
+        "Preco_Fechamento_R$": 68.96,
+        "Variacao_Periodo_%": -21.19,
+        "DY_12m_%": 14.4,
         "Classificacao_Liquidez": "Baixa"
       },
       {
         "Ticker": "HGCR11",
         "Nome_Fundo": "CSHG Recebíveis Imobiliários",
-        "Preco_Fechamento_R$": 94.42,
-        "Variacao_Periodo_%": 0.16,
-        "DY_12m_%": 12.44,
+        "Preco_Fechamento_R$": 94.85,
+        "Variacao_Periodo_%": 0.62,
+        "DY_12m_%": 12.39,
         "Classificacao_Liquidez": "Baixa"
       },
       {
         "Ticker": "RECR11",
         "Nome_Fundo": "REC Recebíveis Imobiliários",
-        "Preco_Fechamento_R$": 73.15,
-        "Variacao_Periodo_%": -9.8,
-        "DY_12m_%": 14.53,
+        "Preco_Fechamento_R$": 74.35,
+        "Variacao_Periodo_%": -8.32,
+        "DY_12m_%": 14.29,
         "Classificacao_Liquidez": "Baixa"
       },
       {
         "Ticker": "VRTA11",
         "Nome_Fundo": "Fator Verità",
-        "Preco_Fechamento_R$": 72.15,
-        "Variacao_Periodo_%": -7.02,
-        "DY_12m_%": 14.14,
+        "Preco_Fechamento_R$": 72.36,
+        "Variacao_Periodo_%": -6.75,
+        "DY_12m_%": 14.1,
         "Classificacao_Liquidez": "Baixa"
       }
     ],
@@ -1129,9 +1129,9 @@
       {
         "Ticker": "KNSC11",
         "Nome_Fundo": "Kinea Securities",
-        "Preco_Fechamento_R$": 9.09,
-        "Variacao_Periodo_%": 4.84,
-        "DY_12m_%": 12.63,
+        "Preco_Fechamento_R$": 9.07,
+        "Variacao_Periodo_%": 4.61,
+        "DY_12m_%": 12.66,
         "Classificacao_Liquidez": "Média"
       }
     ],
@@ -1139,9 +1139,9 @@
       {
         "Ticker": "CPTS11",
         "Nome_Fundo": "Capitânia Securities II",
-        "Preco_Fechamento_R$": 7.52,
-        "Variacao_Periodo_%": -0.13,
-        "DY_12m_%": 14.36,
+        "Preco_Fechamento_R$": 7.53,
+        "Variacao_Periodo_%": 0.0,
+        "DY_12m_%": 14.34,
         "Classificacao_Liquidez": "Alta"
       }
     ],
@@ -1149,17 +1149,17 @@
       {
         "Ticker": "KNIP11",
         "Nome_Fundo": "Kinea Índices de Preços",
-        "Preco_Fechamento_R$": 89.7,
-        "Variacao_Periodo_%": 1.83,
-        "DY_12m_%": 11.27,
+        "Preco_Fechamento_R$": 89.2,
+        "Variacao_Periodo_%": 1.26,
+        "DY_12m_%": 11.33,
         "Classificacao_Liquidez": "Alta"
       },
       {
         "Ticker": "PCIP11",
         "Nome_Fundo": "Patria Crédito Imobiliário (ex-CVBI11)",
-        "Preco_Fechamento_R$": 73.29,
-        "Variacao_Periodo_%": -11.46,
-        "DY_12m_%": 13.29,
+        "Preco_Fechamento_R$": 73.12,
+        "Variacao_Periodo_%": -11.67,
+        "DY_12m_%": 13.32,
         "Classificacao_Liquidez": "Baixa"
       }
     ],
@@ -1167,9 +1167,9 @@
       {
         "Ticker": "KNCR11",
         "Nome_Fundo": "Kinea Rendimentos Imobiliários",
-        "Preco_Fechamento_R$": 106.34,
-        "Variacao_Periodo_%": 2.13,
-        "DY_12m_%": 13.3,
+        "Preco_Fechamento_R$": 106.4,
+        "Variacao_Periodo_%": 2.19,
+        "DY_12m_%": 13.29,
         "Classificacao_Liquidez": "Alta"
       }
     ],
@@ -1177,9 +1177,9 @@
       {
         "Ticker": "TGAR11",
         "Nome_Fundo": "TG Ativo Real",
-        "Preco_Fechamento_R$": 43.85,
-        "Variacao_Periodo_%": -49.77,
-        "DY_12m_%": 22.19,
+        "Preco_Fechamento_R$": 43.7,
+        "Variacao_Periodo_%": -49.94,
+        "DY_12m_%": 22.27,
         "Classificacao_Liquidez": "Média"
       }
     ],
@@ -1187,9 +1187,9 @@
       {
         "Ticker": "BCIA11",
         "Nome_Fundo": "Brasil Capital Real Estate FoF",
-        "Preco_Fechamento_R$": 86.78,
-        "Variacao_Periodo_%": 2.24,
-        "DY_12m_%": 12.0,
+        "Preco_Fechamento_R$": 87.23,
+        "Variacao_Periodo_%": 2.77,
+        "DY_12m_%": 11.93,
         "Classificacao_Liquidez": "Baixa"
       }
     ],
@@ -1197,9 +1197,9 @@
       {
         "Ticker": "KNRI11",
         "Nome_Fundo": "Kinea Renda Imobiliária",
-        "Preco_Fechamento_R$": 157.49,
-        "Variacao_Periodo_%": 6.4,
-        "DY_12m_%": 8.32,
+        "Preco_Fechamento_R$": 157.01,
+        "Variacao_Periodo_%": 6.08,
+        "DY_12m_%": 8.35,
         "Classificacao_Liquidez": "Alta"
       }
     ],
@@ -1207,17 +1207,17 @@
       {
         "Ticker": "PVBI11",
         "Nome_Fundo": "VBI Prime Properties",
-        "Preco_Fechamento_R$": 65.35,
-        "Variacao_Periodo_%": -13.93,
-        "DY_12m_%": 7.76,
+        "Preco_Fechamento_R$": 66.03,
+        "Variacao_Periodo_%": -13.04,
+        "DY_12m_%": 7.68,
         "Classificacao_Liquidez": "Média"
       },
       {
         "Ticker": "HGRE11",
         "Nome_Fundo": "CSHG Real Estate",
-        "Preco_Fechamento_R$": 117.03,
-        "Variacao_Periodo_%": -1.74,
-        "DY_12m_%": 9.83,
+        "Preco_Fechamento_R$": 117.16,
+        "Variacao_Periodo_%": -1.63,
+        "DY_12m_%": 9.82,
         "Classificacao_Liquidez": "Baixa"
       }
     ],
@@ -1225,33 +1225,33 @@
       {
         "Ticker": "HGLG11",
         "Nome_Fundo": "CSHG Logística",
-        "Preco_Fechamento_R$": 148.12,
-        "Variacao_Periodo_%": -6.79,
-        "DY_12m_%": 9.01,
+        "Preco_Fechamento_R$": 147.95,
+        "Variacao_Periodo_%": -6.9,
+        "DY_12m_%": 9.02,
         "Classificacao_Liquidez": "Alta"
       },
       {
         "Ticker": "BTLG11",
         "Nome_Fundo": "BTG Pactual Logística",
-        "Preco_Fechamento_R$": 99.3,
-        "Variacao_Periodo_%": -2.84,
-        "DY_12m_%": 9.67,
+        "Preco_Fechamento_R$": 98.94,
+        "Variacao_Periodo_%": -3.19,
+        "DY_12m_%": 9.71,
         "Classificacao_Liquidez": "Alta"
       },
       {
         "Ticker": "XPLG11",
         "Nome_Fundo": "XP Log",
-        "Preco_Fechamento_R$": 92.53,
-        "Variacao_Periodo_%": -8.43,
-        "DY_12m_%": 10.63,
+        "Preco_Fechamento_R$": 92.51,
+        "Variacao_Periodo_%": -8.45,
+        "DY_12m_%": 10.64,
         "Classificacao_Liquidez": "Média"
       },
       {
         "Ticker": "BRCO11",
         "Nome_Fundo": "Bresco Logística",
-        "Preco_Fechamento_R$": 111.5,
-        "Variacao_Periodo_%": -1.76,
-        "DY_12m_%": 9.83,
+        "Preco_Fechamento_R$": 111.99,
+        "Variacao_Periodo_%": -1.33,
+        "DY_12m_%": 9.79,
         "Classificacao_Liquidez": "Média"
       }
     ],
@@ -1259,9 +1259,9 @@
       {
         "Ticker": "GGRC11",
         "Nome_Fundo": "GGR Covepi Renda",
-        "Preco_Fechamento_R$": 8.94,
-        "Variacao_Periodo_%": -9.7,
-        "DY_12m_%": 12.3,
+        "Preco_Fechamento_R$": 8.99,
+        "Variacao_Periodo_%": -9.19,
+        "DY_12m_%": 12.24,
         "Classificacao_Liquidez": "Alta"
       }
     ],
@@ -1269,9 +1269,9 @@
       {
         "Ticker": "RBRY11",
         "Nome_Fundo": "RBR Alpha Multiestratégia",
-        "Preco_Fechamento_R$": 81.94,
-        "Variacao_Periodo_%": -13.88,
-        "DY_12m_%": 16.23,
+        "Preco_Fechamento_R$": 83.0,
+        "Variacao_Periodo_%": -12.77,
+        "DY_12m_%": 16.02,
         "Classificacao_Liquidez": "Média"
       }
     ],
@@ -1279,9 +1279,9 @@
       {
         "Ticker": "MXRF11",
         "Nome_Fundo": "Maxi Renda",
-        "Preco_Fechamento_R$": 9.1,
-        "Variacao_Periodo_%": -7.05,
-        "DY_12m_%": 13.12,
+        "Preco_Fechamento_R$": 9.17,
+        "Variacao_Periodo_%": -6.33,
+        "DY_12m_%": 13.02,
         "Classificacao_Liquidez": "Alta"
       }
     ],
@@ -1299,9 +1299,9 @@
       {
         "Ticker": "HGRU11",
         "Nome_Fundo": "CSHG Renda Urbana",
-        "Preco_Fechamento_R$": 114.96,
-        "Variacao_Periodo_%": -8.89,
-        "DY_12m_%": 9.52,
+        "Preco_Fechamento_R$": 114.55,
+        "Variacao_Periodo_%": -9.22,
+        "DY_12m_%": 9.55,
         "Classificacao_Liquidez": "Média"
       }
     ],
@@ -1309,9 +1309,9 @@
       {
         "Ticker": "TRXF11",
         "Nome_Fundo": "TRX Real Estate",
-        "Preco_Fechamento_R$": 72.1,
-        "Variacao_Periodo_%": -25.71,
-        "DY_12m_%": 15.08,
+        "Preco_Fechamento_R$": 71.79,
+        "Variacao_Periodo_%": -26.03,
+        "DY_12m_%": 15.14,
         "Classificacao_Liquidez": "Alta"
       }
     ],
@@ -1319,33 +1319,33 @@
       {
         "Ticker": "XPML11",
         "Nome_Fundo": "XP Malls",
-        "Preco_Fechamento_R$": 99.91,
-        "Variacao_Periodo_%": -4.47,
-        "DY_12m_%": 11.08,
+        "Preco_Fechamento_R$": 99.64,
+        "Variacao_Periodo_%": -4.72,
+        "DY_12m_%": 11.11,
         "Classificacao_Liquidez": "Alta"
       },
       {
         "Ticker": "VISC11",
         "Nome_Fundo": "Vinci Shopping Centers",
-        "Preco_Fechamento_R$": 103.01,
-        "Variacao_Periodo_%": -4.97,
+        "Preco_Fechamento_R$": 103.0,
+        "Variacao_Periodo_%": -4.98,
         "DY_12m_%": 9.67,
         "Classificacao_Liquidez": "Média"
       },
       {
         "Ticker": "HSML11",
         "Nome_Fundo": "HSI Malls",
-        "Preco_Fechamento_R$": 82.85,
-        "Variacao_Periodo_%": -3.45,
-        "DY_12m_%": 10.37,
+        "Preco_Fechamento_R$": 83.58,
+        "Variacao_Periodo_%": -2.6,
+        "DY_12m_%": 10.28,
         "Classificacao_Liquidez": "Baixa"
       },
       {
         "Ticker": "HGBS11",
         "Nome_Fundo": "CSHG Brasil Shopping",
-        "Preco_Fechamento_R$": 18.61,
-        "Variacao_Periodo_%": -7.64,
-        "DY_12m_%": 10.48,
+        "Preco_Fechamento_R$": 18.57,
+        "Variacao_Periodo_%": -7.84,
+        "DY_12m_%": 10.5,
         "Classificacao_Liquidez": "Baixa"
       }
     ]
