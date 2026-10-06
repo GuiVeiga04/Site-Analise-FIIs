@@ -149,3 +149,41 @@ export function calcularMeta(
 export function mediaMensal12m(soma12mPorCota: number | null | undefined): number | null {
   return soma12mPorCota == null || !(soma12mPorCota >= 0) ? null : soma12mPorCota / 12;
 }
+
+// ---------------------------------------------------------------------------
+// Bloco 3 — Número mágico
+// ---------------------------------------------------------------------------
+
+export interface NumeroMagico {
+  /** Cotas necessárias para que UM mês de rendimento compre UMA cota nova. */
+  cotas: number;
+  /** Cotas × preço. */
+  capital: number;
+  /** Renda mensal ao atingir o número (≥ preço de 1 cota). */
+  rendaMensal: number;
+  /** Quanto falta a partir das cotas que a pessoa já tem (0 se já atingiu). */
+  faltamCotas: number;
+  faltamCapital: number;
+}
+
+/**
+ * Número mágico = menor quantidade de cotas cuja renda de UM mês paga UMA cota:
+ *   cotas × rendimento por cota ≥ preço   =>   cotas = arredondar PARA CIMA (preço ÷ rendimento por cota)
+ * É a "meta de renda" (bloco 2) com a meta igual ao preço da cota.
+ * Também vale: número mágico ≈ 1 ÷ DY mensal (ex: DY de 0,78% ao mês -> ~129 cotas).
+ */
+export function calcularNumeroMagico(
+  preco: number, rendimentoMensalPorCota: number | null | undefined, cotasAtuais = 0,
+): NumeroMagico | null {
+  const m = calcularMeta(preco, rendimentoMensalPorCota, preco);
+  if (!m) return null;
+  const tem = cotasAtuais > 0 && Number.isFinite(cotasAtuais) ? Math.floor(cotasAtuais) : 0;
+  const faltamCotas = Math.max(0, m.cotas - tem);
+  return {
+    cotas: m.cotas,
+    capital: m.capital,
+    rendaMensal: m.rendaObtida,
+    faltamCotas,
+    faltamCapital: arred(faltamCotas * preco),
+  };
+}

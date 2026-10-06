@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../api/client";
+import { CalcMagico } from "../components/CalcMagico";
 import { CalcMeta } from "../components/CalcMeta";
 import { CalcRenda } from "../components/CalcRenda";
 import { Estado, SinalBadge, TipoPill } from "../components/ui";
@@ -10,8 +11,8 @@ import { useAsync } from "../lib/useAsync";
  * Calculadora de dividendos. Os blocos são construídos um de cada vez:
  *  1. Quanto vou receber            (feito)
  *  2. Meta de renda                 (feito)
- *  3. Número mágico                (próximo)
- *  4. Simulação com aporte e reinvestimento
+ *  3. Número mágico                (feito)
+ *  4. Simulação com aporte e reinvestimento (próximo)
  *  5. E se eu tivesse investido há 12 meses
  */
 export default function Calculadora() {
@@ -52,6 +53,7 @@ export default function Calculadora() {
 
       <section><CalcRenda f={f} /></section>
       <section><CalcMeta f={f} /></section>
+      <section><CalcMagico f={f} /></section>
     </>
   );
 }

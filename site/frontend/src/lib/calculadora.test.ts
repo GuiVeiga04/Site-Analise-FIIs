@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
-  calcularMeta, lerNumero, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
+  calcularMeta, calcularNumeroMagico, lerNumero, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
 } from "./calculadora.ts";
 
 test("entrada: números no formato brasileiro", () => {
@@ -99,4 +99,32 @@ test("bloco 2: entradas sem sentido devolvem null", () => {
   assert.equal(calcularMeta(1000, null, 10), null);
   assert.equal(calcularMeta(1000, 0.1, 0), null);
   assert.equal(calcularMeta(Number.NaN, 0.1, 10), null);
+});
+
+test("bloco 3: número mágico do HGLG11 (conferido à mão)", () => {
+  // 150,30 / 1,17 = 128,46 -> 129 cotas; 129 x 1,17 = 150,93 >= 150,30
+  const n = calcularNumeroMagico(150.3, 1.17)!;
+  assert.equal(n.cotas, 129);
+  assert.equal(n.capital, 19388.7);
+  assert.equal(n.rendaMensal, 150.93);
+  assert.ok(n.rendaMensal >= 150.3);
+  // com uma cota a menos a renda NÃO compra uma cota
+  assert.ok(128 * 1.17 < 150.3);
+});
+
+test("bloco 3: divisão exata não pede cota a mais", () => {
+  assert.equal(calcularNumeroMagico(10, 0.1)!.cotas, 100);
+});
+
+test("bloco 3: quanto falta a partir das cotas que já tenho", () => {
+  const n = calcularNumeroMagico(9.16, 0.1, 40)!; // 92 cotas no total
+  assert.equal(n.cotas, 92);
+  assert.equal(n.faltamCotas, 52);
+  assert.equal(n.faltamCapital, 476.32); // 52 x 9,16
+  assert.equal(calcularNumeroMagico(9.16, 0.1, 500)!.faltamCotas, 0); // já atingiu
+});
+
+test("bloco 3: sem rendimento não existe número mágico", () => {
+  assert.equal(calcularNumeroMagico(100, 0), null);
+  assert.equal(calcularNumeroMagico(0, 1), null);
 });
