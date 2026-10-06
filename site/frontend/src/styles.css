@@ -180,3 +180,31 @@ tr.atual td { background: var(--accent-wash); }
   animation: pisca 1s steps(1) infinite; }
 @keyframes pisca { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+/* calculadora */
+.calc-fundo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 20px; }
+.calc-ticker { font-size: 1.3rem; font-weight: 700; color: var(--text); text-decoration: none; }
+.calc-resumo { display: grid; grid-template-columns: repeat(4, auto); gap: 6px 28px; }
+@media (max-width: 720px) { .calc-resumo { grid-template-columns: repeat(2, auto); } }
+.calc-resumo span, .calc-kpis span { display: block; font-size: .72rem; color: var(--muted); }
+.calc-resumo b { font-size: 1.02rem; }
+.calc-resumo i { display: block; font-style: normal; font-size: .7rem; color: var(--muted); }
+.calc-grid { display: grid; gap: 24px; margin-top: 14px; }
+@media (min-width: 900px) { .calc-grid { grid-template-columns: minmax(260px, 320px) 1fr; } }
+.calc-grid > * { min-width: 0; }
+.calc-form { display: flex; flex-direction: column; gap: 14px; }
+.calc-form label { display: flex; flex-direction: column; gap: 5px; font-size: .82rem; color: var(--text-2); font-weight: 600; }
+.calc-form input { font: inherit; font-size: .95rem; padding: 8px 10px; border-radius: 7px; border: 1px solid var(--border-strong);
+  background: var(--surface); color: var(--text); font-family: "IBM Plex Mono", ui-monospace, monospace; }
+.calc-dica { font-size: .74rem; font-weight: 400; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 8px; padding: 2px; align-self: flex-start; }
+.seg button { font: inherit; font-size: .82rem; border: 0; background: none; color: var(--text-2); padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+.seg button[aria-checked="true"] { background: var(--text); color: var(--bg); font-weight: 600; }
+.calc-kpis { display: flex; flex-wrap: wrap; gap: 10px 32px; margin-bottom: 10px; }
+.calc-kpis b { font-size: 1.35rem; }
+.calc-tabela tbody tr { cursor: default; }
+.calc-aviso { color: var(--warn); font-size: .85rem; }
+.calc-alertas { margin: 10px 0 0; padding-left: 18px; font-size: .82rem; color: var(--warn); }
+.calc-formulas { margin-top: 12px; font-size: .8rem; color: var(--text-2); }
+.calc-formulas summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.calc-formulas ul { padding-left: 18px; margin: 8px 0 0; }

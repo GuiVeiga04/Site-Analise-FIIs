@@ -62,6 +62,7 @@ export default function DetalheFundo() {
         </div>
         <div className="head-acoes">
           <Link className="btn" to={`/comparar?a=${f.ticker}`}>Comparar com…</Link>
+          <Link className="btn" to={`/calculadora?t=${f.ticker}`}>Simular renda</Link>
           {seletor}
         </div>
       </div>

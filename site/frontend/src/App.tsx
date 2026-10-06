@@ -2,6 +2,7 @@ import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { api } from "./api/client";
 import { data } from "./lib/format";
 import { useAsync } from "./lib/useAsync";
+import Calculadora from "./pages/Calculadora";
 import Comparar from "./pages/Comparar";
 import DetalheFundo from "./pages/DetalheFundo";
 import Metodologia from "./pages/Metodologia";
@@ -18,6 +19,7 @@ export default function App() {
             <NavLink to="/" end>Visão Geral</NavLink>
             <NavLink to="/fundo">Detalhe por fundo</NavLink>
             <NavLink to="/comparar">Comparar</NavLink>
+            <NavLink to="/calculadora">Calculadora</NavLink>
             <NavLink to="/metodologia">Metodologia</NavLink>
           </nav>
           <span className="updated">Último pregão: <b>{data(meta.data?.ultimo_pregao)}</b></span>
@@ -29,6 +31,7 @@ export default function App() {
           <Route path="/fundo" element={<DetalheFundo />} />
           <Route path="/fundo/:ticker" element={<DetalheFundo />} />
           <Route path="/comparar" element={<Comparar />} />
+          <Route path="/calculadora" element={<Calculadora />} />
           <Route path="/metodologia" element={<Metodologia />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
