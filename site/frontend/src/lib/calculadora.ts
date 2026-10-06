@@ -107,3 +107,45 @@ function montarRenda(pos: Posicao, porCota: number, mensal: number, anual: numbe
 export function arred(v: number): number {
   return Math.round(v * 100) / 100;
 }
+
+// ---------------------------------------------------------------------------
+// Bloco 2 — Meta de renda
+// ---------------------------------------------------------------------------
+
+export interface MetaRenda {
+  /** Cotas inteiras necessárias para render PELO MENOS a meta. */
+  cotas: number;
+  /** Cotas × preço. */
+  capital: number;
+  /** Renda mensal que essas cotas geram (≥ meta, por causa do arredondamento para cima). */
+  rendaObtida: number;
+  /** Rendimento mensal por cota ÷ preço (% ao mês) — mostra o "esforço" de cada cenário. */
+  dyMensal: number;
+}
+
+/**
+ * Quantas cotas (e quanto capital) para receber `metaMensal` por mês.
+ *   cotas   = arredondar PARA CIMA (meta ÷ rendimento mensal por cota)
+ *   capital = cotas × preço
+ * Para cima porque com uma cota a menos a renda fica abaixo da meta.
+ * Devolve null quando a conta não faz sentido (rendimento zero, preço ou meta inválidos).
+ */
+export function calcularMeta(
+  metaMensal: number, rendimentoMensalPorCota: number | null | undefined, preco: number,
+): MetaRenda | null {
+  if (!(metaMensal > 0) || !Number.isFinite(metaMensal)) return null;
+  if (rendimentoMensalPorCota == null || !(rendimentoMensalPorCota > 0) || !(preco > 0)) return null;
+  // O epsilon evita pedir uma cota a mais quando a divisão é exata (100 ÷ 0,1 = 1000,0000001).
+  const cotas = Math.ceil(metaMensal / rendimentoMensalPorCota - 1e-9);
+  return {
+    cotas,
+    capital: arred(cotas * preco),
+    rendaObtida: arred(cotas * rendimentoMensalPorCota),
+    dyMensal: (rendimentoMensalPorCota / preco) * 100,
+  };
+}
+
+/** Rendimento mensal por cota no cenário "média de 12 meses": soma dos 12 meses ÷ 12. */
+export function mediaMensal12m(soma12mPorCota: number | null | undefined): number | null {
+  return soma12mPorCota == null || !(soma12mPorCota >= 0) ? null : soma12mPorCota / 12;
+}

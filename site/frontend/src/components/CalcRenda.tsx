@@ -5,7 +5,7 @@ import {
 } from "../lib/calculadora";
 import { brl, brlDiv, data, inteiro, taxa } from "../lib/format";
 
-const fmtEntrada = (v: number | null | undefined) =>
+export const fmtEntrada = (v: number | null | undefined) =>
   v == null ? "" : v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 4 });
 
 /**
@@ -43,11 +43,7 @@ export function CalcRenda({ f }: { f: FundoSnapshot }) {
     cenarios.push({ nome: "Valor que você digitou", detalhe: "repetido todo mês", renda: rendaMensalConstante(pos, personalizado) });
   }
 
-  const tendencia = f.tendencia_dividendo_pct;
-  const alertas: string[] = [];
-  if (tendencia != null && tendencia <= -3) alertas.push(`A renda vem caindo: os 3 últimos pagamentos estão ${Math.abs(tendencia).toLocaleString("pt-BR")}% abaixo da média de 12 meses.`);
-  if ((f.quedas_dividendo_12m ?? 0) > 0) alertas.push(`O fundo teve ${f.quedas_dividendo_12m} queda${f.quedas_dividendo_12m === 1 ? "" : "s"} de rendimento nos últimos 12 meses.`);
-  if (f.pagamentos_12m < 11) alertas.push(`Só ${f.pagamentos_12m} pagamentos nos últimos 12 meses: o "último dividendo repetido todo mês" tende a superestimar.`);
+  const alertas = alertasRenda(f);
 
   return (
     <div className="card calc-bloco">
@@ -126,4 +122,14 @@ export function CalcRenda({ f }: { f: FundoSnapshot }) {
       </div>
     </div>
   );
+}
+
+/** Avisos sobre a qualidade da renda do fundo (usados em mais de um bloco). */
+export function alertasRenda(f: FundoSnapshot): string[] {
+  const alertas: string[] = [];
+  const tendencia = f.tendencia_dividendo_pct;
+  if (tendencia != null && tendencia <= -3) alertas.push(`A renda vem caindo: os 3 últimos pagamentos estão ${Math.abs(tendencia).toLocaleString("pt-BR")}% abaixo da média de 12 meses.`);
+  if ((f.quedas_dividendo_12m ?? 0) > 0) alertas.push(`O fundo teve ${f.quedas_dividendo_12m} queda${f.quedas_dividendo_12m === 1 ? "" : "s"} de rendimento nos últimos 12 meses.`);
+  if (f.pagamentos_12m < 11) alertas.push(`Só ${f.pagamentos_12m} pagamentos nos últimos 12 meses: o "último dividendo repetido todo mês" tende a superestimar.`);
+  return alertas;
 }

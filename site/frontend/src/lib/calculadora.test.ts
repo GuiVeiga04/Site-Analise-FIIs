@@ -2,7 +2,9 @@
 // (usa só o Node: node --experimental-strip-types --test)
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { lerNumero, montarPosicao, rendaMedia12m, rendaMensalConstante } from "./calculadora.ts";
+import {
+  calcularMeta, lerNumero, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
+} from "./calculadora.ts";
 
 test("entrada: números no formato brasileiro", () => {
   assert.equal(lerNumero("10.000"), 10000);       // milhar com ponto
@@ -66,4 +68,35 @@ test("bloco 1: sem dado de rendimento não inventa número", () => {
 test("bloco 1: sem cotas o yield fica vazio, não infinito", () => {
   const pos = montarPosicao("valor", 50, 100);
   assert.equal(rendaMensalConstante(pos, 1)!.yieldSobreCusto, null);
+});
+
+test("bloco 2: meta exata não pede cota a mais", () => {
+  // R$ 1.000/mês com R$ 0,10 por cota: exatamente 10.000 cotas
+  const m = calcularMeta(1000, 0.1, 9.16)!;
+  assert.equal(m.cotas, 10000);
+  assert.equal(m.capital, 91600);
+  assert.equal(m.rendaObtida, 1000);
+});
+
+test("bloco 2: arredonda cotas para cima e a renda fica >= meta", () => {
+  // R$ 500 com R$ 1,17 por cota: 427,35... -> 428 cotas
+  const m = calcularMeta(500, 1.17, 147.6)!;
+  assert.equal(m.cotas, 428);
+  assert.equal(m.capital, 63172.8);   // 428 x 147,60
+  assert.equal(m.rendaObtida, 500.76); // 428 x 1,17
+  assert.ok(m.rendaObtida >= 500);
+  assert.ok(Math.abs(m.dyMensal - 0.79268) < 0.0001); // 1,17 / 147,60
+});
+
+test("bloco 2: média de 12 meses vira rendimento mensal (soma / 12)", () => {
+  assert.ok(Math.abs(mediaMensal12m(1.1944)! - 0.099533) < 1e-6);
+  assert.equal(mediaMensal12m(null), null);
+});
+
+test("bloco 2: entradas sem sentido devolvem null", () => {
+  assert.equal(calcularMeta(0, 0.1, 10), null);
+  assert.equal(calcularMeta(1000, 0, 10), null);     // fundo sem rendimento
+  assert.equal(calcularMeta(1000, null, 10), null);
+  assert.equal(calcularMeta(1000, 0.1, 0), null);
+  assert.equal(calcularMeta(Number.NaN, 0.1, 10), null);
 });
