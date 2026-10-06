@@ -661,6 +661,12 @@
       "Valor_R$": 1.14937,
       "Preco_Data_Com": 108.09,
       "DY_Pagamento_pct": 1.063
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 1.129381,
+      "Preco_Data_Com": 106.4,
+      "DY_Pagamento_pct": 1.061
     }
   ],
   "XPML11": [
@@ -1325,6 +1331,12 @@
       "Valor_R$": 0.1,
       "Preco_Data_Com": 9.28,
       "DY_Pagamento_pct": 1.078
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.1,
+      "Preco_Data_Com": 9.17,
+      "DY_Pagamento_pct": 1.091
     }
   ],
   "HGLG11": [
@@ -1663,6 +1675,12 @@
       "Valor_R$": 1.17,
       "Preco_Data_Com": 148.34,
       "DY_Pagamento_pct": 0.789
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 1.17,
+      "Preco_Data_Com": 147.95,
+      "DY_Pagamento_pct": 0.791
     }
   ],
   "BTLG11": [
@@ -2327,6 +2345,12 @@
       "Valor_R$": 0.1,
       "Preco_Data_Com": 9.2,
       "DY_Pagamento_pct": 1.087
+    },
+    {
+      "Data_Ex": "2026-10-02",
+      "Valor_R$": 0.1,
+      "Preco_Data_Com": 8.98,
+      "DY_Pagamento_pct": 1.114
     }
   ],
   "KNIP11": [
@@ -2665,6 +2689,12 @@
       "Valor_R$": 0.65,
       "Preco_Data_Com": 91.29,
       "DY_Pagamento_pct": 0.712
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.6,
+      "Preco_Data_Com": 89.2,
+      "DY_Pagamento_pct": 0.673
     }
   ],
   "CPTS11": [
@@ -3335,6 +3365,12 @@
       "Valor_R$": 1.1,
       "Preco_Data_Com": 157.5,
       "DY_Pagamento_pct": 0.698
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 1.1,
+      "Preco_Data_Com": 157.01,
+      "DY_Pagamento_pct": 0.701
     }
   ],
   "VISC11": [
@@ -3661,6 +3697,12 @@
       "Valor_R$": 0.84,
       "Preco_Data_Com": 102.8,
       "DY_Pagamento_pct": 0.817
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.84,
+      "Preco_Data_Com": 103.0,
+      "DY_Pagamento_pct": 0.816
     }
   ],
   "XPLG11": [
@@ -4319,6 +4361,12 @@
       "Valor_R$": 0.7,
       "Preco_Data_Com": 46.37,
       "DY_Pagamento_pct": 1.51
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": 43.7,
+      "DY_Pagamento_pct": 1.602
     }
   ],
   "HGRU11": [
@@ -4639,6 +4687,12 @@
       "Valor_R$": 0.95,
       "Preco_Data_Com": 115.33,
       "DY_Pagamento_pct": 0.824
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.95,
+      "Preco_Data_Com": 114.55,
+      "DY_Pagamento_pct": 0.829
     }
   ],
   "BRCO11": [
@@ -4971,6 +5025,12 @@
       "Valor_R$": 0.91,
       "Preco_Data_Com": 113.95,
       "DY_Pagamento_pct": 0.799
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.91,
+      "Preco_Data_Com": 111.99,
+      "DY_Pagamento_pct": 0.813
     }
   ],
   "KNSC11": [
@@ -5297,6 +5357,12 @@
       "Valor_R$": 0.09,
       "Preco_Data_Com": 9.14,
       "DY_Pagamento_pct": 0.985
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.08,
+      "Preco_Data_Com": 9.07,
+      "DY_Pagamento_pct": 0.882
     }
   ],
   "RBRY11": [
@@ -6143,6 +6209,12 @@
       "Valor_R$": 0.37,
       "Preco_Data_Com": 68.5,
       "DY_Pagamento_pct": 0.54
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.37,
+      "Preco_Data_Com": 66.03,
+      "DY_Pagamento_pct": 0.56
     }
   ],
   "RBRR11": [
@@ -6789,6 +6861,12 @@
       "Valor_R$": 0.75,
       "Preco_Data_Com": 84.63,
       "DY_Pagamento_pct": 0.886
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.75,
+      "Preco_Data_Com": 83.58,
+      "DY_Pagamento_pct": 0.897
     }
   ],
   "HGBS11": [
@@ -7121,6 +7199,12 @@
       "Valor_R$": 0.17,
       "Preco_Data_Com": 18.69,
       "DY_Pagamento_pct": 0.91
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.17,
+      "Preco_Data_Com": 18.57,
+      "DY_Pagamento_pct": 0.915
     }
   ],
   "HGCR11": [
@@ -7459,6 +7543,12 @@
       "Valor_R$": 1.0,
       "Preco_Data_Com": 95.3,
       "DY_Pagamento_pct": 1.049
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 1.0,
+      "Preco_Data_Com": 94.85,
+      "DY_Pagamento_pct": 1.054
     }
   ],
   "RECR11": [
@@ -8739,6 +8829,12 @@
       "Valor_R$": 0.85,
       "Preco_Data_Com": 118.47,
       "DY_Pagamento_pct": 0.717
+    },
+    {
+      "Data_Ex": "2026-10-01",
+      "Valor_R$": 0.85,
+      "Preco_Data_Com": 117.16,
+      "DY_Pagamento_pct": 0.726
     }
   ],
   "VRTA11": [
