@@ -150,12 +150,17 @@ def _converter_datas(serie: pd.Series) -> pd.Series:
     return iso.fillna(br)
 
 
-def carregar_historico_limpo() -> pd.DataFrame:
+def carregar_historico_limpo(remover_anomalias: bool = True) -> pd.DataFrame:
     """Lê base_fiis_historico.csv e devolve um DataFrame com tipos corretos:
     datas como datetime, preço como float, volume como int.
 
     Funciona tanto com dados novos (já limpos) quanto com o histórico antigo
     que tinha o preço formatado como 'R$ xx,xx'.
+
+    remover_anomalias=True (padrão) descarta cotações claramente erradas do
+    Yahoo (ver remover_cotacoes_anomalas). O atualizador_fiis.py usa False ao
+    regravar o CSV, para que o arquivo continue guardando o dado bruto: o
+    filtro é aplicado na LEITURA, não apaga nada do disco.
     """
     if not ARQUIVO_HISTORICO.exists():
         return pd.DataFrame(
@@ -176,7 +181,75 @@ def carregar_historico_limpo() -> pd.DataFrame:
     df["Data_Coleta"] = _converter_datas(df["Data_Coleta"])
     df["Data_Pregao"] = _converter_datas(df["Data_Pregao"])
 
-    return remover_duplicatas_pregao(df)
+    df = remover_duplicatas_pregao(df)
+    if remover_anomalias:
+        df = remover_cotacoes_anomalas(df)
+    return df
+
+
+# ---------------------------------------------------------------------------
+# Cotações anômalas
+# ---------------------------------------------------------------------------
+#
+# O Yahoo às vezes devolve, por alguns pregões, um preço completamente fora da
+# realidade e depois volta ao normal. Casos reais encontrados na base:
+#   XPML11 em 14-16/01/2026: R$ 1,07 (normal ~R$ 110)
+#   RECR11 em 03-06/11/2025: R$ 55   (normal ~R$ 77, ou seja -28%)
+# Esses pontos distorcem mínima, volatilidade, gráficos e qualquer simulação.
+#
+# Regra: um preço é anômalo quando
+#   1) difere mais de LIMITE_DESVIO (20%) da mediana dos JANELA pregões ANTERIORES, e
+#   2) difere mais de 20% da mediana dos JANELA pregões SEGUINTES, e
+#   3) essas duas medianas concordam entre si (diferença < LIMITE_RETORNO, 10%):
+#      o preço "foi e voltou". Uma queda (ou alta) de verdade que se mantém
+#      muda o patamar e NÃO satisfaz a condição 3, então não é removida.
+# FII não cai (ou sobe) 20% e volta ao mesmo patamar em poucos dias; se isso
+# aparecer, é erro de dado. A janela de 7 pregões de cada lado aguenta até 4
+# pregões errados seguidos
+# sem que eles contaminem a mediana. Pontos nas pontas da série (menos de 3
+# vizinhos de algum lado) não são avaliados: não há como confirmar a volta.
+
+JANELA_ANOMALIA = 7
+MIN_VIZINHOS_ANOMALIA = 3
+LIMITE_DESVIO = 0.20
+LIMITE_RETORNO = 0.10
+
+
+def marcar_cotacoes_anomalas(precos: pd.Series) -> pd.Series:
+    """Recebe os preços de UM fundo em ordem cronológica; devolve uma série
+    booleana (True = cotação anômala)."""
+    p = precos.astype(float).reset_index(drop=True)
+    anomalo = [False] * len(p)
+    for i in range(len(p)):
+        antes = p.iloc[max(0, i - JANELA_ANOMALIA):i].dropna()
+        depois = p.iloc[i + 1:i + 1 + JANELA_ANOMALIA].dropna()
+        atual = p.iloc[i]
+        if pd.isna(atual) or len(antes) < MIN_VIZINHOS_ANOMALIA or len(depois) < MIN_VIZINHOS_ANOMALIA:
+            continue
+        m_antes, m_depois = antes.median(), depois.median()
+        if m_antes <= 0 or m_depois <= 0:
+            continue
+        foi = abs(atual / m_antes - 1) > LIMITE_DESVIO and abs(atual / m_depois - 1) > LIMITE_DESVIO
+        voltou = abs(m_antes / m_depois - 1) < LIMITE_RETORNO
+        anomalo[i] = foi and voltou
+    return pd.Series(anomalo, index=precos.index)
+
+
+def remover_cotacoes_anomalas(df: pd.DataFrame) -> pd.DataFrame:
+    """Remove do histórico (só em memória) as cotações anômalas de cada fundo
+    e registra no log quais foram."""
+    if df.empty:
+        return df
+    df = df.sort_values(["Ticker", "Data_Pregao"])
+    marcas = df.groupby("Ticker", group_keys=False)["Preco_Fechamento_R$"].apply(marcar_cotacoes_anomalas)
+    removidas = df[marcas]
+    if len(removidas):
+        log = logging.getLogger("fiis")
+        for t, g in removidas.groupby("Ticker"):
+            datas = ", ".join(d.strftime("%d/%m/%Y") for d in g["Data_Pregao"])
+            log.warning("Cotações anômalas ignoradas em %s: %s (preços %s)", t, datas,
+                        ", ".join(f"{v:.2f}" for v in g["Preco_Fechamento_R$"]))
+    return df[~marcas].reset_index(drop=True)
 
 
 def remover_duplicatas_pregao(df: pd.DataFrame) -> pd.DataFrame:

@@ -61,6 +61,9 @@ def carregar_banco() -> dict:
             for r in df.itertuples()
             if r.Ticker in tickers_validos
         ]
+        # Recarga completa: apaga antes de inserir. Com só "upsert", uma linha que
+        # saiu do CSV/limpeza (ex: cotação anômala filtrada) ficava presa no banco.
+        con.execute("DELETE FROM cotacoes")
         con.executemany(
             """INSERT INTO cotacoes (ticker, data_pregao, data_coleta, preco, volume_cotas)
                VALUES (?, ?, ?, ?, ?)
@@ -81,6 +84,7 @@ def carregar_banco() -> dict:
             for r in div.to_dict(orient="records")
             if r["Ticker"] in tickers_validos
         ]
+        con.execute("DELETE FROM dividendos")
         con.executemany(
             """INSERT INTO dividendos (ticker, data_ex, valor, fonte, data_coleta)
                VALUES (?, ?, ?, ?, ?)

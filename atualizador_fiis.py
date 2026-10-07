@@ -176,7 +176,8 @@ def anexar_ao_historico(df_novo: pd.DataFrame) -> pd.DataFrame:
     df_novo["Data_Pregao"] = pd.to_datetime(df_novo["Data_Pregao"])
 
     if ARQUIVO_HISTORICO.exists():
-        df_existente = carregar_historico_limpo()
+        # False: regrava o CSV com o dado bruto; o filtro de anomalias só vale na leitura
+        df_existente = carregar_historico_limpo(remover_anomalias=False)
         df_final = pd.concat([df_existente, df_novo], ignore_index=True)
     else:
         df_final = df_novo
