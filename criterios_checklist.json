@@ -1,5 +1,5 @@
 {
-  "_comentario": "Critérios do checklist de triagem. Edite à vontade: cada critério olha um campo do snapshot e dá VERDE se o valor estiver na faixa 'verde', AMARELO se estiver na faixa 'amarelo' e VERMELHO fora das duas. 'min'/'max' vazios (null) = sem limite. 'peso' define quanto o critério conta na nota (0 a 100). 'eliminatorio': true faz o sinal geral ficar vermelho sempre que esse critério ficar vermelho. 'aplica_a' limita o critério a tipos de gestão (null = todos). Não é recomendação de investimento: serve para separar o que merece uma análise mais cuidadosa.",
+  "_comentario": "Critérios do checklist de triagem. Edite à vontade: cada critério olha um campo do snapshot e dá VERDE se o valor estiver na faixa 'verde', AMARELO se estiver na faixa 'amarelo' e VERMELHO fora das duas. 'min'/'max' vazios (null) = sem limite. 'peso' define quanto o critério conta na nota (0 a 100). 'eliminatorio': true faz o sinal geral ficar vermelho sempre que esse critério ficar vermelho. 'aplica_a' limita o critério a tipos de gestão (null = todos). 'ignorar_acima'/'ignorar_abaixo' (opcionais) descartam valores implausíveis, que aparecem na tela com aviso e não entram na nota. Não é recomendação de investimento: serve para separar o que merece uma análise mais cuidadosa.",
   "regras_sinal": {
     "verde_nota_minima": 85,
     "vermelho_nota_abaixo_de": 60,
@@ -169,7 +169,8 @@
         "Tijolo",
         "Híbrido"
       ],
-      "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: confira no relatório do fundo quando parecer estranho."
+      "descricao": "Parte dos imóveis sem inquilino. Dado do Fundamentus: acima de 50% é tratado como provável erro da fonte e fica fora da nota (confira no relatório do fundo).",
+      "ignorar_acima": 50
     }
   ]
 }

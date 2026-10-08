@@ -93,6 +93,8 @@ export interface ItemChecklist {
   status: StatusCriterio;
   peso: number;
   eliminatorio: boolean;
+  /** Valor ignorado por parecer erro da fonte (fica fora da nota). */
+  aviso?: string | null;
   verde: Faixa | null;
   amarelo: Faixa | null;
 }

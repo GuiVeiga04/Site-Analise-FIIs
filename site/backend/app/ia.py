@@ -90,6 +90,10 @@ def contexto_fundo(f: dict, todos: list[dict], dividendos: list[dict], meta: dic
         {"criterio": i["nome"], "valor": _arredondar(i.get("valor")), "status": i["status"]}
         for i in f.get("checklist", [])
     ]
+    avisos = [f'{i["nome"]}: {i["aviso"]}' for i in f.get("checklist", []) if i.get("aviso")]
+    if avisos:
+        # Dado suspeito: a IA deve tratá-lo como não confiável, não como fato
+        dados["avisos_de_dados_suspeitos"] = avisos
     dados["rendimentos_recentes"] = [
         {"data_ex": d["data_ex"], "valor": _arredondar(d["valor"])} for d in (dividendos or [])[-12:]
     ]

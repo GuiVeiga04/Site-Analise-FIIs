@@ -75,8 +75,15 @@ def baixar_com_retentativa(
 
 
 def coletar_cotacoes(fiis: dict[str, str]) -> pd.DataFrame:
-    """Baixa as cotações mais recentes e devolve um DataFrame já no formato
-    de uma linha por fundo (preço/volume do último pregão disponível)."""
+    """Baixa os últimos ~5 pregões de cada fundo e devolve TODOS eles (não só
+    o último), com a Data_Coleta de hoje.
+
+    Por que todos: quando a coleta roda à noite, o Yahoo às vezes ainda não
+    fechou o volume do dia e devolve 0. Regravando os 5 últimos pregões, o
+    volume que veio zerado é corrigido na coleta do dia seguinte. A
+    deduplicação por (Ticker, Data_Pregao) mantém a coleta mais recente, e
+    remover_duplicatas_pregao não deixa um volume bom ser trocado por 0.
+    """
     tickers_yf = [f"{t}.SA" for t in fiis]
     log.info("Coletando cotações de %d FIIs...", len(tickers_yf))
     dados = baixar_com_retentativa(tickers_yf)
@@ -87,26 +94,21 @@ def coletar_cotacoes(fiis: dict[str, str]) -> pd.DataFrame:
     for ticker, nome in fiis.items():
         ticker_yf = f"{ticker}.SA"
         try:
-            hist = dados[ticker_yf].dropna(how="all")
-
+            hist = dados[ticker_yf].dropna(subset=["Close"])
             if hist.empty:
-                preco = volume = data_pregao = None
-            else:
-                ultimo = hist.iloc[-1]
-                preco = round(float(ultimo["Close"]), 2)
-                volume = int(ultimo["Volume"])
-                data_pregao = hist.index[-1].date().isoformat()
-
-            registros.append(
-                {
-                    "Data_Coleta": hoje,
-                    "Data_Pregao": data_pregao,
-                    "Ticker": ticker,
-                    "Nome_Fundo": nome,
-                    "Preco_Fechamento_R$": preco,
-                    "Volume_Ultimo_Dia": volume,
-                }
-            )
+                raise ValueError("sem cotações no período")
+            for data_idx, linha in hist.iterrows():
+                volume = linha["Volume"]
+                registros.append(
+                    {
+                        "Data_Coleta": hoje,
+                        "Data_Pregao": data_idx.date().isoformat(),
+                        "Ticker": ticker,
+                        "Nome_Fundo": nome,
+                        "Preco_Fechamento_R$": round(float(linha["Close"]), 2),
+                        "Volume_Ultimo_Dia": int(volume) if pd.notna(volume) else None,
+                    }
+                )
         except Exception as e:
             log.error("Erro ao processar %s: %s", ticker, e)
             registros.append(
@@ -176,8 +178,8 @@ def anexar_ao_historico(df_novo: pd.DataFrame) -> pd.DataFrame:
     df_novo["Data_Pregao"] = pd.to_datetime(df_novo["Data_Pregao"])
 
     if ARQUIVO_HISTORICO.exists():
-        # False: regrava o CSV com o dado bruto; o filtro de anomalias só vale na leitura
-        df_existente = carregar_historico_limpo(remover_anomalias=False)
+        # False: regrava o CSV com o dado bruto; os filtros só valem na leitura
+        df_existente = carregar_historico_limpo(remover_anomalias=False, volume_zero_como_vazio=False)
         df_final = pd.concat([df_existente, df_novo], ignore_index=True)
     else:
         df_final = df_novo
@@ -218,6 +220,8 @@ def main(argv: list[str] | None = None) -> None:
     df_final = anexar_ao_historico(df_novo)
 
     df_final = df_final.sort_values(["Data_Coleta", "Ticker"]).reset_index(drop=True)
+    # Int64 (com maiúscula) aceita vazio sem virar "123.0" no CSV
+    df_final["Volume_Ultimo_Dia"] = pd.to_numeric(df_final["Volume_Ultimo_Dia"], errors="coerce").round().astype("Int64")
     df_final.to_csv(ARQUIVO_HISTORICO, index=False, encoding="utf-8-sig", sep=";")
 
     log.info(

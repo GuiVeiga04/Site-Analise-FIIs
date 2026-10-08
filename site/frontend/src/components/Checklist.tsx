@@ -57,11 +57,14 @@ export function ChecklistCard({ f }: { f: FundoSnapshot }) {
               {i.eliminatorio && <span className="tag-elim" title="Se ficar vermelho, o sinal geral fica vermelho">eliminatório</span>}
             </span>
             <span className="valor num" aria-label={`${i.nome}: ${i.status}`}>
-              {i.status === "sem_dado" ? "sem dado" : fmt(i.valor, i.unidade, comSinal(i))}
+              {i.aviso
+                ? <>{fmt(i.valor, i.unidade, comSinal(i))} <span className="tag-suspeito">suspeito</span></>
+                : i.status === "sem_dado" ? "sem dado" : fmt(i.valor, i.unidade, comSinal(i))}
             </span>
             <span className="regra">
               verde {faixa(i.verde, i.unidade)} · amarelo {faixa(i.amarelo, i.unidade)} · peso {i.peso}
             </span>
+            {i.aviso && <span className="aviso-dado">{i.aviso}</span>}
             {i.descricao && <span className="desc">{i.descricao}</span>}
           </li>
         ))}

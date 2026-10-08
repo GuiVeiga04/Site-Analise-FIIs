@@ -201,6 +201,7 @@ export default function Comparar() {
                         return (
                           <td key={f.ticker} className="r">
                             {!it ? <span className="sub-name">não se aplica</span>
+                              : it.aviso ? <span className="tag-suspeito" title={it.aviso}>suspeito</span>
                               : it.status === "sem_dado" ? <span className="sub-name">sem dado</span>
                                 : <SinalBadge sinal={it.status} nota={null} />}
                           </td>

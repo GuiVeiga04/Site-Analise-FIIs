@@ -86,3 +86,24 @@ def test_arquivo_de_criterios_do_projeto_e_valido():
     assert len(ids) == len(set(ids))
     for c in cfg["criterios"]:
         assert {"id", "nome", "campo", "verde", "amarelo", "peso"} <= set(c)
+
+
+def test_valor_implausivel_fica_fora_da_nota_com_aviso():
+    cfg = {"regras_sinal": CFG["regras_sinal"], "criterios": CFG["criterios"][:1] + [
+        dict(CFG["criterios"][3], ignorar_acima=50)]}
+    # vacância 86% num fundo de tijolo: ignorada; só o P/VP conta
+    r = avaliar_fundo({"Tipo_Gestao": "Tijolo", "P_VP": 0.9, "Vacancia_%": 86.28}, cfg)
+    vac = next(i for i in r["Checklist"] if i["id"] == "vac")
+    assert vac["status"] == "sem_dado"
+    assert vac["valor"] == 86.28            # o valor continua visível na tela
+    assert "relatório gerencial" in vac["aviso"]
+    assert r["Checklist_Nota"] == 100       # não puxou a nota para baixo
+    # dentro do plausível: avaliado normalmente, sem aviso
+    r2 = avaliar_fundo({"Tipo_Gestao": "Tijolo", "P_VP": 0.9, "Vacancia_%": 20}, cfg)
+    vac2 = next(i for i in r2["Checklist"] if i["id"] == "vac")
+    assert vac2["status"] == "vermelho" and vac2["aviso"] is None
+
+
+def test_criterios_do_projeto_ignoram_vacancia_acima_de_50():
+    vac = next(c for c in carregar_criterios()["criterios"] if c["id"] == "vacancia")
+    assert vac["ignorar_acima"] == 50

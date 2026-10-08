@@ -209,3 +209,8 @@ tr.atual td { background: var(--accent-wash); }
 .calc-formulas summary { cursor: pointer; color: var(--accent); font-weight: 600; }
 .calc-formulas ul { padding-left: 18px; margin: 8px 0 0; }
 .calc-frase { font-size: .95rem; margin: 0 0 12px; color: var(--text-2); } .calc-frase b { color: var(--text); }
+
+/* dado suspeito (valor ignorado no checklist) */
+.tag-suspeito { font-size: .66rem; text-transform: uppercase; letter-spacing: .04em; color: var(--warn);
+  border: 1px solid currentColor; border-radius: 4px; padding: 0 4px; font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 600; }
+.checklist .aviso-dado { grid-column: 2 / -1; font-size: .76rem; color: var(--warn); }

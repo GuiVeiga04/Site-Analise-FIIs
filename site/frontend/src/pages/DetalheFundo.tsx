@@ -183,7 +183,9 @@ export default function DetalheFundo() {
             {(f.qtd_imoveis ?? 0) > 0 && <>
               <div><dt>Imóveis</dt><dd className="num">{inteiro(f.qtd_imoveis)}</dd></div>
               <div><dt>Vacância média</dt>
-                <dd className={`num ${f.vacancia_pct == null ? "" : f.vacancia_pct > 15 ? "crit" : f.vacancia_pct > 7 ? "warn" : ""}`}>{taxa(f.vacancia_pct)}</dd></div>
+                {f.checklist.find((i) => i.id === "vacancia")?.aviso
+                  ? <dd className="num">{taxa(f.vacancia_pct)} <span className="tag-suspeito" title="Valor fora do plausível: ignorado no checklist. Confira no relatório gerencial.">suspeito</span></dd>
+                  : <dd className={`num ${f.vacancia_pct == null ? "" : f.vacancia_pct > 15 ? "crit" : f.vacancia_pct > 7 ? "warn" : ""}`}>{taxa(f.vacancia_pct)}</dd>}</div>
               <div><dt>Cap rate</dt><dd className="num">{taxa(f.cap_rate_pct)}</dd></div>
             </>}
             <div><dt>FFO yield</dt><dd className="num">{taxa(f.ffo_yield_pct)}</dd></div>

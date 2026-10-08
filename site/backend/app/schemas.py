@@ -29,6 +29,7 @@ class ItemChecklist(BaseModel):
     valor: float | None
     unidade: str = ""
     status: str  # verde | amarelo | vermelho | sem_dado
+    aviso: str | None = None  # valor ignorado por parecer erro da fonte
     peso: float
     eliminatorio: bool = False
     verde: Faixa | None = None

@@ -150,7 +150,7 @@ def _converter_datas(serie: pd.Series) -> pd.Series:
     return iso.fillna(br)
 
 
-def carregar_historico_limpo(remover_anomalias: bool = True) -> pd.DataFrame:
+def carregar_historico_limpo(remover_anomalias: bool = True, volume_zero_como_vazio: bool = True) -> pd.DataFrame:
     """Lê base_fiis_historico.csv e devolve um DataFrame com tipos corretos:
     datas como datetime, preço como float, volume como int.
 
@@ -158,9 +158,12 @@ def carregar_historico_limpo(remover_anomalias: bool = True) -> pd.DataFrame:
     que tinha o preço formatado como 'R$ xx,xx'.
 
     remover_anomalias=True (padrão) descarta cotações claramente erradas do
-    Yahoo (ver remover_cotacoes_anomalas). O atualizador_fiis.py usa False ao
-    regravar o CSV, para que o arquivo continue guardando o dado bruto: o
-    filtro é aplicado na LEITURA, não apaga nada do disco.
+    Yahoo (ver remover_cotacoes_anomalas).
+    volume_zero_como_vazio=True (padrão) trata volume 0 como "sem dado": é o
+    que o Yahoo devolve quando o volume do dia ainda não fechou, e um 0 falso
+    puxaria a liquidez média para baixo.
+    O atualizador_fiis.py usa False nos dois ao regravar o CSV, para que o
+    arquivo continue guardando o dado bruto: os filtros valem na LEITURA.
     """
     if not ARQUIVO_HISTORICO.exists():
         return pd.DataFrame(
@@ -182,6 +185,8 @@ def carregar_historico_limpo(remover_anomalias: bool = True) -> pd.DataFrame:
     df["Data_Pregao"] = _converter_datas(df["Data_Pregao"])
 
     df = remover_duplicatas_pregao(df)
+    if volume_zero_como_vazio:
+        df["Volume_Ultimo_Dia"] = df["Volume_Ultimo_Dia"].where(df["Volume_Ultimo_Dia"] > 0)
     if remover_anomalias:
         df = remover_cotacoes_anomalas(df)
     return df
@@ -270,6 +275,13 @@ def remover_duplicatas_pregao(df: pd.DataFrame) -> pd.DataFrame:
     se_tem_pregao = df["Data_Pregao"].notna()
     com_pregao = df[se_tem_pregao].sort_values("Data_Coleta")
     sem_pregao = df[~se_tem_pregao]
+
+    # Se a coleta mais recente de um pregão veio sem volume (0 ou vazio) e uma
+    # coleta anterior do MESMO pregão tinha volume, aproveita o volume anterior:
+    # regravar um pregão nunca deve piorar o dado.
+    vol = pd.to_numeric(com_pregao["Volume_Ultimo_Dia"], errors="coerce")
+    ultimo_bom = vol.where(vol > 0).groupby([com_pregao["Ticker"], com_pregao["Data_Pregao"]]).transform("last")
+    com_pregao = com_pregao.assign(Volume_Ultimo_Dia=vol.where(vol > 0, ultimo_bom).fillna(vol))
 
     com_pregao = com_pregao.drop_duplicates(subset=["Ticker", "Data_Pregao"], keep="last")
 

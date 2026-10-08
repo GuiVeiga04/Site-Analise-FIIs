@@ -57,7 +57,7 @@ def test_atualizador_regrava_o_csv_sem_filtrar():
     # o CSV guarda o dado bruto; o filtro só vale na leitura
     from app.config import RAIZ_PROJETO
     codigo = (RAIZ_PROJETO / "atualizador_fiis.py").read_text(encoding="utf-8")
-    assert "carregar_historico_limpo(remover_anomalias=False)" in codigo
+    assert "carregar_historico_limpo(remover_anomalias=False, volume_zero_como_vazio=False)" in codigo
 
 
 def test_ingest_remove_do_banco_linha_que_saiu_da_limpeza(tmp_path, monkeypatch):

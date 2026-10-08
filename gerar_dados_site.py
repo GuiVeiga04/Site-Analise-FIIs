@@ -387,6 +387,8 @@ def anexar_fundamentos(snapshot: pd.DataFrame, cvm: pd.DataFrame, fundamentus: p
 #   vermelho -> algum critério eliminatório vermelho, ou nota < vermelho_nota_abaixo_de
 #   verde    -> nota >= verde_nota_minima
 #   amarelo  -> o resto
+# Um critério pode ter "ignorar_acima"/"ignorar_abaixo": valores fora disso são
+# tratados como erro da fonte (sem_dado + aviso) e não entram na nota.
 # É uma TRIAGEM: aponta onde olhar primeiro, não diz o que comprar.
 
 PONTOS = {"verde": 1.0, "amarelo": 0.5, "vermelho": 0.0}
@@ -421,6 +423,19 @@ def avaliar_fundo(linha: dict | pd.Series, config: dict) -> dict:
             continue
         valor = linha.get(c["campo"])
         status = classificar_valor(valor, c)
+        # Valor fora do plausível (ex: vacância de 86% num shopping que paga
+        # renda normal): fica fora da nota, mas aparece com aviso na tela.
+        aviso = None
+        if status != "sem_dado":
+            acima, abaixo = c.get("ignorar_acima"), c.get("ignorar_abaixo")
+            v = float(valor)
+            if (acima is not None and v > acima) or (abaixo is not None and v < abaixo):
+                status = "sem_dado"
+                un = c.get("unidade", "")
+                br = lambda x: f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".") + un  # noqa: E731
+                limite = f"acima de {br(acima)}" if acima is not None and v > acima else f"abaixo de {br(abaixo)}"
+                aviso = (f"{br(v)} parece erro da fonte ({limite}) e ficou fora da nota. "
+                         "Confira no relatório gerencial do fundo.")
         peso = float(c.get("peso", 1))
         peso_total += peso
         if status != "sem_dado":
@@ -430,7 +445,8 @@ def avaliar_fundo(linha: dict | pd.Series, config: dict) -> dict:
                 eliminado = True
         itens.append({
             "id": c["id"], "nome": c["nome"], "descricao": c.get("descricao"),
-            "valor": None if status == "sem_dado" else round(float(valor), 4),
+            "valor": None if status == "sem_dado" and aviso is None else round(float(valor), 4),
+            "aviso": aviso,
             "unidade": c.get("unidade", ""), "status": status, "peso": peso,
             "eliminatorio": bool(c.get("eliminatorio")),
             "verde": c.get("verde"), "amarelo": c.get("amarelo"),
