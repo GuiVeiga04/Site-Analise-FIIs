@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
-  calcularMeta, calcularNumeroMagico, lerNumero, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
+  calcularMeta, calcularNumeroMagico, lerNumero, simular, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
 } from "./calculadora.ts";
 
 test("entrada: números no formato brasileiro", () => {
@@ -127,4 +127,70 @@ test("bloco 3: quanto falta a partir das cotas que já tenho", () => {
 test("bloco 3: sem rendimento não existe número mágico", () => {
   assert.equal(calcularNumeroMagico(100, 0), null);
   assert.equal(calcularNumeroMagico(0, 1), null);
+});
+
+const base = { preco: 10, rendimentoMensalPorCota: 0.1, aporteInicial: 1000, aporteMensal: 0, meses: 2, reinvestir: true };
+
+test("bloco 4: dois meses conferidos à mão (reinvestindo)", () => {
+  // mês 0: 1000 / 10 = 100 cotas
+  // mês 1: renda 100 x 0,10 = 10,00 -> compra 1 cota -> 101 cotas, caixa 0
+  // mês 2: renda 101 x 0,10 = 10,10 -> compra 1 cota -> 102 cotas, caixa 0,10
+  const r = simular(base)!;
+  assert.deepEqual(r.meses.map((m) => m.cotas), [100, 101, 102]);
+  assert.ok(Math.abs(r.final.caixa - 0.1) < 1e-9);
+  assert.ok(Math.abs(r.final.patrimonio - 1020.1) < 1e-9);
+  assert.ok(Math.abs(r.final.totalRendimentos - 20.1) < 1e-9);
+  assert.ok(Math.abs(r.final.rendaMes - 10.1) < 1e-9);
+  assert.equal(r.final.totalAportado, 1000);
+});
+
+test("bloco 4: sem reinvestir, os rendimentos não compram cotas", () => {
+  const r = simular({ ...base, reinvestir: false, meses: 12 })!;
+  assert.equal(r.final.cotas, 100);
+  assert.ok(Math.abs(r.final.totalRendimentos - 120) < 1e-9); // 12 x 10 recebidos e "sacados"
+  assert.equal(r.final.patrimonio, 1000);
+});
+
+test("bloco 4: aporte mensal entra todo mês e o troco acumula", () => {
+  // aporte de 15 com cota de 10: compra 1 e sobra 5; no mês seguinte 5 + 15 = 20 -> 2 cotas
+  const r = simular({ ...base, aporteInicial: 0, aporteMensal: 15, rendimentoMensalPorCota: 0, meses: 2 })!;
+  assert.deepEqual(r.meses.map((m) => m.cotas), [0, 1, 3]);
+  assert.equal(r.final.caixa, 0);
+  assert.equal(r.final.totalAportado, 30);
+});
+
+test("bloco 4: reinvestir sempre dá patrimônio e renda maiores no longo prazo", () => {
+  const p = { preco: 150.3, rendimentoMensalPorCota: 1.1175, aporteInicial: 10000, aporteMensal: 1000, meses: 120 };
+  const com = simular({ ...p, reinvestir: true })!;
+  const sem = simular({ ...p, reinvestir: false })!;
+  assert.ok(com.final.patrimonio > sem.final.patrimonio);
+  assert.ok(com.final.rendaMes > sem.final.rendaMes);
+  assert.equal(com.final.totalAportado, sem.final.totalAportado); // mesmo dinheiro do bolso
+  assert.equal(com.final.totalAportado, 10000 + 1000 * 120);
+});
+
+test("bloco 4: número mágico é atingido quando a renda do mês paga 1 cota", () => {
+  // 129 cotas de HGLG11 é o número mágico do bloco 3: começar com 129 atinge no mês 1
+  const r = simular({ preco: 150.3, rendimentoMensalPorCota: 1.17, aporteInicial: 129 * 150.3, aporteMensal: 0, meses: 3, reinvestir: true })!;
+  assert.equal(r.mesNumeroMagico, 1);
+  assert.equal(calcularNumeroMagico(150.3, 1.17)!.cotas, 129);
+  const antes = simular({ preco: 150.3, rendimentoMensalPorCota: 1.17, aporteInicial: 128 * 150.3, aporteMensal: 0, meses: 1, reinvestir: false })!;
+  assert.equal(antes.mesNumeroMagico, null); // 128 cotas não chega
+});
+
+test("bloco 4: valorização, crescimento do rendimento e inflação usam taxa mensal equivalente", () => {
+  const r = simular({ ...base, aporteInicial: 0, meses: 12, rendimentoMensalPorCota: 0,
+    valorizacaoPrecoAnual: 12, inflacaoAnual: 10 })!;
+  // depois de 12 meses o preço acumulou exatamente +12%
+  assert.ok(Math.abs(r.meses[12].preco * Math.pow(1.12, 1 / 12) - 11.2) < 1e-9);
+  const r2 = simular({ ...base, meses: 12, reinvestir: false, inflacaoAnual: 10 })!;
+  assert.ok(Math.abs(r2.final.patrimonioReal - 1000 / 1.1) < 1e-9); // R$ 1.000 daqui a 1 ano valem 909 de hoje
+  const r3 = simular({ ...base, meses: 13, reinvestir: false, crescimentoRendimentoAnual: 10 })!;
+  assert.ok(Math.abs(r3.meses[13].rendaMes - 100 * 0.1 * 1.1) < 1e-9); // no mês 13 o rendimento já subiu 10%
+});
+
+test("bloco 4: entradas inválidas e limites", () => {
+  assert.equal(simular({ ...base, preco: 0 }), null);
+  assert.equal(simular({ ...base, meses: 10000 })!.meses.length, 601); // no máximo 50 anos
+  assert.equal(simular({ ...base, meses: -3 })!.meses.length, 1);
 });

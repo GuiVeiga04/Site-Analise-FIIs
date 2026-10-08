@@ -187,3 +187,97 @@ export function calcularNumeroMagico(
     faltamCapital: arred(faltamCotas * preco),
   };
 }
+
+// ---------------------------------------------------------------------------
+// Bloco 4 — Simulação com aporte mensal e reinvestimento
+// ---------------------------------------------------------------------------
+
+export interface ParamsSimulacao {
+  preco: number;                     // preço da cota hoje (R$)
+  rendimentoMensalPorCota: number;   // rendimento por cota por mês hoje (R$)
+  aporteInicial: number;             // R$ investidos no mês 0
+  aporteMensal: number;              // R$ investidos todo mês, do mês 1 em diante
+  meses: number;                     // prazo (limitado a 600 = 50 anos)
+  reinvestir: boolean;               // rendimentos voltam para a compra de cotas?
+  crescimentoRendimentoAnual?: number; // % ao ano (padrão 0: rendimento constante)
+  valorizacaoPrecoAnual?: number;      // % ao ano (padrão 0: preço constante)
+  inflacaoAnual?: number;              // % ao ano, só para mostrar valores "em reais de hoje"
+}
+
+export interface MesSimulado {
+  mes: number;
+  cotas: number;
+  preco: number;
+  caixa: number;               // dinheiro que sobrou por não completar 1 cota
+  patrimonio: number;          // cotas × preço + caixa
+  patrimonioReal: number;      // patrimônio descontada a inflação (reais de hoje)
+  rendaMes: number;            // rendimento recebido neste mês
+  totalAportado: number;       // soma do que saiu do bolso até aqui
+  totalRendimentos: number;    // soma dos rendimentos recebidos até aqui
+}
+
+export interface ResultadoSimulacao {
+  meses: MesSimulado[];        // índice 0 = mês 0 (só o aporte inicial)
+  final: MesSimulado;
+  /** Primeiro mês em que a renda do mês compra 1 cota (null se não atingir no prazo). */
+  mesNumeroMagico: number | null;
+}
+
+/**
+ * Simulação mês a mês. A ordem dentro de cada mês m (1..N) é:
+ *   1. recebe o rendimento das cotas que já tinha:  renda = cotas × rendimento por cota do mês
+ *   2. entra o aporte mensal no caixa
+ *   3. se reinvestir, a renda também entra no caixa (senão ela é "sacada")
+ *   4. compra o máximo de cotas inteiras com o caixa; o troco fica para o mês seguinte
+ *   5. preço e rendimento crescem pela taxa mensal equivalente: (1 + taxa anual)^(1/12) − 1
+ * No mês 0 só acontece a compra com o aporte inicial.
+ * Premissas: sem corretagem, sem IR (rendimento de FII é isento para PF), cotas inteiras.
+ */
+export function simular(p: ParamsSimulacao): ResultadoSimulacao | null {
+  if (!(p.preco > 0) || !(p.rendimentoMensalPorCota >= 0)) return null;
+  const meses = Math.min(600, Math.max(0, Math.floor(p.meses || 0)));
+  const aporteInicial = Math.max(0, p.aporteInicial || 0);
+  const aporteMensal = Math.max(0, p.aporteMensal || 0);
+  const fator = (anual = 0) => Math.pow(1 + anual / 100, 1 / 12);
+  const fRend = fator(p.crescimentoRendimentoAnual);
+  const fPreco = fator(p.valorizacaoPrecoAnual);
+  const fInfl = fator(p.inflacaoAnual);
+
+  let preco = p.preco;
+  let rend = p.rendimentoMensalPorCota;
+  let caixa = aporteInicial;
+  let cotas = 0;
+  let totalAportado = aporteInicial;
+  let totalRendimentos = 0;
+  let mesNumeroMagico: number | null = null;
+
+  const comprar = () => {
+    const n = Math.floor(caixa / preco + 1e-9);
+    cotas += n;
+    caixa = Math.max(0, caixa - n * preco);
+  };
+  const registrar = (mes: number, rendaMes: number): MesSimulado => {
+    const patrimonio = cotas * preco + caixa;
+    return {
+      mes, cotas, preco, caixa, patrimonio,
+      patrimonioReal: patrimonio / Math.pow(fInfl, mes),
+      rendaMes, totalAportado, totalRendimentos,
+    };
+  };
+
+  comprar();
+  const serie: MesSimulado[] = [registrar(0, 0)];
+  for (let m = 1; m <= meses; m++) {
+    const renda = cotas * rend;
+    totalRendimentos += renda;
+    caixa += aporteMensal;
+    totalAportado += aporteMensal;
+    if (p.reinvestir) caixa += renda;
+    if (mesNumeroMagico === null && renda >= preco - 1e-9 && renda > 0) mesNumeroMagico = m;
+    comprar();
+    serie.push(registrar(m, renda));
+    preco *= fPreco;
+    rend *= fRend;
+  }
+  return { meses: serie, final: serie[serie.length - 1], mesNumeroMagico };
+}

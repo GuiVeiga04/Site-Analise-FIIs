@@ -3,6 +3,7 @@ import { api } from "../api/client";
 import { CalcMagico } from "../components/CalcMagico";
 import { CalcMeta } from "../components/CalcMeta";
 import { CalcRenda } from "../components/CalcRenda";
+import { CalcSimulacao } from "../components/CalcSimulacao";
 import { Estado, SinalBadge, TipoPill } from "../components/ui";
 import { brl, brlDiv, data, taxa } from "../lib/format";
 import { useAsync } from "../lib/useAsync";
@@ -12,8 +13,8 @@ import { useAsync } from "../lib/useAsync";
  *  1. Quanto vou receber            (feito)
  *  2. Meta de renda                 (feito)
  *  3. Número mágico                (feito)
- *  4. Simulação com aporte e reinvestimento (próximo)
- *  5. E se eu tivesse investido há 12 meses
+ *  4. Simulação com aporte e reinvestimento (feito)
+ *  5. E se eu tivesse investido há 12 meses (próximo)
  */
 export default function Calculadora() {
   const [params, setParams] = useSearchParams();
@@ -54,6 +55,7 @@ export default function Calculadora() {
       <section><CalcRenda f={f} /></section>
       <section><CalcMeta f={f} /></section>
       <section><CalcMagico f={f} /></section>
+      <section><CalcSimulacao f={f} /></section>
     </>
   );
 }
