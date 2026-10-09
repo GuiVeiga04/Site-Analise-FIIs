@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
-  calcularMeta, calcularNumeroMagico, lerNumero, limitarTaxa, simular, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
+  calcularMeta, calcularNumeroMagico, lerNumero, limitarTaxa, simular, simularHistorico, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
 } from "./calculadora.ts";
 
 test("entrada: números no formato brasileiro", () => {
@@ -235,4 +235,66 @@ test("robustez: lerNumero nunca devolve infinito", () => {
   assert.ok(Number.isNaN(lerNumero("Infinity")));
   assert.ok(Number.isNaN(lerNumero("1e999")));
   assert.equal(lerNumero("1e3"), 1000);
+});
+
+// Série pequena e conferível à mão para o bloco 5
+const PRECOS = [
+  { data: "2026-01-02", preco: 10 }, { data: "2026-01-05", preco: 10 },
+  { data: "2026-02-02", preco: 10 }, { data: "2026-03-02", preco: 11 },
+];
+const PROVENTOS = [
+  { dataEx: "2026-01-02", valor: 0.1 },  // data-ex no dia da compra: NÃO recebe
+  { dataEx: "2026-02-02", valor: 0.1 },
+  { dataEx: "2026-03-02", valor: 0.1 },
+];
+
+test("bloco 5: reinvestindo, conferido à mão", () => {
+  // compra 02/01: R$ 1.000 / 10 = 100 cotas
+  // 02/02: 100 x 0,10 = 10,00 -> compra 1 cota a 10 -> 101 cotas, caixa 0
+  // 02/03: 101 x 0,10 = 10,10 -> cota a 11 não cabe -> caixa 10,10
+  // final: 101 x 11 + 10,10 = 1.121,10 -> retorno 12,11%
+  const r = simularHistorico(PRECOS, PROVENTOS, "2026-01-02", "valor", 1000, true)!;
+  assert.equal(r.dataCompra, "2026-01-02");
+  assert.equal(r.cotasIniciais, 100);
+  assert.equal(r.pagamentos.length, 2);              // o de 02/01 ficou de fora
+  assert.equal(r.cotasFinais, 101);
+  assert.ok(Math.abs(r.caixa - 10.1) < 1e-9);
+  assert.ok(Math.abs(r.rendimentosRecebidos - 20.1) < 1e-9);
+  assert.ok(Math.abs(r.valorFinal - 1121.1) < 1e-9);
+  assert.ok(Math.abs(r.retornoTotalPct - 12.11) < 1e-9);
+  assert.ok(Math.abs(r.variacaoPrecoPct - 10) < 1e-9);
+});
+
+test("bloco 5: sem reinvestir, rendimentos ficam somados à parte", () => {
+  // 100 cotas o tempo todo: 2 x R$ 10 recebidos; 100 x 11 + 20 = 1.120 -> 12%
+  const r = simularHistorico(PRECOS, PROVENTOS, "2026-01-02", "valor", 1000, false)!;
+  assert.equal(r.cotasFinais, 100);
+  assert.ok(Math.abs(r.rendimentosRecebidos - 20) < 1e-9);
+  assert.ok(Math.abs(r.valorFinal - 1120) < 1e-9);
+  assert.ok(Math.abs(r.retornoTotalPct - 12) < 1e-9);
+});
+
+test("bloco 5: data sem pregão vai para o próximo pregão; data-ex depois da compra recebe", () => {
+  // pede sábado 03/01 -> compra segunda 05/01; agora o provento de 02/01 continua fora
+  const r = simularHistorico(PRECOS, PROVENTOS, "2026-01-03", "cotas", 50, false)!;
+  assert.equal(r.dataCompra, "2026-01-05");
+  assert.equal(r.capitalInicial, 500);
+  assert.equal(r.pagamentos.length, 2);
+  // comprando 1 dia ANTES da data-ex (31/12, aqui o 1º pregão é 02/01) também não recebe a de 02/01
+  const r2 = simularHistorico([{ data: "2025-12-31", preco: 10 }, ...PRECOS], PROVENTOS, "2025-12-31", "cotas", 10, false)!;
+  assert.equal(r2.pagamentos.length, 3);              // agora recebe também a de 02/01
+});
+
+test("bloco 5: série do patrimônio começa na compra e termina no valor final", () => {
+  const r = simularHistorico(PRECOS, PROVENTOS, "2026-01-02", "valor", 1000, true)!;
+  assert.equal(r.serie[0].data, "2026-01-02");
+  assert.equal(r.serie[0].patrimonio, 1000);
+  assert.ok(Math.abs(r.serie[r.serie.length - 1].patrimonio - r.valorFinal) < 1e-9);
+});
+
+test("bloco 5: casos sem resultado", () => {
+  assert.equal(simularHistorico(PRECOS, PROVENTOS, "2026-03-02", "valor", 1000, true), null); // compra no último dia
+  assert.equal(simularHistorico(PRECOS, PROVENTOS, "2027-01-01", "valor", 1000, true), null); // depois do último pregão
+  assert.equal(simularHistorico(PRECOS, PROVENTOS, "2026-01-02", "valor", 5, true), null);    // não compra 1 cota
+  assert.equal(simularHistorico([], PROVENTOS, "2026-01-02", "valor", 1000, true), null);
 });

@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { api } from "../api/client";
+import { CalcHistorico } from "../components/CalcHistorico";
 import { CalcMagico } from "../components/CalcMagico";
 import { CalcMeta } from "../components/CalcMeta";
 import { CalcRenda } from "../components/CalcRenda";
@@ -14,7 +15,7 @@ import { useAsync } from "../lib/useAsync";
  *  2. Meta de renda                 (feito)
  *  3. Número mágico                (feito)
  *  4. Simulação com aporte e reinvestimento (feito)
- *  5. E se eu tivesse investido há 12 meses (próximo)
+ *  5. E se eu tivesse investido em data passada (feito)
  */
 export default function Calculadora() {
   const [params, setParams] = useSearchParams();
@@ -56,6 +57,7 @@ export default function Calculadora() {
       <section><CalcMeta f={f} /></section>
       <section><CalcMagico f={f} /></section>
       <section><CalcSimulacao f={f} /></section>
+      <section><CalcHistorico f={f} /></section>
     </>
   );
 }

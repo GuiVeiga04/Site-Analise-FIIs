@@ -308,3 +308,107 @@ export function simular(p: ParamsSimulacao): ResultadoSimulacao | null {
   }
   return { meses: serie, final: serie[serie.length - 1], mesNumeroMagico };
 }
+
+// ---------------------------------------------------------------------------
+// Bloco 5 — E se eu tivesse investido em uma data passada (dados reais)
+// ---------------------------------------------------------------------------
+
+export interface PrecoDia { data: string; preco: number }        // data ISO "AAAA-MM-DD"
+export interface Provento { dataEx: string; valor: number }      // R$ por cota
+
+export interface PagamentoRecebido {
+  dataEx: string;
+  valorPorCota: number;
+  cotas: number;             // cotas que tinha (e que receberam)
+  recebido: number;          // cotas × valor por cota
+  precoReinvestimento: number;
+  cotasCompradas: number;    // só com reinvestimento
+}
+
+export interface PontoHistoricoSim { data: string; patrimonio: number }
+
+export interface ResultadoHistorico {
+  dataCompra: string;        // pregão em que a compra foi feita (o 1º a partir da data pedida)
+  precoCompra: number;
+  dataFinal: string;         // último pregão disponível
+  precoFinal: number;
+  capitalInicial: number;    // o que saiu do bolso
+  cotasIniciais: number;
+  cotasFinais: number;
+  caixa: number;             // troco + rendimentos que não completaram 1 cota
+  rendimentosRecebidos: number;
+  /** Valor final: cotas × preço final + caixa (+ rendimentos sacados, sem reinvestimento). */
+  valorFinal: number;
+  retornoTotalPct: number;   // valorFinal ÷ capitalInicial − 1
+  variacaoPrecoPct: number;  // só o preço: preço final ÷ preço de compra − 1
+  pagamentos: PagamentoRecebido[];
+  serie: PontoHistoricoSim[];
+}
+
+/**
+ * Refaz o investimento com preços e rendimentos REAIS:
+ *  1. Compra no fechamento do 1º pregão a partir de `dataPedida` (fim de semana/feriado
+ *     vai para o próximo pregão). Modo "valor": máximo de cotas inteiras, troco no caixa.
+ *  2. Recebe todo rendimento com data-ex DEPOIS do dia da compra: quem tem a cota no
+ *     fechamento da data-com (pregão anterior à data-ex) recebe. Comprou na própria
+ *     data-ex? Esse rendimento não é seu.
+ *  3. Reinvestindo: o rendimento vai para o caixa e compra cotas no fechamento do 1º
+ *     pregão a partir da data-ex. (Aproximação: o dinheiro de fato cai alguns dias depois.)
+ *     Sem reinvestir: o rendimento é somado à parte (dinheiro recebido).
+ *  4. Valor final = cotas × preço do último pregão + caixa (+ rendimentos, sem reinvestir).
+ * `precos` e `proventos` podem vir em qualquer ordem; preços inválidos são ignorados.
+ */
+export function simularHistorico(
+  precos: PrecoDia[], proventos: Provento[], dataPedida: string,
+  modo: ModoEntrada, entrada: number, reinvestir: boolean,
+): ResultadoHistorico | null {
+  const serieP = precos.filter((p) => p.preco > 0 && Number.isFinite(p.preco)).sort((a, b) => a.data.localeCompare(b.data));
+  if (!serieP.length || !(entrada > 0) || !Number.isFinite(entrada)) return null;
+  const iCompra = serieP.findIndex((p) => p.data >= dataPedida);
+  if (iCompra < 0 || iCompra === serieP.length - 1) return null; // precisa de pelo menos 1 pregão depois
+  const compra = serieP[iCompra];
+  const final = serieP[serieP.length - 1];
+
+  const pos = montarPosicao(modo, entrada, compra.preco);
+  if (pos.cotas === 0) return null;
+  const capitalInicial = modo === "valor" ? entrada : pos.valorAplicado;
+  let cotas = pos.cotas;
+  let caixa = pos.sobra;
+  let recebidos = 0;
+
+  const provs = proventos
+    .filter((d) => d.valor > 0 && Number.isFinite(d.valor) && d.dataEx > compra.data && d.dataEx <= final.data)
+    .sort((a, b) => a.dataEx.localeCompare(b.dataEx));
+  const pagamentos: PagamentoRecebido[] = [];
+  const serie: PontoHistoricoSim[] = [];
+  let k = 0;
+  for (let i = iCompra; i < serieP.length; i++) {
+    const dia = serieP[i];
+    // rendimentos cuja data-ex já chegou (pode haver mais de um até este pregão)
+    while (k < provs.length && provs[k].dataEx <= dia.data) {
+      const d = provs[k++];
+      const recebido = cotas * d.valor;
+      recebidos += recebido;
+      let compradas = 0;
+      if (reinvestir) {
+        caixa += recebido;
+        compradas = Math.floor(caixa / dia.preco + 1e-9);
+        cotas += compradas;
+        caixa = Math.max(0, caixa - compradas * dia.preco);
+      }
+      pagamentos.push({
+        dataEx: d.dataEx, valorPorCota: d.valor, cotas: cotas - compradas, recebido,
+        precoReinvestimento: dia.preco, cotasCompradas: compradas,
+      });
+    }
+    serie.push({ data: dia.data, patrimonio: cotas * dia.preco + caixa + (reinvestir ? 0 : recebidos) });
+  }
+  const valorFinal = cotas * final.preco + caixa + (reinvestir ? 0 : recebidos);
+  return {
+    dataCompra: compra.data, precoCompra: compra.preco, dataFinal: final.data, precoFinal: final.preco,
+    capitalInicial, cotasIniciais: pos.cotas, cotasFinais: cotas, caixa, rendimentosRecebidos: recebidos,
+    valorFinal, retornoTotalPct: (valorFinal / capitalInicial - 1) * 100,
+    variacaoPrecoPct: (final.preco / compra.preco - 1) * 100,
+    pagamentos, serie,
+  };
+}
