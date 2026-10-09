@@ -24,10 +24,23 @@
 export function lerNumero(txt: string): number {
   const t = txt.trim().replace(/\s|R\$/g, "");
   if (!t) return Number.NaN;
-  if (t.includes(",")) return Number(t.replace(/\./g, "").replace(",", "."));
-  if (/^\d{1,3}(\.\d{3})+$/.test(t)) return Number(t.replace(/\./g, ""));
-  return Number(t);
+  let n: number;
+  if (t.includes(",")) n = Number(t.replace(/\./g, "").replace(",", "."));
+  else if (/^\d{1,3}(\.\d{3})+$/.test(t)) n = Number(t.replace(/\./g, ""));
+  else n = Number(t);
+  return Number.isFinite(n) ? n : Number.NaN; // "Infinity", "1e999" etc. viram inválidos
 }
+
+/** Número finito e >= 0 (rendimento por cota válido). */
+const rendimentoValido = (v: number | null | undefined): v is number => v != null && Number.isFinite(v) && v >= 0;
+
+/**
+ * Rendimento mensal acima de 20% do preço da cota não existe em FII (o normal é
+ * perto de 1%): quase sempre é erro de digitação (ex: 115 em vez de 1,15).
+ * As funções devolvem null nesse caso, em vez de números absurdos.
+ */
+export const RENDIMENTO_MENSAL_MAXIMO = 0.2;
+const plausivel = (rend: number, preco: number) => rend <= preco * RENDIMENTO_MENSAL_MAXIMO;
 
 // ---------------------------------------------------------------------------
 // Bloco 1 — Quanto vou receber
@@ -78,7 +91,7 @@ export interface Renda {
  *   mensal = cotas × rendimento por cota;  anual = mensal × 12
  */
 export function rendaMensalConstante(pos: Posicao, rendimentoPorCota: number | null | undefined): Renda | null {
-  if (rendimentoPorCota == null || !(rendimentoPorCota >= 0)) return null;
+  if (!rendimentoValido(rendimentoPorCota)) return null;
   const mensal = pos.cotas * rendimentoPorCota;
   return montarRenda(pos, rendimentoPorCota, mensal, mensal * 12);
 }
@@ -89,7 +102,7 @@ export function rendaMensalConstante(pos: Posicao, rendimentoPorCota: number | n
  *   anual = cotas × soma 12m;  mensal = anual ÷ 12 (média por mês)
  */
 export function rendaMedia12m(pos: Posicao, soma12mPorCota: number | null | undefined): Renda | null {
-  if (soma12mPorCota == null || !(soma12mPorCota >= 0)) return null;
+  if (!rendimentoValido(soma12mPorCota)) return null;
   const anual = pos.cotas * soma12mPorCota;
   return montarRenda(pos, soma12mPorCota / 12, anual / 12, anual);
 }
@@ -134,7 +147,8 @@ export function calcularMeta(
   metaMensal: number, rendimentoMensalPorCota: number | null | undefined, preco: number,
 ): MetaRenda | null {
   if (!(metaMensal > 0) || !Number.isFinite(metaMensal)) return null;
-  if (rendimentoMensalPorCota == null || !(rendimentoMensalPorCota > 0) || !(preco > 0)) return null;
+  if (!rendimentoValido(rendimentoMensalPorCota) || rendimentoMensalPorCota === 0) return null;
+  if (!(preco > 0) || !Number.isFinite(preco) || !plausivel(rendimentoMensalPorCota, preco)) return null;
   // O epsilon evita pedir uma cota a mais quando a divisão é exata (100 ÷ 0,1 = 1000,0000001).
   const cotas = Math.ceil(metaMensal / rendimentoMensalPorCota - 1e-9);
   return {
@@ -147,7 +161,7 @@ export function calcularMeta(
 
 /** Rendimento mensal por cota no cenário "média de 12 meses": soma dos 12 meses ÷ 12. */
 export function mediaMensal12m(soma12mPorCota: number | null | undefined): number | null {
-  return soma12mPorCota == null || !(soma12mPorCota >= 0) ? null : soma12mPorCota / 12;
+  return rendimentoValido(soma12mPorCota) ? soma12mPorCota / 12 : null;
 }
 
 // ---------------------------------------------------------------------------
@@ -233,12 +247,22 @@ export interface ResultadoSimulacao {
  * No mês 0 só acontece a compra com o aporte inicial.
  * Premissas: sem corretagem, sem IR (rendimento de FII é isento para PF), cotas inteiras.
  */
+export const TAXA_ANUAL_MIN = -50;
+export const TAXA_ANUAL_MAX = 100;
+export const limitarTaxa = (t: number) =>
+  Number.isFinite(t) ? Math.min(TAXA_ANUAL_MAX, Math.max(TAXA_ANUAL_MIN, t)) : 0;
+
 export function simular(p: ParamsSimulacao): ResultadoSimulacao | null {
-  if (!(p.preco > 0) || !(p.rendimentoMensalPorCota >= 0)) return null;
+  if (!(p.preco > 0) || !Number.isFinite(p.preco) || !rendimentoValido(p.rendimentoMensalPorCota)) return null;
+  if (!plausivel(p.rendimentoMensalPorCota, p.preco)) return null;
   const meses = Math.min(600, Math.max(0, Math.floor(p.meses || 0)));
-  const aporteInicial = Math.max(0, p.aporteInicial || 0);
-  const aporteMensal = Math.max(0, p.aporteMensal || 0);
-  const fator = (anual = 0) => Math.pow(1 + anual / 100, 1 / 12);
+  const valorOuZero = (v: number) => (Number.isFinite(v) && v > 0 ? v : 0);
+  const aporteInicial = valorOuZero(p.aporteInicial);
+  const aporteMensal = valorOuZero(p.aporteMensal);
+  // Taxas anuais limitadas a [-50%, +100%]: -100% zeraria o preço (divisão por zero),
+  // abaixo disso a potência vira NaN, e quedas extremas por décadas levam a conta a
+  // números astronômicos. Fora dessa faixa não faz sentido para FII.
+  const fator = (anual = 0) => Math.pow(1 + limitarTaxa(anual) / 100, 1 / 12);
   const fRend = fator(p.crescimentoRendimentoAnual);
   const fPreco = fator(p.valorizacaoPrecoAnual);
   const fInfl = fator(p.inflacaoAnual);
@@ -275,6 +299,9 @@ export function simular(p: ParamsSimulacao): ResultadoSimulacao | null {
     if (p.reinvestir) caixa += renda;
     if (mesNumeroMagico === null && renda >= preco - 1e-9 && renda > 0) mesNumeroMagico = m;
     comprar();
+    // Proteção: combinações extremas (cota quase de graça e rendimento alto
+    // reinvestido por décadas) estouram o limite numérico. Melhor não mostrar nada.
+    if (!Number.isFinite(cotas) || !Number.isFinite(caixa) || !Number.isFinite(cotas * preco)) return null;
     serie.push(registrar(m, renda));
     preco *= fPreco;
     rend *= fRend;

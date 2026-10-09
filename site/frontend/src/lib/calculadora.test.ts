@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
-  calcularMeta, calcularNumeroMagico, lerNumero, simular, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
+  calcularMeta, calcularNumeroMagico, lerNumero, limitarTaxa, simular, mediaMensal12m, montarPosicao, rendaMedia12m, rendaMensalConstante,
 } from "./calculadora.ts";
 
 test("entrada: números no formato brasileiro", () => {
@@ -193,4 +193,46 @@ test("bloco 4: entradas inválidas e limites", () => {
   assert.equal(simular({ ...base, preco: 0 }), null);
   assert.equal(simular({ ...base, meses: 10000 })!.meses.length, 601); // no máximo 50 anos
   assert.equal(simular({ ...base, meses: -3 })!.meses.length, 1);
+});
+
+test("robustez: entradas extremas nunca geram NaN nem infinito", () => {
+  const b4 = { preco: 150, rendimentoMensalPorCota: 1.1, aporteInicial: 10000, aporteMensal: 1000, meses: 120, reinvestir: true };
+  const extremos = [
+    { crescimentoRendimentoAnual: -150 }, { valorizacaoPrecoAnual: -100 }, { valorizacaoPrecoAnual: -150 },
+    { inflacaoAnual: -100 }, { inflacaoAnual: -150 }, { valorizacaoPrecoAnual: 5000, meses: 600 },
+    { aporteMensal: Number.NaN }, { aporteInicial: -5 },
+  ];
+  for (const e of extremos) {
+    const r = simular({ ...b4, ...e });
+    if (r === null) continue; // recusar é aceitável; o que não pode é número inválido na tela
+    const f = r.final;
+    for (const v of [f.cotas, f.patrimonio, f.patrimonioReal, f.rendaMes, f.preco, f.totalAportado]) {
+      assert.ok(Number.isFinite(v), `${JSON.stringify(e)} gerou ${v}`);
+    }
+  }
+});
+
+test("robustez: rendimento implausível ou infinito é rejeitado em todos os blocos", () => {
+  // 115 por cota de R$ 150 (erro de digitação de 1,15): mais de 20% ao mês
+  assert.equal(simular({ preco: 150, rendimentoMensalPorCota: 115, aporteInicial: 1000, aporteMensal: 0, meses: 12, reinvestir: true }), null);
+  assert.equal(simular({ preco: 150, rendimentoMensalPorCota: Infinity, aporteInicial: 1000, aporteMensal: 0, meses: 12, reinvestir: true }), null);
+  assert.equal(calcularMeta(1000, 115, 150), null);
+  assert.equal(calcularMeta(1000, Infinity, 150), null);
+  assert.equal(calcularNumeroMagico(150, 115), null);
+  assert.equal(rendaMensalConstante(montarPosicao("cotas", 10, 150), Infinity), null);
+  // 20% ao mês ainda é aceito (limite)
+  assert.ok(calcularMeta(1000, 30, 150));
+});
+
+test("robustez: taxas anuais são limitadas a [-50%, +100%]", () => {
+  assert.equal(limitarTaxa(-150), -50);
+  assert.equal(limitarTaxa(500), 100);
+  assert.equal(limitarTaxa(Number.NaN), 0);
+  assert.equal(limitarTaxa(8), 8);
+});
+
+test("robustez: lerNumero nunca devolve infinito", () => {
+  assert.ok(Number.isNaN(lerNumero("Infinity")));
+  assert.ok(Number.isNaN(lerNumero("1e999")));
+  assert.equal(lerNumero("1e3"), 1000);
 });

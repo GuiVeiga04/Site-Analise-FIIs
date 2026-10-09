@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { FundoSnapshot } from "../api/types";
 import { calcularNumeroMagico, lerNumero, mediaMensal12m, type NumeroMagico } from "../lib/calculadora";
 import { brl, brlDiv, data, inteiro } from "../lib/format";
-import { fmtEntrada } from "./CalcRenda";
+import { avisoRendimento, fmtEntrada } from "./CalcRenda";
 
 /**
  * Bloco 3 — Número mágico: quantas cotas para que a renda de um mês compre uma cota nova.
@@ -35,7 +35,8 @@ export function CalcMagico({ f }: { f: FundoSnapshot }) {
       n: calcularNumeroMagico(preco, mediaMensal12m(f.dividendos_12m), tem),
     },
   ];
-  if (personalizado > 0) {
+  const avisoPers = avisoRendimento(personalizado, preco);
+  if (personalizado > 0 && !avisoPers) {
     cenarios.push({ nome: "Valor que você digitou", detalhe: "por cota, todo mês", porCota: personalizado, n: calcularNumeroMagico(preco, personalizado, tem) });
   }
   const d = cenarios[1].n;
@@ -104,6 +105,7 @@ export function CalcMagico({ f }: { f: FundoSnapshot }) {
               </tbody>
             </table>
           </div>
+          {avisoPers && <p className="calc-aviso">{avisoPers}</p>}
           <details className="calc-formulas">
             <summary>Como a conta é feita</summary>
             <ul>

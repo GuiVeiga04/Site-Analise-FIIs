@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { FundoSnapshot } from "../api/types";
 import {
-  lerNumero, montarPosicao, rendaMedia12m, rendaMensalConstante, type ModoEntrada, type Renda,
+  RENDIMENTO_MENSAL_MAXIMO, lerNumero, montarPosicao, rendaMedia12m, rendaMensalConstante, type ModoEntrada, type Renda,
 } from "../lib/calculadora";
 import { brl, brlDiv, data, inteiro, taxa } from "../lib/format";
 
@@ -39,7 +39,8 @@ export function CalcRenda({ f }: { f: FundoSnapshot }) {
       renda: rendaMedia12m(pos, f.dividendos_12m),
     },
   ];
-  if (personalizado >= 0) {
+  const avisoPers = avisoRendimento(personalizado, preco);
+  if (personalizado >= 0 && !avisoPers) {
     cenarios.push({ nome: "Valor que você digitou", detalhe: "repetido todo mês", renda: rendaMensalConstante(pos, personalizado) });
   }
 
@@ -103,6 +104,7 @@ export function CalcRenda({ f }: { f: FundoSnapshot }) {
               </tbody>
             </table>
           </div>
+          {avisoPers && <p className="calc-aviso">{avisoPers}</p>}
           {alertas.length > 0 && (
             <ul className="calc-alertas">{alertas.map((a) => <li key={a}>{a}</li>)}</ul>
           )}
@@ -132,4 +134,11 @@ export function alertasRenda(f: FundoSnapshot): string[] {
   if ((f.quedas_dividendo_12m ?? 0) > 0) alertas.push(`O fundo teve ${f.quedas_dividendo_12m} queda${f.quedas_dividendo_12m === 1 ? "" : "s"} de rendimento nos últimos 12 meses.`);
   if (f.pagamentos_12m < 11) alertas.push(`Só ${f.pagamentos_12m} pagamentos nos últimos 12 meses: o "último dividendo repetido todo mês" tende a superestimar.`);
   return alertas;
+}
+
+/** Aviso quando o rendimento digitado é alto demais para o preço (provável erro de digitação). */
+export function avisoRendimento(rendimento: number, preco: number): string | null {
+  if (!(rendimento > 0) || !(preco > 0) || rendimento <= preco * RENDIMENTO_MENSAL_MAXIMO) return null;
+  const pctMes = (rendimento / preco) * 100;
+  return `O rendimento digitado é ${pctMes.toLocaleString("pt-BR", { maximumFractionDigits: 0 })}% do preço por mês — FII costuma render perto de 1%. Confira o valor (ex.: 1,15 e não 115). Esse cenário foi ignorado.`;
 }

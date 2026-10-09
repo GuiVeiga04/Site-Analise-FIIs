@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { FundoSnapshot } from "../api/types";
 import { calcularMeta, lerNumero, mediaMensal12m, type MetaRenda } from "../lib/calculadora";
 import { brl, brlDiv, data, inteiro, taxa } from "../lib/format";
-import { alertasRenda, fmtEntrada } from "./CalcRenda";
+import { alertasRenda, avisoRendimento, fmtEntrada } from "./CalcRenda";
 
 /**
  * Bloco 2 — Meta de renda: quanto preciso ter para receber R$ X por mês.
@@ -34,7 +34,8 @@ export function CalcMeta({ f }: { f: FundoSnapshot }) {
       r: calcularMeta(meta, mediaMensal12m(f.dividendos_12m), preco),
     },
   ];
-  if (personalizado > 0) {
+  const avisoPers = avisoRendimento(personalizado, preco);
+  if (personalizado > 0 && !avisoPers) {
     cenarios.push({ nome: "Valor que você digitou", detalhe: "por cota, todo mês", porCota: personalizado, r: calcularMeta(meta, personalizado, preco) });
   }
   const destaque = cenarios[1].r;
@@ -95,6 +96,7 @@ export function CalcMeta({ f }: { f: FundoSnapshot }) {
               </tbody>
             </table>
           </div>
+          {avisoPers && <p className="calc-aviso">{avisoPers}</p>}
           {alertas.length > 0 && <ul className="calc-alertas">{alertas.map((a) => <li key={a}>{a}</li>)}</ul>}
           <details className="calc-formulas">
             <summary>Como a conta é feita</summary>

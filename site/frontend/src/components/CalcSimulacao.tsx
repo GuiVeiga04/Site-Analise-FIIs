@@ -3,9 +3,9 @@ import {
   CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import type { FundoSnapshot } from "../api/types";
-import { lerNumero, mediaMensal12m, simular, type ResultadoSimulacao } from "../lib/calculadora";
+import { TAXA_ANUAL_MAX, TAXA_ANUAL_MIN, lerNumero, limitarTaxa, mediaMensal12m, simular, type ResultadoSimulacao } from "../lib/calculadora";
 import { brl, brlDiv, inteiro } from "../lib/format";
-import { alertasRenda, fmtEntrada } from "./CalcRenda";
+import { alertasRenda, avisoRendimento, fmtEntrada } from "./CalcRenda";
 
 type Cenario = "media" | "ultimo" | "personalizado";
 const eixo = { fontSize: 11, fill: "var(--muted)" };
@@ -110,12 +110,18 @@ export function CalcSimulacao({ f }: { f: FundoSnapshot }) {
             <label>Valorização da cota (% ao ano)<input inputMode="decimal" value={valorizTxt} onChange={(e) => setValorizTxt(e.target.value)} /></label>
             <label>Inflação (% ao ano)<input inputMode="decimal" value={inflTxt} onChange={(e) => setInflTxt(e.target.value)} />
               <span className="calc-dica">Só para mostrar o patrimônio final em reais de hoje.</span></label>
+            <span className="calc-dica">As taxas anuais ficam limitadas entre {TAXA_ANUAL_MIN}% e +{TAXA_ANUAL_MAX}% ao ano.</span>
           </details>
         </div>
 
         <div>
           {!com || !sem || prazoInvalido ? (
-            <p className="calc-aviso">Informe preço, rendimento e um prazo maior que zero.</p>
+            <p className="calc-aviso">
+              {avisoRendimento(parametros.rendimentoMensalPorCota, parametros.preco)
+                ?? (prazoInvalido || !(parametros.preco > 0) || !(parametros.rendimentoMensalPorCota >= 0)
+                  ? "Informe preço, rendimento e um prazo maior que zero."
+                  : "Essa combinação de premissas leva a valores fora de escala. Revise as premissas avançadas.")}
+            </p>
           ) : (
             <>
               <p className="calc-frase">
@@ -138,7 +144,7 @@ export function CalcSimulacao({ f }: { f: FundoSnapshot }) {
                     <tr><td>Patrimônio final<span className="sub-name">cotas × preço + troco</span></td>
                       <td className="r num"><b>{brl(com.final.patrimonio)}</b></td><td className="r num"><b>{brl(sem.final.patrimonio)}</b></td></tr>
                     {parametros.inflacaoAnual !== 0 && (
-                      <tr><td>Patrimônio em reais de hoje<span className="sub-name">descontada a inflação de {parametros.inflacaoAnual.toLocaleString("pt-BR")}% a.a.</span></td>
+                      <tr><td>Patrimônio em reais de hoje<span className="sub-name">descontada a inflação de {limitarTaxa(parametros.inflacaoAnual).toLocaleString("pt-BR")}% a.a.</span></td>
                         <td className="r num">{brl(com.final.patrimonioReal)}</td><td className="r num">{brl(sem.final.patrimonioReal)}</td></tr>
                     )}
                     <tr><td>Renda no último mês</td><td className="r num"><b>{brl(com.final.rendaMes)}</b></td><td className="r num"><b>{brl(sem.final.rendaMes)}</b></td></tr>
@@ -190,7 +196,7 @@ export function CalcSimulacao({ f }: { f: FundoSnapshot }) {
 
               <p className={ajustes ? "calc-dica" : "calc-aviso"}>
                 {ajustes
-                  ? `Premissas: rendimento crescendo ${parametros.crescimentoRendimentoAnual.toLocaleString("pt-BR")}% e cota valorizando ${parametros.valorizacaoPrecoAnual.toLocaleString("pt-BR")}% ao ano.`
+                  ? `Premissas: rendimento crescendo ${limitarTaxa(parametros.crescimentoRendimentoAnual).toLocaleString("pt-BR")}% e cota valorizando ${limitarTaxa(parametros.valorizacaoPrecoAnual).toLocaleString("pt-BR")}% ao ano.`
                   : "Preço e rendimento fixos em valores de hoje durante todo o prazo (por isso a linha \"sem reinvestir\" coincide com o total aportado). Na prática os dois oscilam: use as premissas avançadas para testar cenários."}
               </p>
             </>
