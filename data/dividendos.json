@@ -6217,326 +6217,6 @@
       "DY_Pagamento_pct": 0.56
     }
   ],
-  "RBRR11": [
-    {
-      "Data_Ex": "2022-04-12",
-      "Valor_R$": 1.195247,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2022-05-11",
-      "Valor_R$": 1.195247,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2022-06-10",
-      "Valor_R$": 1.2,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2022-07-12",
-      "Valor_R$": 1.266,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2022-08-08",
-      "Valor_R$": 1.1,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2022-10-13",
-      "Valor_R$": 0.7,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2022-11-11",
-      "Valor_R$": 0.7,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2022-12-12",
-      "Valor_R$": 0.7,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-01-11",
-      "Valor_R$": 0.904016,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-02-08",
-      "Valor_R$": 0.95,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-03-10",
-      "Valor_R$": 0.95,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-04-13",
-      "Valor_R$": 1.0,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-05-11",
-      "Valor_R$": 1.0,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-06-13",
-      "Valor_R$": 1.0,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-07-12",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-08-10",
-      "Valor_R$": 0.7,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-09-13",
-      "Valor_R$": 0.65,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-10-11",
-      "Valor_R$": 0.65,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-11-13",
-      "Valor_R$": 0.65,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2023-12-12",
-      "Valor_R$": 0.65,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-01-11",
-      "Valor_R$": 0.68,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-02-08",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-03-12",
-      "Valor_R$": 0.84,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-04-10",
-      "Valor_R$": 0.85,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-05-13",
-      "Valor_R$": 0.85,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-06-12",
-      "Valor_R$": 0.85,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-07-10",
-      "Valor_R$": 0.961,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-08-12",
-      "Valor_R$": 0.85,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-09-11",
-      "Valor_R$": 0.85,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-10-10",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-11-12",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2024-12-11",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-01-13",
-      "Valor_R$": 0.82,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-02-10",
-      "Valor_R$": 0.9,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-03-14",
-      "Valor_R$": 0.95,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-04-10",
-      "Valor_R$": 0.95,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-05-13",
-      "Valor_R$": 1.0,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-06-11",
-      "Valor_R$": 0.9,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-07-10",
-      "Valor_R$": 1.0,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-08-12",
-      "Valor_R$": 0.95,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-09-10",
-      "Valor_R$": 0.85,
-      "Preco_Data_Com": null,
-      "DY_Pagamento_pct": null
-    },
-    {
-      "Data_Ex": "2025-10-10",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": 86.75,
-      "DY_Pagamento_pct": 0.922
-    },
-    {
-      "Data_Ex": "2025-11-12",
-      "Valor_R$": 0.7,
-      "Preco_Data_Com": 84.74,
-      "DY_Pagamento_pct": 0.826
-    },
-    {
-      "Data_Ex": "2025-12-10",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": 84.02,
-      "DY_Pagamento_pct": 0.952
-    },
-    {
-      "Data_Ex": "2026-01-13",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": 87.4,
-      "DY_Pagamento_pct": 0.915
-    },
-    {
-      "Data_Ex": "2026-02-11",
-      "Valor_R$": 0.8,
-      "Preco_Data_Com": 85.29,
-      "DY_Pagamento_pct": 0.938
-    },
-    {
-      "Data_Ex": "2026-03-11",
-      "Valor_R$": 0.7,
-      "Preco_Data_Com": 86.0,
-      "DY_Pagamento_pct": 0.814
-    },
-    {
-      "Data_Ex": "2026-04-13",
-      "Valor_R$": 0.7,
-      "Preco_Data_Com": 84.97,
-      "DY_Pagamento_pct": 0.824
-    },
-    {
-      "Data_Ex": "2026-05-13",
-      "Valor_R$": 0.9,
-      "Preco_Data_Com": 83.98,
-      "DY_Pagamento_pct": 1.072
-    },
-    {
-      "Data_Ex": "2026-06-11",
-      "Valor_R$": 0.95,
-      "Preco_Data_Com": 82.14,
-      "DY_Pagamento_pct": 1.157
-    },
-    {
-      "Data_Ex": "2026-07-10",
-      "Valor_R$": 0.98,
-      "Preco_Data_Com": 78.25,
-      "DY_Pagamento_pct": 1.252
-    },
-    {
-      "Data_Ex": "2026-08-12",
-      "Valor_R$": 0.9,
-      "Preco_Data_Com": 75.44,
-      "DY_Pagamento_pct": 1.193
-    },
-    {
-      "Data_Ex": "2026-09-11",
-      "Valor_R$": 0.9,
-      "Preco_Data_Com": 70.59,
-      "DY_Pagamento_pct": 1.275
-    }
-  ],
   "HSML11": [
     {
       "Data_Ex": "2022-04-01",
@@ -6867,6 +6547,326 @@
       "Valor_R$": 0.75,
       "Preco_Data_Com": 83.58,
       "DY_Pagamento_pct": 0.897
+    }
+  ],
+  "RBRR11": [
+    {
+      "Data_Ex": "2022-04-12",
+      "Valor_R$": 1.195247,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2022-05-11",
+      "Valor_R$": 1.195247,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2022-06-10",
+      "Valor_R$": 1.2,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2022-07-12",
+      "Valor_R$": 1.266,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2022-08-08",
+      "Valor_R$": 1.1,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2022-10-13",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2022-11-11",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2022-12-12",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-01-11",
+      "Valor_R$": 0.904016,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-02-08",
+      "Valor_R$": 0.95,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-03-10",
+      "Valor_R$": 0.95,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-04-13",
+      "Valor_R$": 1.0,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-05-11",
+      "Valor_R$": 1.0,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-06-13",
+      "Valor_R$": 1.0,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-07-12",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-08-10",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-09-13",
+      "Valor_R$": 0.65,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-10-11",
+      "Valor_R$": 0.65,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-11-13",
+      "Valor_R$": 0.65,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2023-12-12",
+      "Valor_R$": 0.65,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-01-11",
+      "Valor_R$": 0.68,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-02-08",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-03-12",
+      "Valor_R$": 0.84,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-04-10",
+      "Valor_R$": 0.85,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-05-13",
+      "Valor_R$": 0.85,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-06-12",
+      "Valor_R$": 0.85,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-07-10",
+      "Valor_R$": 0.961,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-08-12",
+      "Valor_R$": 0.85,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-09-11",
+      "Valor_R$": 0.85,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-10-10",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-11-12",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2024-12-11",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-01-13",
+      "Valor_R$": 0.82,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-02-10",
+      "Valor_R$": 0.9,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-03-14",
+      "Valor_R$": 0.95,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-04-10",
+      "Valor_R$": 0.95,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-05-13",
+      "Valor_R$": 1.0,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-06-11",
+      "Valor_R$": 0.9,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-07-10",
+      "Valor_R$": 1.0,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-08-12",
+      "Valor_R$": 0.95,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-09-10",
+      "Valor_R$": 0.85,
+      "Preco_Data_Com": null,
+      "DY_Pagamento_pct": null
+    },
+    {
+      "Data_Ex": "2025-10-10",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": 86.75,
+      "DY_Pagamento_pct": 0.922
+    },
+    {
+      "Data_Ex": "2025-11-12",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": 84.74,
+      "DY_Pagamento_pct": 0.826
+    },
+    {
+      "Data_Ex": "2025-12-10",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": 84.02,
+      "DY_Pagamento_pct": 0.952
+    },
+    {
+      "Data_Ex": "2026-01-13",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": 87.4,
+      "DY_Pagamento_pct": 0.915
+    },
+    {
+      "Data_Ex": "2026-02-11",
+      "Valor_R$": 0.8,
+      "Preco_Data_Com": 85.29,
+      "DY_Pagamento_pct": 0.938
+    },
+    {
+      "Data_Ex": "2026-03-11",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": 86.0,
+      "DY_Pagamento_pct": 0.814
+    },
+    {
+      "Data_Ex": "2026-04-13",
+      "Valor_R$": 0.7,
+      "Preco_Data_Com": 84.97,
+      "DY_Pagamento_pct": 0.824
+    },
+    {
+      "Data_Ex": "2026-05-13",
+      "Valor_R$": 0.9,
+      "Preco_Data_Com": 83.98,
+      "DY_Pagamento_pct": 1.072
+    },
+    {
+      "Data_Ex": "2026-06-11",
+      "Valor_R$": 0.95,
+      "Preco_Data_Com": 82.14,
+      "DY_Pagamento_pct": 1.157
+    },
+    {
+      "Data_Ex": "2026-07-10",
+      "Valor_R$": 0.98,
+      "Preco_Data_Com": 78.25,
+      "DY_Pagamento_pct": 1.252
+    },
+    {
+      "Data_Ex": "2026-08-12",
+      "Valor_R$": 0.9,
+      "Preco_Data_Com": 75.44,
+      "DY_Pagamento_pct": 1.193
+    },
+    {
+      "Data_Ex": "2026-09-11",
+      "Valor_R$": 0.9,
+      "Preco_Data_Com": 70.59,
+      "DY_Pagamento_pct": 1.275
     }
   ],
   "HGBS11": [
@@ -8171,6 +8171,12 @@
       "Valor_R$": 0.7373,
       "Preco_Data_Com": 77.43,
       "DY_Pagamento_pct": 0.952
+    },
+    {
+      "Data_Ex": "2026-10-08",
+      "Valor_R$": 0.6182,
+      "Preco_Data_Com": 77.98,
+      "DY_Pagamento_pct": 0.793
     }
   ],
   "ALZR11": [
