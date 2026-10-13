@@ -7519,6 +7519,12 @@
       "Valor_R$": 0.8,
       "Preco_Data_Com": 74.57,
       "DY_Pagamento_pct": 1.073
+    },
+    {
+      "Data_Ex": "2026-10-09",
+      "Valor_R$": 0.65,
+      "Preco_Data_Com": 78.8,
+      "DY_Pagamento_pct": 0.825
     }
   ],
   "HGCR11": [
