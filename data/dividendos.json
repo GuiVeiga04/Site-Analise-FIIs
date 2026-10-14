@@ -5689,6 +5689,12 @@
       "Valor_R$": 1.0,
       "Preco_Data_Com": 81.8,
       "DY_Pagamento_pct": 1.222
+    },
+    {
+      "Data_Ex": "2026-10-13",
+      "Valor_R$": 1.0,
+      "Preco_Data_Com": 87.65,
+      "DY_Pagamento_pct": 1.141
     }
   ],
   "MCCI11": [
@@ -6867,6 +6873,12 @@
       "Valor_R$": 0.9,
       "Preco_Data_Com": 70.59,
       "DY_Pagamento_pct": 1.275
+    },
+    {
+      "Data_Ex": "2026-10-13",
+      "Valor_R$": 0.73,
+      "Preco_Data_Com": 75.2,
+      "DY_Pagamento_pct": 0.971
     }
   ],
   "HGBS11": [
