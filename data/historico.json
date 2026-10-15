@@ -1840,6 +1840,13 @@
       "Volume_Ultimo_Dia": 387169.0,
       "Volume_Financeiro_R$": 4014942.53,
       "Variacao_Dia_%": -0.86
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 10.4,
+      "Volume_Ultimo_Dia": 305231.0,
+      "Volume_Financeiro_R$": 3174402.4,
+      "Variacao_Dia_%": 0.29
     }
   ],
   "BCIA11": [
@@ -3683,6 +3690,13 @@
       "Volume_Ultimo_Dia": 3288.0,
       "Volume_Financeiro_R$": 302791.92,
       "Variacao_Dia_%": -0.6
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 90.2,
+      "Volume_Ultimo_Dia": 5534.0,
+      "Volume_Financeiro_R$": 499166.8,
+      "Variacao_Dia_%": -2.05
     }
   ],
   "BRCO11": [
@@ -5526,6 +5540,13 @@
       "Volume_Ultimo_Dia": 93578.0,
       "Volume_Financeiro_R$": 10499451.6,
       "Variacao_Dia_%": 0.01
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 111.75,
+      "Volume_Ultimo_Dia": 83489.0,
+      "Volume_Financeiro_R$": 9329895.75,
+      "Variacao_Dia_%": -0.4
     }
   ],
   "BTLG11": [
@@ -7369,6 +7390,13 @@
       "Volume_Ultimo_Dia": 203706.0,
       "Volume_Financeiro_R$": 21260795.220000003,
       "Variacao_Dia_%": -0.69
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 104.6,
+      "Volume_Ultimo_Dia": 153898.0,
+      "Volume_Financeiro_R$": 16097730.799999999,
+      "Variacao_Dia_%": 0.22
     }
   ],
   "CPTS11": [
@@ -9212,6 +9240,13 @@
       "Volume_Ultimo_Dia": 1020251.0,
       "Volume_Financeiro_R$": 8029375.37,
       "Variacao_Dia_%": -0.76
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 7.94,
+      "Volume_Ultimo_Dia": 923344.0,
+      "Volume_Financeiro_R$": 7331351.36,
+      "Variacao_Dia_%": 0.89
     }
   ],
   "GGRC11": [
@@ -11055,6 +11090,13 @@
       "Volume_Ultimo_Dia": 1971626.0,
       "Volume_Financeiro_R$": 18336121.8,
       "Variacao_Dia_%": -1.59
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 9.25,
+      "Volume_Ultimo_Dia": 1253945.0,
+      "Volume_Financeiro_R$": 11598991.25,
+      "Variacao_Dia_%": -0.54
     }
   ],
   "HGBS11": [
@@ -12898,6 +12940,13 @@
       "Volume_Ultimo_Dia": 402887.0,
       "Volume_Financeiro_R$": 7779747.97,
       "Variacao_Dia_%": -0.52
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 19.11,
+      "Volume_Ultimo_Dia": 346282.0,
+      "Volume_Financeiro_R$": 6617449.02,
+      "Variacao_Dia_%": -1.04
     }
   ],
   "HGCR11": [
@@ -14741,6 +14790,13 @@
       "Volume_Ultimo_Dia": 54607.0,
       "Volume_Financeiro_R$": 5351486.0,
       "Variacao_Dia_%": 0.38
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 97.0,
+      "Volume_Ultimo_Dia": 38066.0,
+      "Volume_Financeiro_R$": 3692402.0,
+      "Variacao_Dia_%": -1.02
     }
   ],
   "HGLG11": [
@@ -16584,6 +16640,13 @@
       "Volume_Ultimo_Dia": 185462.0,
       "Volume_Financeiro_R$": 28995129.080000002,
       "Variacao_Dia_%": -0.79
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 156.0,
+      "Volume_Ultimo_Dia": 132082.0,
+      "Volume_Financeiro_R$": 20604792.0,
+      "Variacao_Dia_%": -0.22
     }
   ],
   "HGRE11": [
@@ -18427,6 +18490,13 @@
       "Volume_Ultimo_Dia": 26274.0,
       "Volume_Financeiro_R$": 3228811.86,
       "Variacao_Dia_%": -3.25
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 123.01,
+      "Volume_Ultimo_Dia": 33453.0,
+      "Volume_Financeiro_R$": 4115053.5300000003,
+      "Variacao_Dia_%": 0.1
     }
   ],
   "HGRU11": [
@@ -20270,6 +20340,13 @@
       "Volume_Ultimo_Dia": 77673.0,
       "Volume_Financeiro_R$": 9639219.299999999,
       "Variacao_Dia_%": -2.09
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 124.5,
+      "Volume_Ultimo_Dia": 53105.0,
+      "Volume_Financeiro_R$": 6611572.5,
+      "Variacao_Dia_%": 0.32
     }
   ],
   "HSML11": [
@@ -22113,6 +22190,13 @@
       "Volume_Ultimo_Dia": 166098.0,
       "Volume_Financeiro_R$": 15443792.040000001,
       "Variacao_Dia_%": -0.75
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 93.55,
+      "Volume_Ultimo_Dia": 47898.0,
+      "Volume_Financeiro_R$": 4480857.899999999,
+      "Variacao_Dia_%": 0.61
     }
   ],
   "KNCR11": [
@@ -23956,6 +24040,13 @@
       "Volume_Ultimo_Dia": 325136.0,
       "Volume_Financeiro_R$": 34152285.440000005,
       "Variacao_Dia_%": -0.39
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 105.4,
+      "Volume_Ultimo_Dia": 185880.0,
+      "Volume_Financeiro_R$": 19591752.0,
+      "Variacao_Dia_%": 0.34
     }
   ],
   "KNIP11": [
@@ -25799,6 +25890,13 @@
       "Volume_Ultimo_Dia": 103738.0,
       "Volume_Financeiro_R$": 9699503.0,
       "Variacao_Dia_%": -1.1
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 94.04,
+      "Volume_Ultimo_Dia": 111466.0,
+      "Volume_Financeiro_R$": 10482262.64,
+      "Variacao_Dia_%": 0.58
     }
   ],
   "KNRI11": [
@@ -27642,6 +27740,13 @@
       "Volume_Ultimo_Dia": 36664.0,
       "Volume_Financeiro_R$": 6020228.8,
       "Variacao_Dia_%": -1.07
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 164.06,
+      "Volume_Ultimo_Dia": 32624.0,
+      "Volume_Financeiro_R$": 5352293.44,
+      "Variacao_Dia_%": -0.09
     }
   ],
   "KNSC11": [
@@ -29485,6 +29590,13 @@
       "Volume_Ultimo_Dia": 672833.0,
       "Volume_Financeiro_R$": 6116051.97,
       "Variacao_Dia_%": -1.09
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 9.1,
+      "Volume_Ultimo_Dia": 415664.0,
+      "Volume_Financeiro_R$": 3782542.4,
+      "Variacao_Dia_%": 0.11
     }
   ],
   "MCCI11": [
@@ -31328,6 +31440,13 @@
       "Volume_Ultimo_Dia": 74681.0,
       "Volume_Financeiro_R$": 7129795.07,
       "Variacao_Dia_%": 0.69
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 94.61,
+      "Volume_Ultimo_Dia": 61251.0,
+      "Volume_Financeiro_R$": 5794957.11,
+      "Variacao_Dia_%": -0.9
     }
   ],
   "MXRF11": [
@@ -33171,6 +33290,13 @@
       "Volume_Ultimo_Dia": 2600640.0,
       "Volume_Financeiro_R$": 24367996.799999997,
       "Variacao_Dia_%": -0.85
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 9.36,
+      "Volume_Ultimo_Dia": 1807213.0,
+      "Volume_Financeiro_R$": 16915513.68,
+      "Variacao_Dia_%": -0.11
     }
   ],
   "PCIP11": [
@@ -35014,6 +35140,13 @@
       "Volume_Ultimo_Dia": 186476.0,
       "Volume_Financeiro_R$": 15164228.319999998,
       "Variacao_Dia_%": 1.57
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 80.58,
+      "Volume_Ultimo_Dia": 43739.0,
+      "Volume_Financeiro_R$": 3524488.62,
+      "Variacao_Dia_%": -0.91
     }
   ],
   "PVBI11": [
@@ -36857,6 +36990,13 @@
       "Volume_Ultimo_Dia": 84922.0,
       "Volume_Financeiro_R$": 6109288.68,
       "Variacao_Dia_%": -0.81
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 72.36,
+      "Volume_Ultimo_Dia": 59703.0,
+      "Volume_Financeiro_R$": 4320109.08,
+      "Variacao_Dia_%": 0.58
     }
   ],
   "RBRR11": [
@@ -38700,6 +38840,13 @@
       "Volume_Ultimo_Dia": 67638.0,
       "Volume_Financeiro_R$": 5001153.72,
       "Variacao_Dia_%": -1.68
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 73.9,
+      "Volume_Ultimo_Dia": 51172.0,
+      "Volume_Financeiro_R$": 3781610.8000000003,
+      "Variacao_Dia_%": -0.05
     }
   ],
   "RBRY11": [
@@ -40543,6 +40690,13 @@
       "Volume_Ultimo_Dia": 55000.0,
       "Volume_Financeiro_R$": 4752550.0,
       "Variacao_Dia_%": -1.41
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 87.42,
+      "Volume_Ultimo_Dia": 49870.0,
+      "Volume_Financeiro_R$": 4359635.4,
+      "Variacao_Dia_%": 1.17
     }
   ],
   "RECR11": [
@@ -42358,6 +42512,13 @@
       "Volume_Ultimo_Dia": 51818.0,
       "Volume_Financeiro_R$": 3958895.2,
       "Variacao_Dia_%": -1.1
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 76.0,
+      "Volume_Ultimo_Dia": 44787.0,
+      "Volume_Financeiro_R$": 3403812.0,
+      "Variacao_Dia_%": -0.52
     }
   ],
   "TGAR11": [
@@ -44201,6 +44362,13 @@
       "Volume_Ultimo_Dia": 113460.0,
       "Volume_Financeiro_R$": 5673000.0,
       "Variacao_Dia_%": -5.43
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 49.2,
+      "Volume_Ultimo_Dia": 86283.0,
+      "Volume_Financeiro_R$": 4245123.600000001,
+      "Variacao_Dia_%": -1.6
     }
   ],
   "TRXF11": [
@@ -46043,6 +46211,13 @@
       "Preco_Fechamento_R$": 71.9,
       "Volume_Ultimo_Dia": 403516.0,
       "Volume_Financeiro_R$": 29012800.400000002,
+      "Variacao_Dia_%": 0.0
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 71.9,
+      "Volume_Ultimo_Dia": 281970.0,
+      "Volume_Financeiro_R$": 20273643.0,
       "Variacao_Dia_%": 0.0
     }
   ],
@@ -47887,6 +48062,13 @@
       "Volume_Ultimo_Dia": 134993.0,
       "Volume_Financeiro_R$": 15287957.25,
       "Variacao_Dia_%": -0.66
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 113.5,
+      "Volume_Ultimo_Dia": 94631.0,
+      "Volume_Financeiro_R$": 10740618.5,
+      "Variacao_Dia_%": 0.22
     }
   ],
   "VRTA11": [
@@ -49730,6 +49912,13 @@
       "Volume_Ultimo_Dia": 22995.0,
       "Volume_Financeiro_R$": 1760267.25,
       "Variacao_Dia_%": -0.58
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 76.2,
+      "Volume_Ultimo_Dia": 17087.0,
+      "Volume_Financeiro_R$": 1302029.4000000001,
+      "Variacao_Dia_%": -0.46
     }
   ],
   "XPLG11": [
@@ -51573,6 +51762,13 @@
       "Volume_Ultimo_Dia": 87661.0,
       "Volume_Financeiro_R$": 8884442.35,
       "Variacao_Dia_%": -0.88
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 101.2,
+      "Volume_Ultimo_Dia": 64623.0,
+      "Volume_Financeiro_R$": 6539847.600000001,
+      "Variacao_Dia_%": -0.15
     }
   ],
   "XPML11": [
@@ -53395,6 +53591,13 @@
       "Volume_Ultimo_Dia": 290884.0,
       "Volume_Financeiro_R$": 31057684.68,
       "Variacao_Dia_%": -1.2
+    },
+    {
+      "Data_Pregao": "2026-10-14",
+      "Preco_Fechamento_R$": 106.3,
+      "Volume_Ultimo_Dia": 186061.0,
+      "Volume_Financeiro_R$": 19778284.3,
+      "Variacao_Dia_%": -0.44
     }
   ]
 }
