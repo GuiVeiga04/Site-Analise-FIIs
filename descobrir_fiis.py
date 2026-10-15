@@ -16,12 +16,15 @@ Uso:
     python descobrir_fiis.py                          # só o relatório
     python descobrir_fiis.py --aplicar                # inclui os disponíveis no fiis_config.json
     python descobrir_fiis.py --aplicar --liquidez-minima 50000   # só quem negocia >= R$ 50 mil/dia
+    python descobrir_fiis.py --reclassificar          # refaz tipo/segmento dos fundos "auto" (sem Yahoo)
 
 Saída: descoberta_fiis.csv (um fundo por linha, com o status de cada um).
 
-Fundos incluídos automaticamente ganham "origem": "auto" no config. Tipo de
-gestão e segmento vêm do segmento do Fundamentus (regras em
-fiis_common.classificar_segmento) e o nome vem do registro na CVM. Vale
+Fundos incluídos automaticamente ganham "origem": "auto" no config. O nome vem
+do registro na CVM. O tipo de gestão vem da COMPOSIÇÃO da carteira no informe
+mensal da CVM (>= 60% em CRI/LCI = Papel, em cotas de FII = FoF, em imóveis =
+Tijolo, senão Híbrido); o segmento vem do Fundamentus ou, quando ele é genérico
+("Multicategoria", "Outros"), do nome do fundo (fiis_common.classificar_fundo). Vale
 revisar no config os fundos que você mais acompanha; os que já estavam lá não
 são alterados.
 """
@@ -41,7 +44,7 @@ from fiis_common import (
     ARQUIVO_CONFIG,
     PASTA_BASE,
     carregar_config,
-    classificar_segmento,
+    classificar_fundo,
     configurar_logging,
 )
 
@@ -104,6 +107,78 @@ def ler_cadastro_cvm(geral: pd.DataFrame, compl: pd.DataFrame) -> pd.DataFrame:
         if col not in ultimo:
             ultimo[col] = pd.NA
     return ultimo[colunas].reset_index(drop=True)
+
+
+# Colunas do arquivo inf_mensal_fii_ativo_passivo (nomes normalizados: sem "_", minúsculas)
+_COLS_PAPEL = {"cri", "lci", "lh", "lig", "letrashipotecarias", "letrascreditoimobiliario",
+               "letrasimobiliariasgarantidas", "certificadosrecebiveisimobiliarios"}
+_COLS_FII = {"fii", "cotasfii", "cotasdefii", "cotasfundosinvestimentoimobiliario"}
+_COLS_IMOVEIS = {"terrenos", "imoveisrendaacabados", "imoveisrendaconstrucao", "imoveisvendaacabados",
+                 "imoveisvendaconstrucao", "outrosdireitosreais"}
+_COLS_IMOVEIS_TOTAL = {"direitosbensimoveis"}
+_COLS_SPE = {"acoessociedadesatividadesfii", "cotassociedadesatividadesfii"}  # SPEs donas de imóveis
+
+
+def _norm_col(c: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", str(c).lower())
+
+
+def ler_composicao_cvm(conteudo_zip: bytes) -> pd.DataFrame:
+    """Composição da carteira no informe mais recente de cada fundo:
+    CNPJ, Pct_Papel, Pct_FII, Pct_Imoveis (frações de papel + FII + imóveis;
+    caixa e renda fixa ficam de fora). DataFrame vazio se o arquivo não vier."""
+    import zipfile
+
+    vazio = pd.DataFrame(columns=["CNPJ", "Pct_Papel", "Pct_FII", "Pct_Imoveis"])
+    z = zipfile.ZipFile(io.BytesIO(conteudo_zip))
+    nome = next((n for n in z.namelist() if "_ativo_passivo_" in n), None)
+    if nome is None:
+        log.warning("CVM: arquivo de ativo/passivo não está no zip; classificando só por segmento e nome")
+        return vazio
+    with z.open(nome) as f:
+        bruto = pd.read_csv(f, sep=";", encoding="latin-1", dtype=str)
+    cols = {_norm_col(c): c for c in bruto.columns}
+    cnpj = next((cols[k] for k in ("cnpjfundoclasse", "cnpjfundo") if k in cols), None)
+    achadas = {g: [cols[k] for k in nomes if k in cols]
+               for g, nomes in (("papel", _COLS_PAPEL), ("fii", _COLS_FII), ("imoveis", _COLS_IMOVEIS),
+                                ("total", _COLS_IMOVEIS_TOTAL), ("spe", _COLS_SPE))}
+    if cnpj is None or not achadas["papel"] or not achadas["fii"] or not (achadas["imoveis"] or achadas["total"]):
+        log.warning("CVM ativo/passivo: colunas esperadas não encontradas (achei %s); classificando só por "
+                    "segmento e nome. Colunas do arquivo: %s", achadas, list(bruto.columns))
+        return vazio
+
+    def soma(lista):
+        total = pd.Series(0.0, index=bruto.index)
+        for c in lista:
+            total = total + cf._numero(bruto[c]).fillna(0)
+        return total
+
+    df = pd.DataFrame({"CNPJ": bruto[cnpj]})
+    df["Data_Referencia"] = pd.to_datetime(bruto[cols["datareferencia"]], errors="coerce") if "datareferencia" in cols else pd.NaT
+    df["Versao"] = cf._numero(bruto[cols["versao"]]) if "versao" in cols else 0
+    df["papel"] = soma(achadas["papel"])
+    df["fii"] = soma(achadas["fii"])
+    df["imoveis"] = pd.concat([soma(achadas["imoveis"]), soma(achadas["total"])], axis=1).max(axis=1) + soma(achadas["spe"])
+    df = df.sort_values(["Data_Referencia", "Versao"]).drop_duplicates("CNPJ", keep="last")
+    partes = df[["papel", "fii", "imoveis"]].clip(lower=0)
+    base = partes.sum(axis=1)
+    ok = base > 0
+    saida = pd.DataFrame({
+        "CNPJ": df.loc[ok, "CNPJ"],
+        "Pct_Papel": (partes.loc[ok, "papel"] / base[ok]).round(3),
+        "Pct_FII": (partes.loc[ok, "fii"] / base[ok]).round(3),
+        "Pct_Imoveis": (partes.loc[ok, "imoveis"] / base[ok]).round(3),
+    })
+    log.info("CVM: composição da carteira de %d fundos (colunas usadas: %s)", len(saida),
+             {k: v for k, v in achadas.items() if v})
+    return saida.reset_index(drop=True)
+
+
+def _composicao(linha) -> dict | None:
+    v = {k: linha.get(c) for k, c in (("papel", "Pct_Papel"), ("fii", "Pct_FII"), ("imoveis", "Pct_Imoveis"))}
+    if all(x is None or pd.isna(x) for x in v.values()):
+        return None
+    return {k: (0.0 if x is None or pd.isna(x) else float(x)) for k, x in v.items()}
 
 
 _LIXO_NOME = [
@@ -218,7 +293,13 @@ def montar_relatorio(fund: pd.DataFrame, cvm: pd.DataFrame, yahoo: pd.DataFrame,
     df.loc[df["Nome"] == "", "Nome"] = df["Ticker"]
     seg_origem = df["Segmento_Fundamentus"].fillna("").astype(str)
     seg_origem = seg_origem.where(seg_origem.str.strip() != "", df["Segmento_CVM"].fillna("").astype(str))
-    classif = [classificar_segmento(s, n) for s, n in zip(seg_origem, df["Nome_CVM"].fillna(""))]
+    for c in ("Pct_Papel", "Pct_FII", "Pct_Imoveis"):
+        if c not in df:
+            df[c] = pd.NA
+    nomes = df["Nome_CVM"].fillna("").astype(str)
+    nomes = nomes.where(nomes.str.strip() != "", df["Nome"])
+    classif = [classificar_fundo(s, n, _composicao(linha))
+               for s, n, (_, linha) in zip(seg_origem, nomes, df.iterrows())]
     df["Segmento_Padrao"] = [c[0] for c in classif]
     df["Tipo_Gestao"] = [c[1] for c in classif]
 
@@ -241,7 +322,7 @@ def montar_relatorio(fund: pd.DataFrame, cvm: pd.DataFrame, yahoo: pd.DataFrame,
     df["Status"] = [status(i) for i in range(len(df))]
     colunas = ["Ticker", "Status", "Nome", "Tipo_Gestao", "Segmento_Padrao", "Segmento_Fundamentus",
                "Volume_Fin_Medio_Yahoo", "Dias_Com_Negocio", "Liquidez_Fundamentus", "Yahoo_Ultimo_Pregao",
-               "Yahoo_Preco", "CNPJ", "Nome_CVM", "Cotistas"]
+               "Yahoo_Preco", "CNPJ", "Nome_CVM", "Cotistas", "Pct_Papel", "Pct_FII", "Pct_Imoveis"]
     return df[colunas].sort_values(["Status", "Volume_Fin_Medio_Yahoo"], ascending=[True, False]).reset_index(drop=True)
 
 
@@ -297,6 +378,50 @@ def aplicar(relatorio: pd.DataFrame, caminho=ARQUIVO_CONFIG) -> list[str]:
     return [f["ticker"] for f in novos]
 
 
+def reclassificar(relatorio: pd.DataFrame, caminho=ARQUIVO_CONFIG) -> dict[str, tuple[str, str]]:
+    """Refaz tipo de gestão e segmento dos fundos "origem": "auto" do config com
+    a classificação do relatório (completa CNPJ e nome quando faltavam). Os
+    escolhidos à mão não mudam. Devolve {ticker: (tipo antigo, tipo novo)} dos que mudaram de tipo."""
+    config = json.loads(caminho.read_text(encoding="utf-8"))
+    rel = relatorio.set_index("Ticker")
+    mudou = {}
+    for f in config["fundos"]:
+        if f.get("origem") != "auto" or f["ticker"] not in rel.index:
+            continue
+        r = rel.loc[f["ticker"]]
+        if f.get("tipo_gestao") != r["Tipo_Gestao"]:
+            mudou[f["ticker"]] = (f.get("tipo_gestao"), r["Tipo_Gestao"])
+        f["tipo_gestao"] = r["Tipo_Gestao"]
+        f["segmento"] = f["segmento_padrao"] = r["Segmento_Padrao"]
+        if not f.get("cnpj") and _texto(r["CNPJ"]):
+            f["cnpj"] = _texto(r["CNPJ"])
+        if f.get("nome") in ("", f["ticker"]) and _texto(r["Nome"]) not in ("", f["ticker"]):
+            f["nome"] = _texto(r["Nome"])
+    # "origem" continua sendo a última chave da linha
+    config["fundos"] = [{**{k: v for k, v in f.items() if k != "origem"},
+                         **({"origem": f["origem"]} if "origem" in f else {})} for f in config["fundos"]]
+    config["_comentario_auto"] = (
+        'Fundos com "origem": "auto" foram incluídos pelo descobrir_fiis.py: nome da CVM; tipo pela composição '
+        "da carteira no informe da CVM; segmento pelo Fundamentus ou pelo nome. Pode corrigir à mão; apague o "
+        "campo origem se revisar (aí o --reclassificar não mexe mais nele).")
+    gravar_config(config, caminho)
+    return mudou
+
+
+def conferir_com_manuais(relatorio: pd.DataFrame, fundos: list[dict]) -> None:
+    """Mede a classificação automática contra os fundos classificados à mão."""
+    rel = relatorio.set_index("Ticker")
+    manuais = [f for f in fundos if f.get("origem") != "auto" and f["ticker"] in rel.index]
+    if not manuais:
+        return
+    diferentes = [f"{f['ticker']} (à mão {f['tipo_gestao']}, automático {rel.loc[f['ticker'], 'Tipo_Gestao']})"
+                  for f in manuais if rel.loc[f["ticker"], "Tipo_Gestao"] != f["tipo_gestao"]]
+    log.info("Conferência com os fundos classificados à mão: %d de %d com o mesmo tipo de gestão.",
+             len(manuais) - len(diferentes), len(manuais))
+    if diferentes:
+        log.info("  Diferentes: %s", "; ".join(diferentes))
+
+
 def _faixa_liquidez(v) -> str:
     v = 0 if pd.isna(v) else float(v)
     if v >= 1_000_000:
@@ -322,6 +447,8 @@ def resumir(relatorio: pd.DataFrame) -> None:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Descobre FIIs disponíveis nas fontes do projeto")
     p.add_argument("--aplicar", action="store_true", help="inclui os disponíveis no fiis_config.json")
+    p.add_argument("--reclassificar", action="store_true",
+                   help="refaz tipo e segmento dos fundos com origem auto (não consulta o Yahoo)")
     p.add_argument("--liquidez-minima", type=float, default=0,
                    help="volume financeiro médio mínimo no último mês, em R$/dia (padrão 0 = todos com negócio)")
     a = p.parse_args(argv)
@@ -334,30 +461,54 @@ def main(argv: list[str] | None = None) -> int:
         log.warning("Fundamentus indisponível (%s); seguindo só com a CVM", e)
         fund = pd.DataFrame(columns=["Ticker", "Segmento_Fundamentus", "Liquidez_Fundamentus"])
 
-    gerais, compls = [], []
+    gerais, compls, composicao = [], [], None
     ano = date.today().year
     for a_ in (ano, ano - 1):
         try:
-            g, c = cf.ler_zip_cvm(cf.baixar(cf.URL_CVM.format(ano=a_)))
+            conteudo = cf.baixar(cf.URL_CVM.format(ano=a_))
+            g, c = cf.ler_zip_cvm(conteudo)
             gerais.append(g)
             compls.append(c)
             log.info("CVM %d: %d informes", a_, len(g))
+            try:
+                composicao = ler_composicao_cvm(conteudo)
+            except Exception as e:  # composição é um extra: sem ela, classifica por segmento e nome
+                log.warning("CVM: não deu para ler a composição da carteira (%s)", e)
             break  # o ano corrente basta para o cadastro; o anterior só se ele faltar
         except Exception as e:
             log.warning("CVM %d indisponível: %s", a_, e)
     cvm = ler_cadastro_cvm(pd.concat(gerais), pd.concat(compls)) if gerais else \
         pd.DataFrame(columns=["Raiz", "CNPJ", "Nome_CVM", "Segmento_CVM", "Cotistas"])
+    if composicao is not None and len(composicao) and len(cvm):
+        cvm = cvm.merge(composicao, on="CNPJ", how="left")
     log.info("CVM: %d fundos com ISIN de cota", len(cvm))
 
     if fund.empty and cvm.empty:
         log.error("Nenhuma das listas (Fundamentus, CVM) foi baixada; nada a fazer.")
         return 1
 
-    monitorados = {f["ticker"] for f in carregar_config()}
+    fundos = carregar_config()
+    monitorados = {f["ticker"] for f in fundos}
+    if a.reclassificar:
+        vazio = pd.DataFrame(columns=["Ticker", "Yahoo_Ultimo_Pregao", "Yahoo_Preco", "Dias_Com_Negocio",
+                                      "Volume_Fin_Medio_Yahoo"])
+        rel = montar_relatorio(fund, cvm, vazio, monitorados)
+        conferir_com_manuais(rel, fundos)
+        mudou = reclassificar(rel)
+        log.info("Reclassificação: %d fundo(s) mudaram de tipo de gestão.", len(mudou))
+        auto = [f for f in carregar_config() if f.get("origem") == "auto"]
+        log.info("Fundos auto por tipo: %s", pd.Series([f["tipo_gestao"] for f in auto]).value_counts().to_dict())
+        log.info("Fundos auto por segmento: %s",
+                 pd.Series([f["segmento_padrao"] for f in auto]).value_counts().to_dict())
+        log.info("Agora rode de novo o gerar_dados_site.py (e o ingest do site) para os pares e filtros "
+                 "usarem a nova classificação.")
+        return 0
+
     lista = candidatos(fund, cvm, monitorados)
     log.info("%d tickers candidatos; conferindo cotação no Yahoo...", len(lista))
     yahoo = checar_yahoo(lista)
     rel = montar_relatorio(fund, cvm, yahoo, monitorados, a.liquidez_minima)
+    conferir_com_manuais(rel, fundos)
     rel.to_csv(ARQUIVO_RELATORIO, sep=";", index=False, encoding="utf-8-sig")
     log.info("Relatório gravado em '%s'.", ARQUIVO_RELATORIO.name)
     resumir(rel)

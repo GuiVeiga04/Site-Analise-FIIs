@@ -80,7 +80,12 @@ def carregar_config() -> list[dict]:
     """
     with open(ARQUIVO_CONFIG, encoding="utf-8") as f:
         config = json.load(f)
-    return config["fundos"]
+    fundos = config["fundos"]
+    for f in fundos:
+        # Fundos incluídos pelo descobrir_fiis.py podem vir sem gestora
+        f.setdefault("gestora", "")
+        f.setdefault("segmento_padrao", padronizar_segmento(f.get("segmento"), f.get("tipo_gestao"), f.get("nome")))
+    return fundos
 
 
 def montar_dicionario_tickers(fundos: list[dict]) -> dict[str, str]:
@@ -89,15 +94,150 @@ def montar_dicionario_tickers(fundos: list[dict]) -> dict[str, str]:
 
 
 def montar_dicionario_classificacao(fundos: list[dict]) -> dict[str, dict]:
-    """Ticker -> {gestora, tipo_gestao, segmento}."""
+    """Ticker -> {gestora, tipo_gestao, segmento, segmento_padrao}."""
     return {
         f["ticker"]: {
-            "gestora": f["gestora"],
+            "gestora": f.get("gestora", ""),
             "tipo_gestao": f["tipo_gestao"],
             "segmento": f["segmento"],
+            "segmento_padrao": f.get("segmento_padrao")
+            or padronizar_segmento(f.get("segmento"), f.get("tipo_gestao"), f.get("nome")),
         }
         for f in fundos
     }
+
+
+# ---------------------------------------------------------------------------
+# Segmento padronizado
+# ---------------------------------------------------------------------------
+#
+# O "segmento" do config é texto livre (ex: "CRI High Grade", "Logística /
+# Galpões Industriais"). Para comparar um fundo com os pares e para o filtro
+# do site, todo fundo também ganha um segmento PADRONIZADO, de uma lista
+# curta. Ele sai do segmento do config (fundos escolhidos à mão) ou do
+# segmento do Fundamentus (fundos incluídos pelo descobrir_fiis.py).
+
+SEG_PAPEL = "Recebíveis (CRI)"
+SEG_FOF = "Fundo de Fundos"
+SEG_HIBRIDO = "Híbrido"
+SEG_OUTROS = "Outros"
+
+# (pedaços de texto procurados, segmento padronizado, tipo de gestão). A ordem importa.
+REGRAS_SEGMENTO = [
+    (("FUNDO DE FUNDOS", "FOF"), SEG_FOF, "FoF"),
+    (("TITULOS", "VAL MOB", "VALORES MOBILIARIOS", "CRI", "RECEBIVEIS", "CREDITO"), SEG_PAPEL, "Papel"),
+    (("HIBRIDO", "MULTICATEGORIA", "MULTIESTRATEGIA"), SEG_HIBRIDO, "Híbrido"),
+    (("RENDA URBANA", "VAREJO"), "Renda urbana / varejo", "Tijolo"),
+    (("LOGISTIC", "GALPO", "INDUSTRIA"), "Logística", "Tijolo"),
+    (("SHOPPING",), "Shoppings", "Tijolo"),
+    (("LAJE", "ESCRITORIO", "CORPORATIV"), "Lajes corporativas", "Tijolo"),
+    (("HOSPITAL", "SAUDE"), "Hospitais", "Tijolo"),
+    (("HOTE",), "Hotéis", "Tijolo"),
+    (("RESIDENC",), "Residencial", "Tijolo"),
+    (("AGENCIA", "BANCO"), "Agências bancárias", "Tijolo"),
+    (("EDUCAC",), "Educacional", "Tijolo"),
+    (("AGRO",), "Agro", "Tijolo"),
+    (("DESENVOLV", "INCORPORA", "LOTEAMENTO"), "Desenvolvimento", "Tijolo"),
+]
+
+_PADRAO_FOF_NOME = re.compile(r"\b(FOF|FOFII|FUNDO DE FUNDOS|FII DE FII|FIIS? DE FIIS)\b")
+
+
+def _sem_acento(texto) -> str:
+    import unicodedata
+    t = unicodedata.normalize("NFKD", str(texto or "")).encode("ascii", "ignore").decode().upper()
+    return re.sub(r"[^A-Z0-9 ]", " ", t)
+
+
+def classificar_segmento(segmento: str | None, nome: str | None = None) -> tuple[str, str]:
+    """Texto de segmento (do config ou do Fundamentus) -> (segmento padronizado, tipo de gestão).
+    Nome com "FOF"/"Fundo de Fundos" vira FoF mesmo que o segmento diga outra coisa."""
+    if _PADRAO_FOF_NOME.search(_sem_acento(nome)):
+        return SEG_FOF, "FoF"
+    texto = " " + _sem_acento(segmento) + " "
+    for chaves, padrao, tipo in REGRAS_SEGMENTO:
+        # "CRI"/"FOF" só como palavra inteira (senão "CRI" casaria com "esCRItório")
+        if any((f" {c} " in texto) if len(c) <= 3 else (c in texto) for c in chaves):
+            return padrao, tipo
+    return SEG_OUTROS, SEG_HIBRIDO
+
+
+# Pelo NOME do fundo. Usado quando o segmento da fonte é genérico: o
+# Fundamentus (e a CVM) põem a maioria dos fundos em "Multicategoria" ou
+# "Outros", inclusive fundos de CRI. A ordem importa: "Habitat Recebíveis"
+# é papel antes de ser residencial.
+REGRAS_NOME = [
+    (r"\bFOF\b|\bFOFII\b|FUNDO DE FUNDOS|\bFIC\b|MULTIGEST|\bFII DE FII", SEG_FOF, "FoF"),
+    (r"\bCRI\b|RECEBIVE|CREDIT|HIGH YIELD|HIGH GRADE|\bJUROS\b|\bINDICES\b|TITULOS|ATIVOS FINANCEIROS"
+     r"|SECURITIES|PAPEIS|\bIPCA\b|\bCDI\b|RENDIMENTOS IMOB|\bPAPEL\b|\bYIELD\b|INFLACAO|\bRECEB",
+     SEG_PAPEL, "Papel"),
+    (r"RENDA URBANA|VAREJO|\bURB\b|\bURBANA\b", "Renda urbana / varejo", "Tijolo"),
+    (r"LOGIST|\bLOG\b|GALP|INDUSTRIA", "Logística", "Tijolo"),
+    (r"SHOPPING|\bMALLS?\b", "Shoppings", "Tijolo"),
+    (r"CORPORATE|CORPORATIV|OFFICE|ESCRITORIO|\bLAJES?\b|\bTOP OFF\b", "Lajes corporativas", "Tijolo"),
+    (r"HOSPITA|SAUDE", "Hospitais", "Tijolo"),
+    (r"HOTE", "Hotéis", "Tijolo"),
+    (r"RESIDENC|\bRENDA RESID", "Residencial", "Tijolo"),
+    (r"\bAGRO|TERRAS?\b|TERRAX", "Agro", "Tijolo"),
+    (r"DESENVOLV|INCORPORA|LOTEAMENTO", "Desenvolvimento", "Tijolo"),
+    (r"MULTIESTRAT|MULTI ESTRAT|HEDGE|TOTAL RETURN|OPORTUNIDADE|\bMULTI\b", SEG_HIBRIDO, "Híbrido"),
+]
+
+
+def classificar_por_nome(nome: str | None) -> tuple[str, str] | None:
+    """(segmento padronizado, tipo) deduzido do nome, ou None se o nome não diz."""
+    t = " " + _sem_acento(nome) + " "
+    for padrao, seg, tipo in REGRAS_NOME:
+        if re.search(padrao, t):
+            return seg, tipo
+    return None
+
+
+# Composição da carteira (informe mensal da CVM): fração do que está investido
+COMPOSICAO_DOMINANTE = 0.6
+
+
+def classificar_fundo(segmento: str | None, nome: str | None = None,
+                      composicao: dict | None = None) -> tuple[str, str]:
+    """Classificação de um fundo incluído automaticamente.
+
+    1. Composição da carteira na CVM, quando existe: >= 60% em CRI/LCI/LH/LIG
+       é Papel; >= 60% em cotas de FII é FoF; >= 60% em imóveis é Tijolo;
+       senão Híbrido. É o critério mais confiável: não depende de rótulo.
+    2. Segmento da fonte (Fundamentus/CVM), quando é específico (Logística...).
+    3. Nome do fundo, quando o segmento é genérico ("Multicategoria", "Outros").
+    O segmento de um fundo de tijolo vem de 2 ou 3 (a CVM não diz se é galpão ou shopping).
+    """
+    seg_fonte, tipo_fonte = classificar_segmento(segmento, nome)
+    generico = seg_fonte in (SEG_OUTROS, SEG_HIBRIDO)
+    pelo_nome = classificar_por_nome(nome)
+    if generico and pelo_nome:
+        seg_fonte, tipo_fonte = pelo_nome
+
+    if composicao:
+        papel, fii, imoveis = (composicao.get(k) or 0 for k in ("papel", "fii", "imoveis"))
+        if papel >= COMPOSICAO_DOMINANTE:
+            return SEG_PAPEL, "Papel"
+        if fii >= COMPOSICAO_DOMINANTE:
+            return SEG_FOF, "FoF"
+        if imoveis >= COMPOSICAO_DOMINANTE:
+            return (seg_fonte, "Tijolo") if tipo_fonte == "Tijolo" else (SEG_OUTROS, "Tijolo")
+        if papel + fii + imoveis > 0:
+            return SEG_HIBRIDO, "Híbrido"
+    return seg_fonte, tipo_fonte
+
+
+def padronizar_segmento(segmento: str | None, tipo_gestao: str | None = None, nome: str | None = None) -> str:
+    """Segmento padronizado de um fundo do config. O tipo de gestão escolhido à
+    mão manda nos fundos de papel e FoF (o texto do segmento às vezes cita
+    outras coisas, ex: "Multiestratégia (papel + tijolo + FoF)")."""
+    if tipo_gestao == "FoF":
+        return SEG_FOF
+    if tipo_gestao == "Papel":
+        return SEG_PAPEL
+    if tipo_gestao == "Híbrido":
+        return SEG_HIBRIDO
+    return classificar_segmento(segmento, nome)[0]
 
 
 # ---------------------------------------------------------------------------

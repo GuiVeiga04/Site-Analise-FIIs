@@ -259,3 +259,83 @@ def test_ia_diaria_so_para_fundos_escolhidos_a_mao(monkeypatch):
     assert g.tickers_padrao() == ["HGLG11"]
     monkeypatch.setenv("FIIS_IA_TODOS", "1")
     assert g.tickers_padrao() == ["HGLG11", "AUTO11"]
+
+
+# ---------------------------------------------------------------- classificação pela carteira (CVM) e pelo nome
+
+ATIVO_PASSIVO = """CNPJ_Fundo_Classe;Data_Referencia;Versao;Disponibilidades;Direitos_Bens_Imoveis;Terrenos;Imoveis_Renda_Acabados;FII;CRI;LCI;LH;LIG;Acoes_Sociedades_Atividades_FII
+11.111.111/0001-11;2026-07-01;1;10;900;0;900;0;0;0;0;0;0
+11.111.111/0001-11;2026-08-01;1;10;0;0;0;0;1000;0;0;0;0
+11.111.111/0001-11;2026-08-01;2;10;800;0;800;0;100;0;0;0;0
+22.222.222/0001-22;2026-08-01;1;5;0;0;0;0;700;100;0;0;0
+33.333.333/0001-33;2026-08-01;1;0;0;0;0;900;50;0;0;0;0
+44.444.444/0001-44;2026-08-01;1;0;0;0;0;300;400;0;0;0;300
+55.555.555/0001-55;2026-08-01;1;1000;0;0;0;0;0;0;0;0;0
+"""
+
+
+def _zip_com_ativo_passivo(texto=ATIVO_PASSIVO) -> bytes:
+    import io
+    import zipfile
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("inf_mensal_fii_ativo_passivo_2026.csv", texto.encode("latin-1"))
+    return buf.getvalue()
+
+
+def test_composicao_da_carteira():
+    c = d.ler_composicao_cvm(_zip_com_ativo_passivo()).set_index("CNPJ")
+    # informe mais recente, maior versão: 800 em imóveis + 100 em CRI
+    assert c.loc["11.111.111/0001-11", "Pct_Imoveis"] == 0.889
+    assert c.loc["22.222.222/0001-22", "Pct_Papel"] == 1.0          # CRI + LCI
+    assert c.loc["33.333.333/0001-33", "Pct_FII"] == 0.947
+    assert c.loc["44.444.444/0001-44", "Pct_Imoveis"] == 0.3        # SPE conta como imóvel
+    assert "55.555.555/0001-55" not in c.index                      # só caixa: sem composição
+
+
+def test_composicao_com_layout_desconhecido_nao_quebra():
+    c = d.ler_composicao_cvm(_zip_com_ativo_passivo("CNPJ_Fundo_Classe;Data_Referencia;Outra\n1;2026-08-01;3\n"))
+    assert c.empty
+
+
+def test_classificar_fundo():
+    from fiis_common import classificar_fundo, classificar_por_nome
+
+    # carteira manda no tipo, mesmo com rótulo enganoso
+    assert classificar_fundo("Logística", "MAXI RENDA", {"papel": 0.8, "fii": 0.1, "imoveis": 0.1}) == ("Recebíveis (CRI)", "Papel")
+    assert classificar_fundo("Multicategoria", "QUALQUER", {"papel": 0.1, "fii": 0.85, "imoveis": 0.05}) == ("Fundo de Fundos", "FoF")
+    assert classificar_fundo("Multicategoria", "BTGP LOGISTICA FII", {"papel": 0, "fii": 0, "imoveis": 1}) == ("Logística", "Tijolo")
+    assert classificar_fundo("Multicategoria", "SEM PISTA", {"papel": 0, "fii": 0, "imoveis": 1}) == ("Outros", "Tijolo")
+    assert classificar_fundo("Outros", "MISTO", {"papel": 0.5, "fii": 0.1, "imoveis": 0.4}) == ("Híbrido", "Híbrido")
+    # sem carteira: segmento específico, senão o nome
+    assert classificar_fundo("Shoppings", "XP MALLS") == ("Shoppings", "Tijolo")
+    assert classificar_fundo("Multicategoria", "KINEA HIGH YIELD CRI FII") == ("Recebíveis (CRI)", "Papel")
+    assert classificar_fundo("Outros", "HABITAT RECEBÍVEIS PULVERIZADOS") == ("Recebíveis (CRI)", "Papel")
+    assert classificar_fundo("Multicategoria", "AD SHOPPING FII") == ("Shoppings", "Tijolo")
+    assert classificar_fundo("Multicategoria", "BRPR CORPORATE FII") == ("Lajes corporativas", "Tijolo")
+    assert classificar_fundo("Multicategoria", "SUNO FOF") == ("Fundo de Fundos", "FoF")
+    assert classificar_fundo("Multicategoria", "GENESIS MULTIESTRATÉGIA FII") == ("Híbrido", "Híbrido")
+    assert classificar_fundo("Outros", "NOME SEM PISTA") == ("Outros", "Híbrido")
+    assert classificar_por_nome("CAPITÂNIA OFFICE FII") == ("Lajes corporativas", "Tijolo")
+    assert classificar_por_nome("KINEA CREDITAS") == ("Recebíveis (CRI)", "Papel")
+
+
+def test_reclassificar_so_os_automaticos(tmp_path):
+    caminho = tmp_path / "fiis_config.json"
+    cfg = {"fundos": [
+        {"ticker": "HGLG11", "nome": "CSHG Logística", "gestora": "CSHG", "tipo_gestao": "Tijolo", "segmento": "Logística"},
+        {"ticker": "KNCR11", "nome": "KNCR11", "gestora": "", "tipo_gestao": "Híbrido", "segmento": "Híbrido",
+         "segmento_padrao": "Híbrido", "origem": "auto"},
+    ]}
+    caminho.write_text(json.dumps(cfg), encoding="utf-8")
+    rel = pd.DataFrame([
+        {"Ticker": "HGLG11", "Tipo_Gestao": "Papel", "Segmento_Padrao": "Recebíveis (CRI)", "CNPJ": "1", "Nome": "X"},
+        {"Ticker": "KNCR11", "Tipo_Gestao": "Papel", "Segmento_Padrao": "Recebíveis (CRI)", "CNPJ": "16.706.958/0001-32",
+         "Nome": "Kinea Rendimentos"},
+    ])
+    assert d.reclassificar(rel, caminho) == {"KNCR11": ("Híbrido", "Papel")}
+    novo = json.loads(caminho.read_text(encoding="utf-8"))
+    assert novo["fundos"][0] == cfg["fundos"][0]                     # escolhido à mão: intacto
+    k = novo["fundos"][1]
+    assert (k["tipo_gestao"], k["segmento_padrao"], k["cnpj"], k["nome"]) == ("Papel", "Recebíveis (CRI)", "16.706.958/0001-32", "Kinea Rendimentos")
+    assert list(k)[-1] == "origem"
