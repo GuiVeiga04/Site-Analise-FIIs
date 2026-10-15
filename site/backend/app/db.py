@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS fundos (
     nome         TEXT NOT NULL,
     gestora      TEXT,
     tipo_gestao  TEXT,
-    segmento     TEXT
+    segmento     TEXT,
+    segmento_padrao TEXT
 );
 
 CREATE TABLE IF NOT EXISTS cotacoes (
@@ -66,3 +67,7 @@ def conectar(caminho: Path | None = None):
 
 def criar_schema(con: sqlite3.Connection) -> None:
     con.executescript(SCHEMA)
+    # Banco criado antes da coluna segmento_padrao existir: acrescenta
+    colunas = {r[1] for r in con.execute("PRAGMA table_info(fundos)")}
+    if "segmento_padrao" not in colunas:
+        con.execute("ALTER TABLE fundos ADD COLUMN segmento_padrao TEXT")

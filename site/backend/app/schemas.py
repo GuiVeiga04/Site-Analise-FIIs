@@ -10,6 +10,7 @@ class Fundo(BaseModel):
     gestora: str | None = None
     tipo_gestao: str | None = None
     segmento: str | None = None
+    segmento_padrao: str | None = None
 
 
 class Indicador(BaseModel):
@@ -42,6 +43,7 @@ class Meta(BaseModel):
     total_fundos: int
     tipos_gestao: list[str]
     segmentos: list[str]
+    segmentos_padrao: list[str] = []
     atualizado_em: str | None
     ultimo_dividendo_registrado: str | None = None
     indicadores: dict[str, Indicador] = {}
@@ -54,6 +56,7 @@ class FundoSnapshot(BaseModel):
     gestora: str | None
     tipo_gestao: str | None
     segmento: str | None
+    segmento_padrao: str | None = None
     data_pregao: str
     preco: float | None
     variacao_dia_pct: float | None

@@ -58,7 +58,7 @@ export default function DetalheFundo() {
         <div>
           <h1><span className="mono">{f.ticker}</span> <TipoPill tipo={f.tipo_gestao} />{" "}
             {f.checklist.length > 0 && <SinalBadge sinal={f.checklist_sinal} nota={f.checklist_nota} />}</h1>
-          <p>{f.nome} · {f.gestora} · {f.segmento}</p>
+          <p>{[f.nome, f.gestora, f.segmento].filter(Boolean).join(" · ")}</p>
         </div>
         <div className="head-acoes">
           <Link className="btn" to={`/comparar?a=${f.ticker}`}>Comparar com…</Link>

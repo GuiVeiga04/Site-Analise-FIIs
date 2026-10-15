@@ -77,17 +77,28 @@ export function ChecklistCard({ f }: { f: FundoSnapshot }) {
   );
 }
 
-/** Fundo atual lado a lado com os pares (mesmo grupo usado nas medianas). */
+const MAX_PARES = 15;
+
+/** Fundo atual lado a lado com os pares (mesmo grupo usado nas medianas).
+ *  Grupo grande (ex: dezenas de fundos de recebíveis): mostra os 15 de maior
+ *  nota no checklist, sempre incluindo o fundo atual. */
 export function TabelaPares({ f, todos }: { f: FundoSnapshot; todos: FundoSnapshot[] }) {
   const nav = useNavigate();
-  const pares = todos
+  const grupo = todos
     .filter((x) => x.grupo_pares && x.grupo_pares === f.grupo_pares)
-    .sort((a, b) => (b.checklist_nota ?? -1) - (a.checklist_nota ?? -1));
-  if (pares.length < 2) return null;
+    .sort((a, b) => (b.checklist_nota ?? -1) - (a.checklist_nota ?? -1)
+      || (b.volume_financeiro_medio ?? 0) - (a.volume_financeiro_medio ?? 0));
+  if (grupo.length < 2) return null;
+  const pares = grupo.slice(0, MAX_PARES);
+  if (!pares.some((x) => x.ticker === f.ticker)) pares.push(f);
   return (
     <div className="card">
       <div className="chart-title">Comparação com os pares — {f.grupo_pares}</div>
-      <div className="chart-sub">{pares.length} fundos do mesmo grupo, ordenados pela nota do checklist. Clique para abrir.</div>
+      <div className="chart-sub">
+        {grupo.length > pares.length
+          ? `${grupo.length} fundos no grupo; os ${MAX_PARES} de maior nota no checklist${pares.length > MAX_PARES ? " e este fundo" : ""}.`
+          : `${grupo.length} fundos do mesmo grupo, ordenados pela nota do checklist.`} Clique para abrir.
+      </div>
       <div className="table-wrap" style={{ border: 0 }}>
         <table style={{ minWidth: 760 }}>
           <thead>

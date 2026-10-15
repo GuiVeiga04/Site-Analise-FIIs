@@ -37,39 +37,72 @@ from fiis_common import (
 log = configurar_logging()
 
 
+TAMANHO_LOTE = 100  # tickers por chamada ao Yahoo (com centenas de fundos, lotes evitam timeouts)
+
+
+def _yahoo_download(tickers: list[str], periodo: str) -> pd.DataFrame:
+    return yf.download(
+        tickers,
+        period=periodo,
+        group_by="ticker",
+        auto_adjust=False,
+        progress=False,
+        threads=True,
+    )
+
+
+def _separar_por_ticker(dados: pd.DataFrame, tickers: list[str]) -> dict[str, pd.DataFrame]:
+    """Resposta do yf.download -> {ticker: DataFrame}, só com os que vieram com dados."""
+    saida = {}
+    if dados is None or dados.empty:
+        return saida
+    multi = isinstance(dados.columns, pd.MultiIndex)
+    for t in tickers:
+        if multi:
+            if t not in dados.columns.get_level_values(0):
+                continue
+            df = dados[t]
+        elif len(tickers) == 1:
+            df = dados
+        else:
+            continue
+        if not df.dropna(how="all").empty:
+            saida[t] = df
+    return saida
+
+
 def baixar_com_retentativa(
     tickers: list[str], tentativas: int = 3, espera_segundos: int = 5, periodo: str = "5d"
-) -> pd.DataFrame:
-    """Tenta baixar os dados algumas vezes antes de desistir, já que o
-    Yahoo Finance ocasionalmente retorna falhas temporárias (ex: algum
-    ticker aparecendo como sem dados por instabilidade, sem realmente estar).
+) -> dict[str, pd.DataFrame]:
+    """Baixa em lotes e tenta de novo SÓ os tickers que vieram sem dados, já
+    que o Yahoo ocasionalmente falha em alguns (instabilidade, não falta de
+    dado). Fundos sem negócio no período continuam faltando depois das
+    tentativas: isso é normal para FIIs pouco negociados.
+
+    Devolve {ticker_yf: DataFrame com Open/High/Low/Close/Volume...}.
     """
-    resultado = None
+    resultado: dict[str, pd.DataFrame] = {}
+    faltantes = list(tickers)
     for tentativa in range(1, tentativas + 1):
-        resultado = yf.download(
-            tickers,
-            period=periodo,
-            group_by="ticker",
-            auto_adjust=False,
-            progress=False,
-            threads=True,
-        )
-        faltantes = [
-            t for t in tickers
-            if t not in resultado or resultado[t].dropna(how="all").empty
-        ]
+        for i in range(0, len(faltantes), TAMANHO_LOTE):
+            lote = faltantes[i:i + TAMANHO_LOTE]
+            try:
+                resultado.update(_separar_por_ticker(_yahoo_download(lote, periodo), lote))
+            except Exception as e:  # rede/instabilidade: o lote fica para a próxima tentativa
+                log.warning("Yahoo falhou para um lote de %d tickers: %s", len(lote), e)
+        faltantes = [t for t in tickers if t not in resultado]
         if not faltantes:
-            return resultado
+            break
         if tentativa < tentativas:
             log.warning(
-                "Tentativa %d: %d ticker(s) sem dados ainda. Tentando de novo em %ds...",
+                "Tentativa %d: %d ticker(s) sem dados ainda. Tentando só esses de novo em %ds...",
                 tentativa, len(faltantes), espera_segundos,
             )
             time.sleep(espera_segundos)
         else:
             log.warning(
-                "Encerrando após %d tentativas. Ainda faltam: %s",
-                tentativas, faltantes,
+                "Encerrando após %d tentativas. Sem dados no período (%d): %s",
+                tentativas, len(faltantes), ", ".join(faltantes),
             )
     return resultado
 
@@ -157,9 +190,26 @@ def coletar_historico_retroativo(fiis: dict[str, str], periodo: str) -> pd.DataF
                 }
             )
         )
+    if not partes:
+        log.warning("Carga retroativa: o Yahoo não devolveu nada")
+        return pd.DataFrame(columns=["Data_Coleta", "Data_Pregao", "Ticker", "Nome_Fundo",
+                                     "Preco_Fechamento_R$", "Volume_Ultimo_Dia"])
     df = pd.concat(partes, ignore_index=True)
     log.info("Carga retroativa: %d linhas (%d fundos).", len(df), df["Ticker"].nunique())
     return df
+
+
+PERIODO_FUNDO_NOVO = "1y"
+
+
+def tickers_sem_historico(tickers: list[str]) -> list[str]:
+    """Tickers do config que ainda não têm nenhuma cotação no CSV."""
+    if not ARQUIVO_HISTORICO.exists():
+        return list(tickers)
+    existentes = pd.read_csv(ARQUIVO_HISTORICO, sep=";", encoding="utf-8-sig",
+                             usecols=["Ticker", "Preco_Fechamento_R$"], dtype=str)
+    com_preco = set(existentes.loc[existentes["Preco_Fechamento_R$"].fillna("").str.strip() != "", "Ticker"])
+    return [t for t in tickers if t not in com_preco]
 
 
 def anexar_ao_historico(df_novo: pd.DataFrame) -> pd.DataFrame:
@@ -217,6 +267,15 @@ def main(argv: list[str] | None = None) -> None:
         df_novo = coletar_historico_retroativo(fiis, args.retroativo)
     else:
         df_novo = coletar_cotacoes(fiis)
+        # Fundo recém-incluído no config (ex: pelo descobrir_fiis.py) ainda não
+        # tem histórico: busca 1 ano dele uma vez, para já ter DY e gráficos.
+        novos = tickers_sem_historico(list(fiis))
+        if novos:
+            log.info("%d fundo(s) sem histórico: carga de %s para eles (%s%s)", len(novos), PERIODO_FUNDO_NOVO,
+                     ", ".join(novos[:10]), "..." if len(novos) > 10 else "")
+            retro = coletar_historico_retroativo({t: fiis[t] for t in novos}, PERIODO_FUNDO_NOVO)
+            if len(retro):
+                df_novo = pd.concat([retro, df_novo], ignore_index=True)
     df_final = anexar_ao_historico(df_novo)
 
     df_final = df_final.sort_values(["Data_Coleta", "Ticker"]).reset_index(drop=True)

@@ -31,6 +31,7 @@ CAMPOS_SNAPSHOT = {
     "Gestora": "gestora",
     "Tipo_Gestao": "tipo_gestao",
     "Segmento": "segmento",
+    "Segmento_Padrao": "segmento_padrao",
     "Data_Pregao": "data_pregao",
     "Preco_Fechamento_R$": "preco",
     "Variacao_Dia_%": "variacao_dia_pct",
@@ -130,7 +131,7 @@ def _carregar_df() -> tuple[pd.DataFrame, dict]:
     df["Data_Pregao"] = pd.to_datetime(df["Data_Pregao"])
     df["Data_Coleta"] = pd.to_datetime(df["Data_Coleta"])
     classificacao = {
-        f["ticker"]: {k: f[k] for k in ("gestora", "tipo_gestao", "segmento")} for f in fundos
+        f["ticker"]: {k: f.get(k) for k in ("gestora", "tipo_gestao", "segmento", "segmento_padrao")} for f in fundos
     }
     return df, classificacao
 
@@ -172,8 +173,10 @@ def calcular_snapshot() -> list[dict]:
     return registros
 
 
-def calcular_historico(ticker: str) -> list[dict]:
-    df, classificacao = _carregar_df()
+def calcular_historico(ticker: str, base: tuple[pd.DataFrame, dict] | None = None) -> list[dict]:
+    """base: resultado de _carregar_df() já lido (a exportação estática passa
+    o mesmo para todos os fundos, em vez de reler o banco centenas de vezes)."""
+    df, classificacao = base or _carregar_df()
     df = df[df["Ticker"] == ticker]
     if df.empty:
         return []
@@ -190,9 +193,9 @@ def calcular_historico(ticker: str) -> list[dict]:
     ]
 
 
-def calcular_dividendos(ticker: str) -> list[dict] | None:
+def calcular_dividendos(ticker: str, base: tuple[pd.DataFrame, dict] | None = None) -> list[dict] | None:
     """Rendimentos do fundo (None se o ticker não existe; [] se não há rendimentos)."""
-    df, _ = _carregar_df()
+    df, _ = base or _carregar_df()
     if ticker not in set(df["Ticker"]):
         return None
     serie = serie_dividendos(_carregar_dividendos(ticker), df, ticker)
@@ -219,6 +222,7 @@ def calcular_meta() -> dict:
         "total_fundos": len(fundos),
         "tipos_gestao": sorted({f["tipo_gestao"] for f in fundos if f["tipo_gestao"]}),
         "segmentos": sorted({f["segmento"] for f in fundos if f["segmento"]}),
+        "segmentos_padrao": sorted({f["segmento_padrao"] for f in fundos if f.get("segmento_padrao")}),
         "atualizado_em": carregado[0] if carregado else None,
         "ultimo_dividendo_registrado": ult_div[0] if ult_div else None,
         "indicadores": {

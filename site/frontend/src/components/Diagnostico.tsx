@@ -116,7 +116,7 @@ export function DiagnosticoIA({ tickers }: { tickers: string[] }) {
                 ? <>Para gerar aqui, defina a variável <code>ANTHROPIC_API_KEY</code> antes de subir o <code>uvicorn</code> (veja o README).</>
                 : comparacao
                   ? "A comparação por IA roda na hora e fica disponível na versão local do site. Aqui, veja o diagnóstico diário de cada fundo na página dele."
-                  : "O diagnóstico diário deste fundo ainda não foi gerado."}
+                  : "O diagnóstico diário por IA é gerado para os fundos acompanhados de perto; este ainda não tem."}
             </p>
           )
       )}

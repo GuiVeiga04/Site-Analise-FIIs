@@ -42,11 +42,12 @@ def carregar_banco() -> dict:
     with conectar() as con:
         criar_schema(con)
         con.executemany(
-            """INSERT INTO fundos (ticker, nome, gestora, tipo_gestao, segmento)
-               VALUES (:ticker, :nome, :gestora, :tipo_gestao, :segmento)
+            """INSERT INTO fundos (ticker, nome, gestora, tipo_gestao, segmento, segmento_padrao)
+               VALUES (:ticker, :nome, :gestora, :tipo_gestao, :segmento, :segmento_padrao)
                ON CONFLICT(ticker) DO UPDATE SET
                  nome=excluded.nome, gestora=excluded.gestora,
-                 tipo_gestao=excluded.tipo_gestao, segmento=excluded.segmento""",
+                 tipo_gestao=excluded.tipo_gestao, segmento=excluded.segmento,
+                 segmento_padrao=excluded.segmento_padrao""",
             fundos,
         )
         tickers_validos = {f["ticker"] for f in fundos}
@@ -85,6 +86,9 @@ def carregar_banco() -> dict:
             if r["Ticker"] in tickers_validos
         ]
         con.execute("DELETE FROM dividendos")
+        # Fundo que saiu do fiis_config.json sai do banco também
+        con.execute(f"DELETE FROM fundos WHERE ticker NOT IN ({','.join('?' * len(tickers_validos))})",
+                    sorted(tickers_validos))
         con.executemany(
             """INSERT INTO dividendos (ticker, data_ex, valor, fonte, data_coleta)
                VALUES (?, ?, ?, ?, ?)

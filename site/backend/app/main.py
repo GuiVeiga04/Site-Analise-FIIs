@@ -48,7 +48,7 @@ def snapshot(tipo_gestao: str | None = None, segmento: str | None = None):
     if tipo_gestao:
         dados = [d for d in dados if d["tipo_gestao"] == tipo_gestao]
     if segmento:
-        dados = [d for d in dados if d["segmento"] == segmento]
+        dados = [d for d in dados if segmento in (d["segmento"], d.get("segmento_padrao"))]
     return dados
 
 

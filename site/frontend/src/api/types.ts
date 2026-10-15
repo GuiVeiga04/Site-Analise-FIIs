@@ -8,6 +8,8 @@ export interface Fundo {
   gestora: string | null;
   tipo_gestao: TipoGestao | null;
   segmento: string | null;
+  /** Segmento de uma lista curta (Logística, Shoppings, Recebíveis (CRI)...), usado nos pares e no filtro */
+  segmento_padrao?: string | null;
 }
 
 export interface Meta {
@@ -16,6 +18,7 @@ export interface Meta {
   total_fundos: number;
   tipos_gestao: string[];
   segmentos: string[];
+  segmentos_padrao?: string[];
   atualizado_em: string | null;
   ultimo_dividendo_registrado?: string | null;
   /** Banco Central: CDI_aa, Selic_meta_aa, IPCA_12m (vazio se não coletado) */

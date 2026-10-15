@@ -23,7 +23,8 @@ from app.schemas import FundoSnapshot, Meta, PontoDividendo, PontoHistorico
 
 def _gravar(caminho: Path, conteudo) -> None:
     caminho.parent.mkdir(parents=True, exist_ok=True)
-    caminho.write_text(json.dumps(conteudo, ensure_ascii=False, indent=1), encoding="utf-8")
+    # Sem indentação: com centenas de fundos o snapshot.json (lido em toda página) cai pela metade
+    caminho.write_text(json.dumps(conteudo, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
 def exportar(destino: Path) -> None:
@@ -32,10 +33,11 @@ def exportar(destino: Path) -> None:
     snapshot = [FundoSnapshot(**d).model_dump() for d in metrics.calcular_snapshot()]
     _gravar(destino / "meta.json", meta)
     _gravar(destino / "snapshot.json", snapshot)
+    base = metrics._carregar_df()  # lido uma vez só: com centenas de fundos, reler por fundo levaria minutos
     for f in meta["fundos"]:
-        serie = [PontoHistorico(**p).model_dump() for p in metrics.calcular_historico(f["ticker"])]
+        serie = [PontoHistorico(**p).model_dump() for p in metrics.calcular_historico(f["ticker"], base)]
         _gravar(destino / "historico" / f"{f['ticker']}.json", serie)
-        divs = [PontoDividendo(**p).model_dump() for p in metrics.calcular_dividendos(f["ticker"]) or []]
+        divs = [PontoDividendo(**p).model_dump() for p in metrics.calcular_dividendos(f["ticker"], base) or []]
         _gravar(destino / "dividendos" / f"{f['ticker']}.json", divs)
     # Diagnósticos de IA gerados pelo Actions (scripts/gerar_diagnosticos_ia.py)
     pasta_ia = RAIZ_PROJETO / "data" / "ia"

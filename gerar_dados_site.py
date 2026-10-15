@@ -71,10 +71,10 @@ def enriquecer(df: pd.DataFrame, classificacao: dict[str, dict]) -> pd.DataFrame
         df.groupby("Ticker")["Preco_Fechamento_R$"].pct_change() * 100
     ).round(2)
 
-    for campo in ("gestora", "tipo_gestao", "segmento"):
-        df[campo.capitalize() if campo != "tipo_gestao" else "Tipo_Gestao"] = df["Ticker"].map(
-            lambda t: classificacao.get(t, {}).get(campo)
-        )
+    colunas = {"gestora": "Gestora", "tipo_gestao": "Tipo_Gestao", "segmento": "Segmento",
+               "segmento_padrao": "Segmento_Padrao"}
+    for campo, coluna in colunas.items():
+        df[coluna] = df["Ticker"].map(lambda t, c=campo: classificacao.get(t, {}).get(c))
 
     return df
 
@@ -137,6 +137,18 @@ def montar_snapshot(df: pd.DataFrame) -> pd.DataFrame:
 
 LIMIAR_QUEDA = 0.90       # pagamento < 90% da mediana dos 6 anteriores = queda
 MIN_FUNDOS_SEGMENTO = 3   # abaixo disso, compara com o tipo de gestão
+
+
+def grupo_pares(df: pd.DataFrame) -> pd.Series:
+    """Grupo de comparação de cada fundo: o segmento PADRONIZADO (Logística,
+    Shoppings, Recebíveis...), ou o tipo de gestão quando o segmento tem menos
+    de MIN_FUNDOS_SEGMENTO fundos. Sem segmento padronizado (dados antigos),
+    usa o segmento do config."""
+    base = df["Segmento"]
+    if "Segmento_Padrao" in df:
+        base = df["Segmento_Padrao"].where(df["Segmento_Padrao"].notna() & (df["Segmento_Padrao"] != ""), base)
+    tamanho = base.groupby(base).transform("count")
+    return base.where(tamanho >= MIN_FUNDOS_SEGMENTO, df["Tipo_Gestao"])
 
 
 def _preco_em(historico_ticker: pd.DataFrame, quando: pd.Timestamp) -> float | None:
@@ -214,8 +226,8 @@ def anexar_metricas_dividendos(snapshot: pd.DataFrame, historico: pd.DataFrame, 
     - Tendencia_Dividendo_% = média dos 3 últimos ÷ média 12m − 1
     - Estabilidade_CV_% = desvio padrão ÷ média dos pagamentos 12m (menor = mais estável)
     - Retorno_Total_12m_% = (preço atual + rendimentos 12m) ÷ preço de 12 meses atrás − 1
-    - DY_12m_vs_Pares_pp = DY 12m − mediana do grupo de pares (segmento, ou
-      tipo de gestão quando o segmento tem menos de 3 fundos)
+    - DY_12m_vs_Pares_pp = DY 12m − mediana do grupo de pares (segmento
+      padronizado, ou tipo de gestão quando o segmento tem menos de 3 fundos)
     """
     linhas = []
     for _, s in snapshot.iterrows():
@@ -231,8 +243,7 @@ def anexar_metricas_dividendos(snapshot: pd.DataFrame, historico: pd.DataFrame, 
     met = pd.DataFrame(linhas)
     out = snapshot.merge(met, on="Ticker", how="left")
 
-    tamanho_seg = out.groupby("Segmento")["Ticker"].transform("count")
-    out["Grupo_Pares"] = out["Segmento"].where(tamanho_seg >= MIN_FUNDOS_SEGMENTO, out["Tipo_Gestao"])
+    out["Grupo_Pares"] = grupo_pares(out)
     mediana = out.groupby("Grupo_Pares")["DY_12m_%"].transform("median")
     out["DY_12m_Mediana_Pares_%"] = mediana.round(2)
     out["DY_12m_vs_Pares_pp"] = (out["DY_12m_%"] - mediana).round(2)
@@ -362,8 +373,7 @@ def anexar_fundamentos(snapshot: pd.DataFrame, cvm: pd.DataFrame, fundamentus: p
         out["DY_Real_%"] = (((1 + dy / 100) / (1 + ind["IPCA_12m"]["valor"] / 100) - 1) * 100).round(2)
 
     if "Grupo_Pares" not in out:
-        tam = out.groupby("Segmento")["Ticker"].transform("count")
-        out["Grupo_Pares"] = out["Segmento"].where(tam >= MIN_FUNDOS_SEGMENTO, out["Tipo_Gestao"])
+        out["Grupo_Pares"] = grupo_pares(out)
     pvp = pd.to_numeric(out["P_VP"], errors="coerce")
     med = pvp.groupby(out["Grupo_Pares"]).transform("median")
     out["P_VP_Mediana_Pares"] = med.round(2)
@@ -499,11 +509,16 @@ def registros_json(df: pd.DataFrame) -> list[dict]:
     ]
 
 
-def salvar_json(nome: str, conteudo) -> None:
+def salvar_json(nome: str, conteudo, compacto: bool = False) -> None:
+    """compacto=True grava sem indentação: com centenas de fundos o
+    historico.json passaria de 20 MB indentado (e ele vai para o git todo dia)."""
     PASTA_SAIDA.mkdir(exist_ok=True)
     caminho = PASTA_SAIDA / nome
     with open(caminho, "w", encoding="utf-8") as f:
-        json.dump(conteudo, f, ensure_ascii=False, indent=2)
+        if compacto:
+            json.dump(conteudo, f, ensure_ascii=False, separators=(",", ":"))
+        else:
+            json.dump(conteudo, f, ensure_ascii=False, indent=2)
     log.info("Gravado %s", caminho)
 
 
@@ -528,7 +543,7 @@ def main() -> None:
     snapshot = anexar_checklist(snapshot, carregar_criterios())
     salvar_json("snapshot.json", registros_json(snapshot))
 
-    salvar_json("dividendos.json", {
+    salvar_json("dividendos.json", compacto=True, conteudo={
         ticker: registros_json(serie_dividendos(dividendos, df, ticker)[["Data_Ex", "Valor_R$", "Preco_Data_Com", "DY_Pagamento_pct"]])
         for ticker in snapshot["Ticker"]
     })
@@ -541,7 +556,7 @@ def main() -> None:
         )
         for ticker, grupo in df.groupby("Ticker")
     }
-    salvar_json("historico.json", historico_por_ticker)
+    salvar_json("historico.json", historico_por_ticker, compacto=True)
 
     ranking = {
         "por_liquidez": registros_json(

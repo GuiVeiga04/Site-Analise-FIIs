@@ -17,8 +17,9 @@ export default function Metodologia() {
       <p><b>DY 12m</b> é a soma dos rendimentos com data-ex nos últimos 12 meses dividida pelo preço atual da cota.
         <b> DY do mês</b> é só o último rendimento dividido pelo preço atual. Os dois usam o último pregão como
         referência, então sobem quando o preço cai (sem o fundo pagar mais).</p>
-      <p>A comparação com <b>os pares</b> usa a mediana do DY 12m do mesmo segmento. Quando o segmento tem menos de
-        3 fundos na carteira, a régua passa a ser o tipo de gestão (Papel, Tijolo...).</p>
+      <p>A comparação com <b>os pares</b> usa a mediana do DY 12m do mesmo segmento padronizado (Logística,
+        Shoppings, Recebíveis (CRI), Lajes corporativas...). Quando o segmento tem menos de 3 fundos, a régua passa a
+        ser o tipo de gestão (Papel, Tijolo...).</p>
       <h2>Data-ex e data-com</h2>
       <p>O Yahoo Finance registra a <b>data-ex</b>, o primeiro pregão em que a cota já é negociada sem direito ao
         rendimento. A <b>data-com</b> é o pregão anterior: quem tinha a cota no fechamento desse dia recebe.</p>
@@ -78,7 +79,8 @@ export default function Metodologia() {
       <h2>Fonte</h2>
       <p>Cotações e rendimentos do Yahoo Finance (yfinance). Valor patrimonial, patrimônio líquido e cotistas do
         informe mensal da CVM (dados abertos). CDI e IPCA do Banco Central. Vacância e cap rate do Fundamentus. Classificação de gestão e segmento: elaboração
-        própria a partir de informações públicas dos fundos. Os indicadores servem para triagem e não são
+        própria a partir de informações públicas dos fundos para os fundos acompanhados de perto; para os demais
+        (incluídos automaticamente), deduzida do segmento informado pelo Fundamentus, com o nome registrado na CVM. Os indicadores servem para triagem e não são
         recomendação de investimento.</p>
     </div>
   );

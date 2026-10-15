@@ -42,6 +42,10 @@ from fiis_common import (
 
 log = configurar_logging()
 
+# Uma chamada por fundo: com centenas de fundos, uma pausa curta evita que o
+# Yahoo limite as requisições (erro "Too Many Requests").
+PAUSA_ENTRE_FUNDOS = 0.3
+
 
 def baixar_dividendos_ticker(ticker: str, tentativas: int = 3) -> pd.DataFrame:
     """Rendimentos de um ticker (sem o .SA). Devolve DataFrame vazio se o
@@ -81,7 +85,12 @@ def main(tickers: list[str] | None = None) -> None:
     tickers = tickers or [f["ticker"] for f in fundos]
 
     log.info("Coletando rendimentos de %d FIIs...", len(tickers))
-    novos = [baixar_dividendos_ticker(t) for t in tickers]
+    novos = []
+    for i, t in enumerate(tickers, start=1):
+        novos.append(baixar_dividendos_ticker(t))
+        if i % 50 == 0:
+            log.info("  %d de %d fundos...", i, len(tickers))
+        time.sleep(PAUSA_ENTRE_FUNDOS)
     novos = [d for d in novos if not d.empty]
     df_novo = pd.concat(novos, ignore_index=True) if novos else pd.DataFrame(columns=COLUNAS_DIVIDENDOS)
 

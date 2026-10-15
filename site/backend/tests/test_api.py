@@ -7,25 +7,30 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 from app.ingest import carregar_banco  # noqa: E402
 from app.main import app  # noqa: E402
+from fiis_common import carregar_config, carregar_historico_limpo  # noqa: E402
 
 carregar_banco()
 client = TestClient(app)
+N_FUNDOS = len(carregar_config())
+# Fundo recém-incluído no config só entra no snapshot depois da primeira cotação
+_hist = carregar_historico_limpo().dropna(subset=["Preco_Fechamento_R$"])
+N_COM_COTACAO = len({f["ticker"] for f in carregar_config()} & set(_hist["Ticker"]))
 
 
 def test_meta():
     r = client.get("/api/meta").json()
-    assert r["total_fundos"] == 29
+    assert r["total_fundos"] == N_FUNDOS
     assert r["ultimo_pregao"] >= "2026-09-10"
     assert set(r["tipos_gestao"]) >= {"Papel", "Tijolo"}
 
 
 def test_snapshot_ordenado_e_classificado():
     dados = client.get("/api/snapshot").json()
-    assert len(dados) == 29
+    assert len(dados) == N_COM_COTACAO
     vols = [d["volume_financeiro_medio"] for d in dados]
     assert vols == sorted(vols, reverse=True)
     assert {d["liquidez"] for d in dados} <= {"Alta", "Média", "Baixa"}
-    assert [d["rank_liquidez"] for d in dados] == list(range(1, 30))
+    assert [d["rank_liquidez"] for d in dados] == list(range(1, N_COM_COTACAO + 1))
 
 
 def test_filtro_nao_muda_classificacao():

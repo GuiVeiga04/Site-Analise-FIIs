@@ -18,3 +18,12 @@ site/frontend/public/data/
 .pytest_cache/
 *.tsbuildinfo
 testar_fontes_resultado.txt
+# Relatório do descobrir_fiis.py (refeito a cada execução)
+descoberta_fiis.csv
+# JSONs gerados pelo gerar_dados_site.py (o site é montado a partir dos CSVs).
+# Com centenas de fundos o historico.json passa de 15 MB: não vale versionar todo dia.
+data/config.json
+data/dividendos.json
+data/historico.json
+data/ranking.json
+data/snapshot.json

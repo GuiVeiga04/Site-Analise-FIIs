@@ -6,7 +6,7 @@ fundo mudaram desde a última geração (hash das entradas), então dias sem pre
 novo não custam nada.
 
 Uso (a partir de site/backend, com ANTHROPIC_API_KEY definida):
-    python -m scripts.gerar_diagnosticos_ia                 # todos
+    python -m scripts.gerar_diagnosticos_ia                 # os fundos escolhidos à mão (sem "origem": "auto")
     python -m scripts.gerar_diagnosticos_ia HGLG11 MXRF11   # só alguns
     python -m scripts.gerar_diagnosticos_ia --forcar        # ignora o cache
 """
@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -27,13 +28,26 @@ PASTA_IA = RAIZ_PROJETO / "data" / "ia"
 log = logging.getLogger("fiis.ia")
 
 
+def tickers_padrao() -> list[str]:
+    """Fundos que ganham diagnóstico diário. Por padrão, só os escolhidos à mão
+    no fiis_config.json: os incluídos pelo descobrir_fiis.py ("origem": "auto")
+    são centenas, e gerar todos todo dia multiplicaria o custo da API.
+    FIIS_IA_TODOS=1 gera para todos."""
+    from fiis_common import carregar_config
+
+    no_banco = {f["ticker"] for f in metrics.calcular_meta()["fundos"]}
+    todos = os.environ.get("FIIS_IA_TODOS", "").strip() in ("1", "true", "sim")
+    return [f["ticker"] for f in carregar_config()
+            if f["ticker"] in no_banco and (todos or f.get("origem") != "auto")]
+
+
 def gerar_todos(tickers: list[str] | None = None, forcar: bool = False, cliente=None) -> dict:
     if not ia.disponivel() and cliente is None:
         log.warning("ANTHROPIC_API_KEY não definida: diagnósticos de IA não foram gerados.")
         return {"gerados": 0, "em_cache": 0, "falhas": 0}
     modelo = ia.modelo_configurado()
     PASTA_IA.mkdir(parents=True, exist_ok=True)
-    tickers = tickers or [f["ticker"] for f in metrics.calcular_meta()["fundos"]]
+    tickers = tickers or tickers_padrao()
     resumo = {"gerados": 0, "em_cache": 0, "falhas": 0}
     for t in tickers:
         mensagem = metrics.mensagem_ia([t])

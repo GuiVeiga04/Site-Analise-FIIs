@@ -19,7 +19,7 @@ export default function VisaoGeral() {
     const q = f.busca.toLowerCase();
     return (snap.data ?? []).filter((x) =>
       (!f.tipos.length || f.tipos.includes(x.tipo_gestao ?? "")) &&
-      (!f.segmento || x.segmento === f.segmento) &&
+      (!f.segmento || x.segmento_padrao === f.segmento || x.segmento === f.segmento) &&
       (!q || x.ticker.toLowerCase().includes(q) || x.nome.toLowerCase().includes(q)));
   }, [snap.data, f.tipos, f.segmento, f.busca]);
   const filtrados = useMemo(
@@ -36,7 +36,7 @@ export default function VisaoGeral() {
   const cdi = meta.data.indicadores?.CDI_aa?.valor ?? null;
   const cdiLiquido = cdi != null ? cdi * 0.85 : null;
   const segmentos = [...new Set(snap.data.filter((x) => !f.tipos.length || f.tipos.includes(x.tipo_gestao ?? ""))
-    .map((x) => x.segmento ?? ""))].filter(Boolean).sort();
+    .map((x) => x.segmento_padrao ?? x.segmento ?? ""))].filter(Boolean).sort();
 
   return (
     <>
