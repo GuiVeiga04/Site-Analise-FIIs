@@ -45,6 +45,14 @@ jobs:
           cache-dependency-path: site/backend/requirements.txt
       - run: pip install -r site/backend/requirements.txt
 
+      - name: Manter o Supabase ativo
+        continue-on-error: true
+        run: |
+          curl -fsS -m 30 -o /dev/null \
+            "https://vcnnmtafyymdpzgzgntm.supabase.co/rest/v1/operacoes?select=id&limit=1" \
+            -H "apikey: sb_publishable_pYoVal6qxebfuUYon5FAVA_MjccOF-S" \
+            || echo "::warning::Supabase não respondeu (o login do site pode estar pausado)"
+
       - name: Coletar cotações e rendimentos
         if: github.event_name == 'schedule' || inputs.coletar == true
         run: |

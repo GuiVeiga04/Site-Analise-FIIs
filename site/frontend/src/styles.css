@@ -37,7 +37,7 @@ a { color: var(--accent); }
   font-size: .9rem; white-space: nowrap; }
 .nav a.active { background: var(--accent-wash); color: var(--accent); font-weight: 600; }
 .updated { margin-left: auto; font-size: .78rem; color: var(--muted); white-space: nowrap; }
-@media (max-width: 640px) { .updated { display: none; } }
+@media (max-width: 1320px) { .updated { display: none; } }
 main { max-width: 1280px; margin: 0 auto; padding: 24px 16px 64px; }
 @media (min-width: 720px) { main { padding: 32px 32px 80px; } }
 
@@ -218,3 +218,30 @@ tr.atual td { background: var(--accent-wash); }
 .calc-avancado summary { cursor: pointer; font-size: .82rem; color: var(--accent); font-weight: 600; }
 .calc-avancado label { margin-top: 12px; }
 .calc-graficos { margin-top: 18px; }
+
+/* ---- Login e conta ---- */
+.menu-conta { margin-left: 12px; flex-shrink: 0; }
+.updated + .menu-conta { margin-left: 16px; }
+.conta-logada { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-2);
+  font-size: .82rem; padding: 3px 8px 3px 3px; border-radius: 99px; border: 1px solid var(--border); max-width: 220px; }
+.conta-logada.active { border-color: var(--accent); color: var(--accent); }
+.conta-logada img, .avatar-letra { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
+.avatar-letra { display: grid; place-items: center; background: var(--accent-wash); color: var(--accent); font-weight: 700; }
+.conta-email { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 640px) { .conta-email { display: none; } .conta-logada { padding: 3px; } }
+.auth-wrap { display: flex; justify-content: center; padding-top: 24px; }
+.auth-card { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 14px; padding: 24px; }
+.auth-card h1 { margin: 0; font-size: 1.4rem; }
+.auth-card .calc-form { display: flex; flex-direction: column; gap: 12px; }
+.auth-card .btn-primario { width: 100%; padding: 10px; }
+.btn-google { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 10px; font-weight: 600; }
+.auth-ou { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .78rem; }
+.auth-ou::before, .auth-ou::after { content: ""; flex: 1; border-top: 1px solid var(--border); }
+.auth-links { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.auth-erro { margin: 0; padding: 8px 10px; border-radius: 7px; font-size: .85rem;
+  background: rgba(200,50,50,.09); color: #b42318; border: 1px solid rgba(200,50,50,.25); }
+.auth-aviso { margin: 0; padding: 8px 10px; border-radius: 7px; font-size: .85rem;
+  background: var(--accent-wash); color: var(--text); border: 1px solid var(--border); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .auth-erro { color: #f59a90; } }
+.btn:disabled { opacity: .6; cursor: default; }
+.carteira-vazia { text-align: center; padding: 40px 18px; }
