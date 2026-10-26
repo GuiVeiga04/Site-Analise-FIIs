@@ -120,3 +120,107 @@ export function hojeIso(agora = new Date()): string {
   const d = new Date(agora.getTime() - agora.getTimezoneOffset() * 60_000);
   return d.toISOString().slice(0, 10);
 }
+
+// ---------------------------------------------------------------------------
+// Bloco 3: valor atual, resultado, renda e divisão da carteira
+// ---------------------------------------------------------------------------
+
+/** O que o painel precisa saber de cada fundo (vem do snapshot do site). */
+export interface InfoFundo {
+  preco: number | null;
+  ultimo_dividendo: number | null;
+  dividendos_12m: number | null;
+  tipo_gestao: string | null;
+  segmento?: string | null;
+  segmento_padrao?: string | null;
+}
+
+export interface LinhaCarteira extends Posicao {
+  precoAtual: number | null;
+  valorAtual: number | null;      // cotas × preço do último pregão
+  resultado: number | null;       // valor atual − custo (só a variação da cota, sem rendimentos)
+  resultadoPct: number | null;
+  rendaMensal: number | null;     // cotas × último rendimento por cota
+  renda12m: number | null;        // cotas × rendimentos por cota pagos nos últimos 12 meses
+  yocPct: number | null;          // yield on cost: rendimentos 12m ÷ preço médio
+  pesoPct: number | null;         // fatia do valor atual da carteira
+}
+
+export interface Fatia { nome: string; valor: number; pct: number; fundos: number }
+
+export interface ResumoCarteira {
+  linhas: LinhaCarteira[];
+  custo: number;
+  valor: number;            // só fundos com preço
+  resultado: number;        // valor − custo dos fundos com preço
+  resultadoPct: number | null;
+  rendaMensal: number;
+  renda12m: number;
+  yocPct: number | null;    // renda 12m ÷ custo (sobre o que você pagou)
+  dyAtualPct: number | null; // renda 12m ÷ valor atual (sobre quanto vale hoje)
+  semPreco: string[];       // fundos sem cotação no site (ficam fora do valor e do resultado)
+  porSegmento: Fatia[];
+  porTipo: Fatia[];
+}
+
+const fatiar = (linhas: LinhaCarteira[], chave: (l: LinhaCarteira) => string, total: number): Fatia[] => {
+  const m = new Map<string, Fatia>();
+  for (const l of linhas) {
+    if (l.valorAtual == null) continue;
+    const nome = chave(l);
+    const f = m.get(nome) ?? { nome, valor: 0, pct: 0, fundos: 0 };
+    f.valor += l.valorAtual;
+    f.fundos += 1;
+    m.set(nome, f);
+  }
+  return [...m.values()]
+    .map((f) => ({ ...f, pct: total > 0 ? (f.valor / total) * 100 : 0 }))
+    .sort((a, b) => b.valor - a.valor || a.nome.localeCompare(b.nome));
+};
+
+/** Junta as posições (cotas e preço médio) com os dados do site (preço e rendimentos). */
+export function resumirCarteira(posicoes: Posicao[], info: Map<string, InfoFundo>): ResumoCarteira {
+  const ativas = posicoes.filter((p) => p.quantidade > 0);
+  const linhas: LinhaCarteira[] = ativas.map((p) => {
+    const f = info.get(p.ticker);
+    const preco = f?.preco != null && f.preco > 0 ? f.preco : null;
+    const valor = preco != null ? p.quantidade * preco : null;
+    const resultado = valor != null ? valor - p.custo : null;
+    const div12 = f?.dividendos_12m != null && f.dividendos_12m >= 0 ? f.dividendos_12m : null;
+    const ultimo = f?.ultimo_dividendo != null && f.ultimo_dividendo >= 0 ? f.ultimo_dividendo : null;
+    return {
+      ...p,
+      precoAtual: preco,
+      valorAtual: valor,
+      resultado,
+      resultadoPct: resultado != null && p.custo > 0 ? (resultado / p.custo) * 100 : null,
+      rendaMensal: ultimo != null ? p.quantidade * ultimo : null,
+      renda12m: div12 != null ? p.quantidade * div12 : null,
+      yocPct: div12 != null && p.precoMedio > 0 ? (div12 / p.precoMedio) * 100 : null,
+      pesoPct: null,
+    };
+  });
+  const comPreco = linhas.filter((l) => l.valorAtual != null);
+  const valor = comPreco.reduce((s, l) => s + (l.valorAtual ?? 0), 0);
+  const custoComPreco = comPreco.reduce((s, l) => s + l.custo, 0);
+  const custo = linhas.reduce((s, l) => s + l.custo, 0);
+  for (const l of linhas) l.pesoPct = l.valorAtual != null && valor > 0 ? (l.valorAtual / valor) * 100 : null;
+  linhas.sort((a, b) => (b.valorAtual ?? -1) - (a.valorAtual ?? -1) || a.ticker.localeCompare(b.ticker));
+
+  const renda12m = linhas.reduce((s, l) => s + (l.renda12m ?? 0), 0);
+  const resultado = valor - custoComPreco;
+  return {
+    linhas,
+    custo,
+    valor,
+    resultado,
+    resultadoPct: custoComPreco > 0 ? (resultado / custoComPreco) * 100 : null,
+    rendaMensal: linhas.reduce((s, l) => s + (l.rendaMensal ?? 0), 0),
+    renda12m,
+    yocPct: custo > 0 ? (renda12m / custo) * 100 : null,
+    dyAtualPct: valor > 0 ? (renda12m / valor) * 100 : null,
+    semPreco: linhas.filter((l) => l.valorAtual == null).map((l) => l.ticker),
+    porSegmento: fatiar(linhas, (l) => info.get(l.ticker)?.segmento_padrao || info.get(l.ticker)?.segmento || "Sem segmento", valor),
+    porTipo: fatiar(linhas, (l) => info.get(l.ticker)?.tipo_gestao || "Sem tipo", valor),
+  };
+}

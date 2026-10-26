@@ -85,3 +85,47 @@ test("preço sugerido: fechamento na data ou no pregão anterior (até 7 dias)",
   assert.equal(precoNaData(h, "2026-01-01"), null);                                    // antes do histórico
   assert.equal(precoNaData(h, "2026-03-01"), null);                                    // longe demais do último pregão
 });
+
+import { resumirCarteira, type InfoFundo } from "./carteira.ts";
+
+test("resumo: valor, resultado, renda, yield on cost e divisão", () => {
+  const info = new Map<string, InfoFundo>([
+    ["HGLG11", { preco: 160, ultimo_dividendo: 1.1, dividendos_12m: 13.2, tipo_gestao: "Tijolo", segmento_padrao: "Logística" }],
+    ["KNCR11", { preco: 100, ultimo_dividendo: 1.0, dividendos_12m: 12, tipo_gestao: "Papel", segmento_padrao: "Recebíveis (CRI)" }],
+    ["XPLG11", { preco: 100, ultimo_dividendo: 0.8, dividendos_12m: 9.6, tipo_gestao: "Tijolo", segmento_padrao: "Logística" }],
+  ]);
+  const posicoes = calcularPosicoes([
+    op({ id: 1, quantidade: 10, preco: 150 }),                      // HGLG: custo 1.500, vale 1.600
+    op({ id: 2, ticker: "KNCR11", quantidade: 20, preco: 110 }),    // custo 2.200, vale 2.000
+    op({ id: 3, ticker: "XPLG11", quantidade: 4, preco: 100 }),     // custo 400, vale 400
+    op({ id: 4, ticker: "SUMIU11", quantidade: 5, preco: 50 }),     // sem preço no site
+  ]);
+  const r = resumirCarteira(posicoes, info);
+  assert.equal(r.custo, 1500 + 2200 + 400 + 250);
+  assert.equal(r.valor, 4000);
+  assert.equal(r.resultado, 4000 - 4100);                            // só fundos com preço
+  assert.equal(Math.round(r.resultadoPct! * 100) / 100, -2.44);
+  assert.equal(Math.round(r.rendaMensal * 100) / 100, 11 + 20 + 3.2);
+  assert.equal(Math.round(r.renda12m * 100) / 100, 132 + 240 + 38.4);
+  assert.equal(Math.round(r.yocPct! * 100) / 100, Math.round(410.4 / 4350 * 10000) / 100);
+  assert.equal(Math.round(r.dyAtualPct! * 100) / 100, 10.26);
+  assert.deepEqual(r.semPreco, ["SUMIU11"]);
+  const hglg = r.linhas.find((l) => l.ticker === "HGLG11")!;
+  assert.equal(hglg.resultado, 100);
+  assert.equal(Math.round(hglg.yocPct! * 100) / 100, 8.8);           // 13,20 ÷ 150
+  assert.equal(hglg.pesoPct, 40);
+  assert.deepEqual(r.linhas.map((l) => l.ticker), ["KNCR11", "HGLG11", "XPLG11", "SUMIU11"]);  // por valor
+  // empate no valor: ordem alfabética
+  assert.deepEqual(r.porSegmento.map((f) => [f.nome, f.valor, f.pct, f.fundos]),
+    [["Logística", 2000, 50, 2], ["Recebíveis (CRI)", 2000, 50, 1]]);
+  assert.deepEqual(r.porTipo.map((f) => [f.nome, f.pct]), [["Papel", 50], ["Tijolo", 50]]);
+});
+
+test("resumo de carteira vazia ou zerada", () => {
+  const r = resumirCarteira(calcularPosicoes([op({ id: 1 }), op({ id: 2, tipo: "venda", data: "2026-02-01" })]), new Map());
+  assert.equal(r.linhas.length, 0);
+  assert.equal(r.valor, 0);
+  assert.equal(r.resultadoPct, null);
+  assert.equal(r.yocPct, null);
+  assert.deepEqual(r.porSegmento, []);
+});

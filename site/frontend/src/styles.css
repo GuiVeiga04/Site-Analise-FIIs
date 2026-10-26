@@ -267,3 +267,17 @@ tr.atual td { background: var(--accent-wash); }
 .calc-tabela tfoot td { border-top: 1px solid var(--border-strong); }
 .carteira-grid table { min-width: 420px; }
 .tabela-operacoes { min-width: 640px; }
+.kpis.kpis-4 { margin-bottom: 16px; }
+@media (min-width: 900px) { .kpis.kpis-4 { grid-template-columns: repeat(4, 1fr); } }
+.carteira-grid-baixo { margin-top: 16px; }
+.tabela-posicao { min-width: 980px; }
+.barras { list-style: none; margin: 14px 0 4px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.barras li { display: grid; grid-template-columns: minmax(110px, 170px) 1fr 52px 92px; align-items: center; gap: 10px;
+  font-size: .85rem; padding: 2px 0; border-radius: 6px; }
+.barras li:hover { background: var(--accent-wash); }
+.barra-nome { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barra-trilho { height: 10px; }
+.barra { display: block; height: 10px; min-width: 2px; background: var(--accent); border-radius: 0 4px 4px 0; }
+.barra-pct { text-align: right; color: var(--text); font-weight: 600; }
+.barra-valor { text-align: right; color: var(--muted); }
+@media (max-width: 520px) { .barras li { grid-template-columns: 1fr 52px; } .barra-trilho { grid-column: 1 / -1; grid-row: 2; } .barra-valor { display: none; } }
