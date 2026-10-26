@@ -29,3 +29,11 @@ test("regra de senha", () => {
   assert.match(senhaValida("abc1") ?? "", /8 caracteres/);
   assert.match(senhaValida("abcdefghij") ?? "", /letras e números/);
 });
+
+test("hash do nonce do login Google (SHA-256 em hexadecimal)", async () => {
+  const { sha256Hex, novoNonce } = await import("./googleGis.ts");
+  assert.equal(await sha256Hex("abc"), "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+  const n = await novoNonce();
+  assert.equal(n.hash, await sha256Hex(n.puro));
+  assert.notEqual(n.puro, (await novoNonce()).puro);
+});

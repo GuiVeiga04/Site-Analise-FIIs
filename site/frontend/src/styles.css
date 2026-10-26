@@ -245,3 +245,5 @@ tr.atual td { background: var(--accent-wash); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .auth-erro { color: #f59a90; } }
 .btn:disabled { opacity: .6; cursor: default; }
 .carteira-vazia { text-align: center; padding: 40px 18px; }
+.google-oficial { display: flex; justify-content: center; min-height: 44px; }
+.google-carregando { height: 44px; border-radius: 4px; border: 1px solid var(--border); background: var(--accent-wash); }

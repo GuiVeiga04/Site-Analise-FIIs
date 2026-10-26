@@ -12,6 +12,8 @@ interface EstadoAuth {
   erroRetorno: string | null;
   limparErroRetorno: () => void;
   entrarComGoogle: () => Promise<string | null>;
+  /** Token do botão oficial do Google + o nonce "puro" usado para gerá-lo */
+  entrarComTokenGoogle: (token: string, nonce: string) => Promise<string | null>;
   entrarComEmail: (email: string, senha: string) => Promise<string | null>;
   criarConta: (email: string, senha: string) => Promise<{ erro: string | null; precisaConfirmar: boolean }>;
   enviarRecuperacao: (email: string) => Promise<string | null>;
@@ -82,6 +84,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         options: { redirectTo: retorno(), queryParams: { prompt: "select_account" } },
       });
       return error ? traduzirErro(error.message) : null;
+    },
+    async entrarComTokenGoogle(token, nonce) {
+      lembrarDestino("#/carteira");
+      const { error } = await supabase.auth.signInWithIdToken({ provider: "google", token, nonce });
+      if (error) return traduzirErro(error.message);
+      irParaDestinoGuardado();
+      return null;
     },
     async entrarComEmail(email, senha) {
       const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password: senha });
