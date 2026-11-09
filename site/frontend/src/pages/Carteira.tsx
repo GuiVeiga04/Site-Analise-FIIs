@@ -1,11 +1,15 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { api } from "../api/client";
 import { FormOperacao } from "../components/FormOperacao";
 import { DivisaoCarteira, KpisCarteira, TabelaPosicao } from "../components/PainelCarteira";
+import { RendimentosCarteira } from "../components/RendimentosCarteira";
 import { Estado } from "../components/ui";
 import { useAuth } from "../lib/auth";
-import { calcularPosicoes, primeiraVendaSemCotas, resumirCarteira, type Operacao } from "../lib/carteira";
+import {
+  calcularPosicoes, hojeIso, primeiraVendaSemCotas, rendimentosRecebidos, resultadoTotal, resumirCarteira, resumirRendimentos,
+  type Operacao, type ProventoFundo,
+} from "../lib/carteira";
 import { excluirOperacao, useOperacoes } from "../lib/carteiraApi";
 import { brl, data, inteiro } from "../lib/format";
 import { useAsync } from "../lib/useAsync";
@@ -14,7 +18,7 @@ import { useAsync } from "../lib/useAsync";
  * Minha carteira (só para quem está logado).
  * Bloco 2: lançar, editar e excluir compras e vendas; posição e preço médio.
  * Bloco 3: valor atual, resultado, renda, yield on cost e divisão por segmento/tipo.
- * Bloco 4: rendimentos recebidos.
+ * Bloco 4: rendimentos recebidos e resultado total (cotas + vendas + rendimentos).
  */
 export default function Carteira() {
   const auth = useAuth();
@@ -27,8 +31,28 @@ export default function Carteira() {
 
   const fundos = useMemo(() => [...(snap.data ?? [])].sort((a, b) => a.ticker.localeCompare(b.ticker)), [snap.data]);
   const porTicker = useMemo(() => new Map(fundos.map((f) => [f.ticker, f])), [fundos]);
-  const resumo = useMemo(() => resumirCarteira(calcularPosicoes(ops), porTicker), [ops, porTicker]);
+  const posicoes = useMemo(() => calcularPosicoes(ops), [ops]);
+  const resumo = useMemo(() => resumirCarteira(posicoes, porTicker), [posicoes, porTicker]);
   const temPosicao = resumo.linhas.length > 0;
+
+  // Rendimentos de cada fundo que já passou pela carteira (mesmo os vendidos)
+  const tickersOps = useMemo(() => [...new Set(ops.map((o) => o.ticker))].sort().join(","), [ops]);
+  const [proventos, setProventos] = useState<Map<string, ProventoFundo[]> | null>(null);
+  useEffect(() => {
+    if (!tickersOps) { setProventos(new Map()); return; }
+    let vivo = true;
+    setProventos(null);
+    Promise.all(tickersOps.split(",").map((t) =>
+      api.dividendos(t).then((d) => [t, d.map((x) => ({ dataEx: x.data_ex, valor: x.valor }))] as const).catch(() => [t, []] as const),
+    )).then((pares) => { if (vivo) setProventos(new Map(pares.map(([t, d]) => [t, [...d]]))); });
+    return () => { vivo = false; };
+  }, [tickersOps]);
+  const recebidosLista = useMemo(() => (proventos ? rendimentosRecebidos(ops, proventos, hojeIso()) : []), [ops, proventos]);
+  const primeiraOp = useMemo(() => ops.reduce<string | null>((m, o) => (!m || o.data < m ? o.data : m), null), [ops]);
+  const rend = useMemo(() => resumirRendimentos(recebidosLista, primeiraOp, hojeIso()), [recebidosLista, primeiraOp]);
+  const recebidosPorTicker = useMemo(
+    () => (proventos ? new Map(rend.porFundo.map((f) => [f.ticker, f.total])) : null), [proventos, rend]);
+  const total = useMemo(() => (proventos ? resultadoTotal(resumo, posicoes, rend.total) : null), [proventos, resumo, posicoes, rend]);
 
   if (auth.carregando) return <p className="state">Carregando…</p>;
   if (!auth.usuario) return <Navigate to="/entrar" replace />;
@@ -67,8 +91,8 @@ export default function Carteira() {
 
       {temPosicao && (
         <>
-          <KpisCarteira r={resumo} />
-          <section><TabelaPosicao r={resumo} porTicker={porTicker} /></section>
+          <KpisCarteira r={resumo} total={total} />
+          <section><TabelaPosicao r={resumo} porTicker={porTicker} recebidos={recebidosPorTicker} /></section>
         </>
       )}
 
@@ -95,6 +119,10 @@ export default function Carteira() {
             </div>
           )}
       </div>
+
+      {ops.length > 0 && (
+        <section><RendimentosCarteira r={rend} lista={recebidosLista} carregando={proventos == null} /></section>
+      )}
 
       {aviso && <p className="auth-aviso carteira-aviso" role="status">{aviso} <button className="link-btn" onClick={() => setAviso(null)}>ok</button></p>}
 

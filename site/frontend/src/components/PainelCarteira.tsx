@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import type { FundoSnapshot } from "../api/types";
-import type { Fatia, ResumoCarteira } from "../lib/carteira";
+import type { Fatia, ResultadoTotal, ResumoCarteira } from "../lib/carteira";
 import { brl, data, inteiro, pct, taxa } from "../lib/format";
 import { KpiCard, SinalBadge, TipoPill } from "./ui";
 
@@ -13,12 +13,21 @@ const fatiaPct = (v: number | null) => taxa(v, 1);       // participação: sem 
 const classe = (v: number | null) => (v == null || Math.abs(v) < 0.005 ? "" : v > 0 ? "up" : "down");
 
 /** Bloco 3: os quatro números da carteira. */
-export function KpisCarteira({ r }: { r: ResumoCarteira }) {
+export function KpisCarteira({ r, total }: { r: ResumoCarteira; total: ResultadoTotal | null }) {
   return (
     <section className="kpis kpis-4" aria-label="Resumo da carteira">
       <KpiCard label="Patrimônio" value={brl(r.valor)} sub={`você pagou ${brl(r.custo)}`} />
-      <KpiCard label="Resultado" value={<span className={classe(r.resultado)}>{brlSinal(r.resultado)}</span>}
-        sub={<><span className={classe(r.resultadoPct)}>{sinalTxt(r.resultadoPct)}</span> · só a variação das cotas, sem os rendimentos</>} />
+      {total ? (
+        <KpiCard label="Resultado total" value={<span className={classe(total.total)}>{brlSinal(total.total)}</span>}
+          sub={<>
+            <span className={classe(total.totalPct)}>{sinalTxt(total.totalPct)}</span> sobre o que você aplicou ·
+            cotas {brlSinal(total.valorizacao)} · rendimentos {brlSinal(total.rendimentos)}
+            {Math.abs(total.vendas) >= 0.005 && <> · vendas {brlSinal(total.vendas)}</>}
+          </>} />
+      ) : (
+        <KpiCard label="Resultado das cotas" value={<span className={classe(r.resultado)}>{brlSinal(r.resultado)}</span>}
+          sub={<><span className={classe(r.resultadoPct)}>{sinalTxt(r.resultadoPct)}</span> · carregando os rendimentos…</>} />
+      )}
       <KpiCard label="Renda mensal estimada" value={brl(r.rendaMensal)}
         sub={`último rendimento × cotas · ${brl(r.renda12m)} em 12 meses`} />
       <KpiCard label="Yield on cost" value={taxa(r.yocPct)}
@@ -28,7 +37,9 @@ export function KpisCarteira({ r }: { r: ResumoCarteira }) {
 }
 
 /** Tabela de posições com preço atual, resultado e renda de cada fundo. */
-export function TabelaPosicao({ r, porTicker }: { r: ResumoCarteira; porTicker: Map<string, FundoSnapshot> }) {
+export function TabelaPosicao({ r, porTicker, recebidos }: {
+  r: ResumoCarteira; porTicker: Map<string, FundoSnapshot>; recebidos: Map<string, number> | null;
+}) {
   const ultimoPregao = r.linhas.map((l) => porTicker.get(l.ticker)?.data_pregao).filter(Boolean).sort().at(-1);
   return (
     <div className="card">
@@ -42,7 +53,7 @@ export function TabelaPosicao({ r, porTicker }: { r: ResumoCarteira; porTicker: 
           <thead>
             <tr>
               <th>Fundo</th><th>Checklist</th><th className="r">Cotas</th><th className="r">Preço médio</th>
-              <th className="r">Preço atual</th><th className="r">Valor atual</th><th className="r">Resultado</th>
+              <th className="r">Preço atual</th><th className="r">Valor atual</th><th className="r">Resultado</th><th className="r">Recebido</th>
               <th className="r">Renda/mês</th><th className="r">Yield on cost</th><th className="r">Peso</th>
             </tr>
           </thead>
@@ -65,6 +76,7 @@ export function TabelaPosicao({ r, porTicker }: { r: ResumoCarteira; porTicker: 
                     <span className={classe(l.resultado)}>{brlSinal(l.resultado)}</span>
                     <span className="sub-name"><span className={classe(l.resultadoPct)}>{sinalTxt(l.resultadoPct)}</span></span>
                   </td>
+                  <td className="r num">{recebidos ? brl(recebidos.get(l.ticker) ?? 0) : "…"}</td>
                   <td className="r num">{brl(l.rendaMensal)}</td>
                   <td className="r num">{taxa(l.yocPct)}</td>
                   <td className="r num">{fatiaPct(l.pesoPct)}</td>
@@ -78,6 +90,7 @@ export function TabelaPosicao({ r, porTicker }: { r: ResumoCarteira; porTicker: 
               <td className="r num"><b>{brl(r.valor)}</b></td>
               <td className="r num"><b className={classe(r.resultado)}>{brlSinal(r.resultado)}</b>
                 <span className="sub-name"><span className={classe(r.resultadoPct)}>{sinalTxt(r.resultadoPct)}</span></span></td>
+              <td className="r num"><b>{recebidos ? brl(r.linhas.reduce((s, l) => s + (recebidos.get(l.ticker) ?? 0), 0)) : "…"}</b></td>
               <td className="r num"><b>{brl(r.rendaMensal)}</b></td>
               <td className="r num"><b>{taxa(r.yocPct)}</b></td>
               <td className="r num">100%</td>
@@ -93,7 +106,8 @@ export function TabelaPosicao({ r, porTicker }: { r: ResumoCarteira; porTicker: 
       )}
       <p className="calc-dica">
         Renda/mês usa o último rendimento pago por cota; yield on cost usa os rendimentos por cota dos últimos 12
-        meses sobre o seu preço médio. O resultado ainda não soma os rendimentos que você recebeu (próximo bloco).
+        meses sobre o seu preço médio. Resultado é só a variação das cotas; Recebido soma os rendimentos que caíram
+        desde a sua primeira compra de cada fundo.
       </p>
     </div>
   );

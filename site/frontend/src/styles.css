@@ -281,3 +281,7 @@ tr.atual td { background: var(--accent-wash); }
 .barra-pct { text-align: right; color: var(--text); font-weight: 600; }
 .barra-valor { text-align: right; color: var(--muted); }
 @media (max-width: 520px) { .barras li { grid-template-columns: 1fr 52px; } .barra-trilho { grid-column: 1 / -1; grid-row: 2; } .barra-valor { display: none; } }
+.rend-kpis { margin: 12px 0 4px; }
+.tabela-rend { min-width: 420px; }
+.tabela-posicao { min-width: 1080px; }
+.rend-kpis i { display: block; font-style: normal; font-size: .7rem; color: var(--muted); }

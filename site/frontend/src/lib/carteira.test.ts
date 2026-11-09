@@ -129,3 +129,60 @@ test("resumo de carteira vazia ou zerada", () => {
   assert.equal(r.yocPct, null);
   assert.deepEqual(r.porSegmento, []);
 });
+
+import { cotasNaDataCom, rendimentosRecebidos, resultadoTotal, resumirRendimentos, type ProventoFundo } from "./carteira.ts";
+
+test("bloco 4: quem tem a cota na véspera da data-ex recebe", () => {
+  const ops = [
+    op({ id: 1, data: "2026-01-10", quantidade: 10 }),
+    op({ id: 2, data: "2026-02-03", quantidade: 5 }),                    // compra NA data-ex de fev: não leva fev
+    op({ id: 3, data: "2026-03-02", tipo: "venda", quantidade: 15 }),    // vende NA data-ex de mar: ainda leva mar
+  ];
+  assert.equal(cotasNaDataCom(ops, "HGLG11", "2026-02-03"), 10);
+  assert.equal(cotasNaDataCom(ops, "HGLG11", "2026-03-02"), 15);
+  assert.equal(cotasNaDataCom(ops, "HGLG11", "2026-04-01"), 0);
+  const proventos = new Map<string, ProventoFundo[]>([["HGLG11", [
+    { dataEx: "2026-01-02", valor: 1.1 },   // antes da primeira compra
+    { dataEx: "2026-02-03", valor: 1.1 },
+    { dataEx: "2026-03-02", valor: 1.2 },
+    { dataEx: "2026-04-01", valor: 1.1 },   // já tinha vendido tudo
+    { dataEx: "2026-12-01", valor: 1.1 },   // futuro
+  ]]]);
+  const r = rendimentosRecebidos(ops, proventos, "2026-11-09");
+  assert.deepEqual(r.map((x) => [x.dataEx, x.cotas, Math.round(x.valor * 100) / 100]), [["2026-03-02", 15, 18], ["2026-02-03", 10, 11]]);
+});
+
+test("bloco 4: resumo por mês (sem buracos), 12 meses e por fundo", () => {
+  const lista = [
+    { ticker: "HGLG11", dataEx: "2026-10-01", valorPorCota: 1, cotas: 10, valor: 10 },
+    { ticker: "MXRF11", dataEx: "2026-10-15", valorPorCota: 0.1, cotas: 100, valor: 10 },
+    { ticker: "HGLG11", dataEx: "2026-08-01", valorPorCota: 1, cotas: 10, valor: 10 },
+    { ticker: "HGLG11", dataEx: "2025-09-01", valorPorCota: 1, cotas: 10, valor: 10 },   // fora dos 12 meses
+  ];
+  const r = resumirRendimentos(lista, "2025-08-20", "2026-11-09");
+  assert.equal(r.total, 40);
+  assert.equal(r.ultimos12m, 30);                       // dez/25 a nov/26
+  assert.equal(r.mediaMensal12m, 2.5);                  // 30 ÷ 12
+  assert.equal(r.porMes.length, 16);                    // ago/25 .. nov/26
+  assert.deepEqual(r.porMes.at(-2), { mes: "2026-10", valor: 20 });
+  assert.deepEqual(r.porMes[0], { mes: "2025-08", valor: 0 });
+  assert.deepEqual(r.porFundo.map((f) => [f.ticker, f.total, f.pagamentos, f.ultimo]),
+    [["HGLG11", 30, 3, "2026-10-01"], ["MXRF11", 10, 1, "2026-10-15"]]);
+  // carteira com 3 meses de vida: a média divide por 3, não por 12
+  assert.equal(resumirRendimentos(lista.slice(0, 2), "2026-09-05", "2026-11-09").mediaMensal12m, 20 / 3);
+});
+
+test("bloco 4: resultado total = valorização + vendas + rendimentos", () => {
+  const ops = [
+    op({ id: 1, quantidade: 10, preco: 100 }),
+    op({ id: 2, data: "2026-02-01", tipo: "venda", quantidade: 4, preco: 110 }),   // realiza +40
+  ];
+  const posicoes = calcularPosicoes(ops);
+  assert.equal(posicoes[0].resultadoRealizado, 40);
+  assert.equal(posicoes[0].totalComprado, 1000);
+  const info = new Map([["HGLG11", { preco: 105, ultimo_dividendo: 1, dividendos_12m: 12, tipo_gestao: "Tijolo" }]]);
+  const resumo = resumirCarteira(posicoes, info);                                   // 6 cotas: 630 − 600 = +30
+  const t = resultadoTotal(resumo, posicoes, 25);
+  assert.deepEqual([t.valorizacao, t.vendas, t.rendimentos, t.total], [30, 40, 25, 95]);
+  assert.equal(t.totalPct, 9.5);                                                     // 95 ÷ 1.000 aplicado
+});

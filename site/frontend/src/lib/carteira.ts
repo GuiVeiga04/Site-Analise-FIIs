@@ -23,6 +23,8 @@ export interface Posicao {
   precoMedio: number;   // 0 quando a posição foi zerada
   custo: number;        // quantidade × preço médio
   primeiraCompra: string | null;
+  totalComprado: number;       // soma de todas as compras (R$), inclusive de cotas já vendidas
+  resultadoRealizado: number;  // lucro/prejuízo nas vendas: (preço de venda − preço médio) × cotas vendidas
 }
 
 export const PADRAO_TICKER = /^[A-Z]{4}1[1-3]$/;
@@ -41,13 +43,17 @@ export function ordenar(ops: Operacao[]): Operacao[] {
 export function calcularPosicoes(ops: Operacao[]): Posicao[] {
   const mapa = new Map<string, Posicao>();
   for (const op of ordenar(ops)) {
-    const p = mapa.get(op.ticker) ?? { ticker: op.ticker, quantidade: 0, precoMedio: 0, custo: 0, primeiraCompra: null };
+    const p = mapa.get(op.ticker) ?? {
+      ticker: op.ticker, quantidade: 0, precoMedio: 0, custo: 0, primeiraCompra: null, totalComprado: 0, resultadoRealizado: 0,
+    };
     if (op.tipo === "compra") {
       p.custo += op.quantidade * op.preco;
+      p.totalComprado += op.quantidade * op.preco;
       p.quantidade += op.quantidade;
       p.primeiraCompra ??= op.data;
     } else {
       const vendidas = Math.min(op.quantidade, p.quantidade);
+      p.resultadoRealizado += vendidas * (op.preco - p.precoMedio);
       p.custo -= vendidas * p.precoMedio;
       p.quantidade -= vendidas;
     }
@@ -223,4 +229,101 @@ export function resumirCarteira(posicoes: Posicao[], info: Map<string, InfoFundo
     porSegmento: fatiar(linhas, (l) => info.get(l.ticker)?.segmento_padrao || info.get(l.ticker)?.segmento || "Sem segmento", valor),
     porTipo: fatiar(linhas, (l) => info.get(l.ticker)?.tipo_gestao || "Sem tipo", valor),
   };
+}
+
+// ---------------------------------------------------------------------------
+// Bloco 4: rendimentos recebidos e resultado total
+// ---------------------------------------------------------------------------
+
+export interface ProventoFundo { dataEx: string; valor: number }
+
+export interface RendimentoRecebido {
+  ticker: string;
+  dataEx: string;
+  valorPorCota: number;
+  cotas: number;   // cotas que você tinha na véspera da data-ex (data-com)
+  valor: number;   // cotas × valor por cota
+}
+
+/** Quantas cotas a pessoa tinha ao fim do dia anterior à data-ex: conta toda
+ *  operação com data ANTES da data-ex. Quem compra na própria data-ex não leva o
+ *  rendimento; quem vende na data-ex ainda leva (tinha a cota na data-com). */
+export function cotasNaDataCom(ops: Operacao[], ticker: string, dataEx: string): number {
+  let q = 0;
+  for (const o of ops) {
+    if (o.ticker !== ticker || o.data >= dataEx) continue;
+    q += o.tipo === "compra" ? o.quantidade : -o.quantidade;
+  }
+  return Math.max(0, q);
+}
+
+/** Todo rendimento com data-ex até hoje em que a pessoa tinha cotas. Mais recente primeiro. */
+export function rendimentosRecebidos(ops: Operacao[], proventos: Map<string, ProventoFundo[]>, hoje: string): RendimentoRecebido[] {
+  const lista: RendimentoRecebido[] = [];
+  for (const ticker of new Set(ops.map((o) => o.ticker))) {
+    const primeira = ops.filter((o) => o.ticker === ticker).reduce((m, o) => (o.data < m ? o.data : m), "9999-12-31");
+    for (const p of proventos.get(ticker) ?? []) {
+      if (!(p.valor > 0) || p.dataEx <= primeira || p.dataEx > hoje) continue;
+      const cotas = cotasNaDataCom(ops, ticker, p.dataEx);
+      if (cotas > 0) lista.push({ ticker, dataEx: p.dataEx, valorPorCota: p.valor, cotas, valor: cotas * p.valor });
+    }
+  }
+  return lista.sort((a, b) => b.dataEx.localeCompare(a.dataEx) || a.ticker.localeCompare(b.ticker));
+}
+
+export interface ResumoRendimentos {
+  total: number;
+  ultimos12m: number;
+  mediaMensal12m: number;
+  /** um ponto por mês (YYYY-MM), sem buracos, do mês da primeira operação até o mês de hoje */
+  porMes: { mes: string; valor: number }[];
+  porFundo: { ticker: string; total: number; pagamentos: number; ultimo: string }[];
+}
+
+const somarMeses = (mes: string, n: number) => {
+  const [a, m] = mes.split("-").map(Number);
+  const d = new Date(Date.UTC(a, m - 1 + n, 1));
+  return d.toISOString().slice(0, 7);
+};
+
+export function resumirRendimentos(lista: RendimentoRecebido[], primeiraOperacao: string | null, hoje: string): ResumoRendimentos {
+  const total = lista.reduce((s, r) => s + r.valor, 0);
+  const mesHoje = hoje.slice(0, 7);
+  const inicio12 = somarMeses(mesHoje, -11);      // 12 meses: os 11 anteriores + o atual
+  const ultimos12m = lista.filter((r) => r.dataEx.slice(0, 7) >= inicio12).reduce((s, r) => s + r.valor, 0);
+
+  const porMesMapa = new Map<string, number>();
+  for (const r of lista) porMesMapa.set(r.dataEx.slice(0, 7), (porMesMapa.get(r.dataEx.slice(0, 7)) ?? 0) + r.valor);
+  const porMes: { mes: string; valor: number }[] = [];
+  if (primeiraOperacao) {
+    for (let m = primeiraOperacao.slice(0, 7); m <= mesHoje; m = somarMeses(m, 1)) porMes.push({ mes: m, valor: porMesMapa.get(m) ?? 0 });
+  }
+
+  const fundos = new Map<string, { ticker: string; total: number; pagamentos: number; ultimo: string }>();
+  for (const r of lista) {
+    const f = fundos.get(r.ticker) ?? { ticker: r.ticker, total: 0, pagamentos: 0, ultimo: "" };
+    f.total += r.valor; f.pagamentos += 1; if (r.dataEx > f.ultimo) f.ultimo = r.dataEx;
+    fundos.set(r.ticker, f);
+  }
+  // média sobre os meses em que a carteira existiu dentro da janela (no máximo 12)
+  const mesesNaJanela = porMes.filter((p) => p.mes >= inicio12).length || 1;
+  return {
+    total, ultimos12m, mediaMensal12m: ultimos12m / mesesNaJanela, porMes,
+    porFundo: [...fundos.values()].sort((a, b) => b.total - a.total || a.ticker.localeCompare(b.ticker)),
+  };
+}
+
+export interface ResultadoTotal {
+  valorizacao: number;   // cotas que você ainda tem: valor atual − custo
+  vendas: number;        // lucro/prejuízo já realizado nas vendas
+  rendimentos: number;   // tudo que caiu de rendimento
+  total: number;
+  totalPct: number | null; // sobre tudo que você já aplicou em compras
+}
+
+export function resultadoTotal(resumo: ResumoCarteira, posicoes: Posicao[], rendimentos: number): ResultadoTotal {
+  const vendas = posicoes.reduce((s, p) => s + p.resultadoRealizado, 0);
+  const aplicado = posicoes.reduce((s, p) => s + p.totalComprado, 0);
+  const total = resumo.resultado + vendas + rendimentos;
+  return { valorizacao: resumo.resultado, vendas, rendimentos, total, totalPct: aplicado > 0 ? (total / aplicado) * 100 : null };
 }
