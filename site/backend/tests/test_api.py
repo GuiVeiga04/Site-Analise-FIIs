@@ -72,3 +72,9 @@ def test_snapshot_tem_checklist():
     d = client.get("/api/snapshot").json()
     assert all(x["checklist_sinal"] in {"verde", "amarelo", "vermelho", "cinza"} for x in d)
     assert all(isinstance(x["checklist"], list) for x in d)
+
+
+def test_snapshot_traz_cnpj_para_o_ir():
+    dados = {d["ticker"]: d for d in client.get("/api/snapshot").json()}
+    assert dados["HGLG11"]["cnpj"] == "11.728.688/0001-47"
+    assert sum(1 for d in dados.values() if d["cnpj"]) >= len(dados) * 0.8

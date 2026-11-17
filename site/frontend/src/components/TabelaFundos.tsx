@@ -15,7 +15,7 @@ const COLUNAS: { chave: Chave; titulo: string; num?: boolean }[] = [
   { chave: "p_vp", titulo: "P/VP", num: true },
   { chave: "dy_12m_pct", titulo: "DY 12m", num: true },
   { chave: "ultimo_dividendo", titulo: "Último dividendo", num: true },
-  { chave: "variacao_periodo_pct", titulo: "Variação período", num: true },
+  { chave: "variacao_periodo_pct", titulo: "Variação 12m", num: true },
   { chave: "volume_financeiro_medio", titulo: "Liquidez média/dia", num: true },
   { chave: "rank_liquidez", titulo: "Liquidez" },
 ];

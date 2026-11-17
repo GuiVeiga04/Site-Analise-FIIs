@@ -58,7 +58,7 @@ export function Insights({ fundos }: { fundos: FundoSnapshot[] }) {
   if (maiorAlta && maiorQueda && maiorAlta.ticker !== maiorQueda.ticker) {
     itens.push(
       <li key="var">
-        Maior alta do período: <b>{maiorAlta.ticker}</b> ({pct(maiorAlta.variacao_periodo_pct)}). Maior queda:{" "}
+        Maior alta em 12 meses: <b>{maiorAlta.ticker}</b> ({pct(maiorAlta.variacao_periodo_pct)}). Maior queda:{" "}
         <b>{maiorQueda.ticker}</b> ({pct(maiorQueda.variacao_periodo_pct)}).
       </li>,
     );

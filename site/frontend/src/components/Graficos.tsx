@@ -82,7 +82,7 @@ export function DispersaoLiquidez({ fundos }: { fundos: FundoSnapshot[] }) {
   const pontos = fundos.filter((f) => (f.volume_financeiro_medio ?? 0) > 0 && f.variacao_periodo_pct != null);
   return (
     <div className="card">
-      <div className="chart-title">Liquidez × variação de preço no período</div>
+      <div className="chart-title">Liquidez × variação de preço em 12 meses</div>
       <div className="chart-sub">
         Eixo X em escala logarítmica. Fundos pouco negociados com variação forte podem ter o preço movido por poucos negócios.
       </div>

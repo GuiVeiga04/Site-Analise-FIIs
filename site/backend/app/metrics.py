@@ -32,6 +32,7 @@ CAMPOS_SNAPSHOT = {
     "Tipo_Gestao": "tipo_gestao",
     "Segmento": "segmento",
     "Segmento_Padrao": "segmento_padrao",
+    "CNPJ": "cnpj",
     "Data_Pregao": "data_pregao",
     "Preco_Fechamento_R$": "preco",
     "Variacao_Dia_%": "variacao_dia_pct",

@@ -8,6 +8,7 @@ import Carteira from "./pages/Carteira";
 import Comparar from "./pages/Comparar";
 import DetalheFundo from "./pages/DetalheFundo";
 import Entrar from "./pages/Entrar";
+import ImpostoRenda from "./pages/ImpostoRenda";
 import Metodologia from "./pages/Metodologia";
 import NovaSenha from "./pages/NovaSenha";
 import VisaoGeral from "./pages/VisaoGeral";
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/calculadora" element={<Calculadora />} />
           <Route path="/metodologia" element={<Metodologia />} />
           <Route path="/carteira" element={<Carteira />} />
+          <Route path="/carteira/ir" element={<ImpostoRenda />} />
           <Route path="/entrar" element={<Entrar />} />
           <Route path="/nova-senha" element={<NovaSenha />} />
           <Route path="*" element={<Navigate to="/" replace />} />

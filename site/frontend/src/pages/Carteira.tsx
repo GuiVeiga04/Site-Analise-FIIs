@@ -1,15 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useMemo, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { api } from "../api/client";
 import { FormOperacao } from "../components/FormOperacao";
 import { DivisaoCarteira, KpisCarteira, TabelaPosicao } from "../components/PainelCarteira";
 import { RendimentosCarteira } from "../components/RendimentosCarteira";
+import { ContaCard } from "../components/ContaCard";
+import { ImportarExportar } from "../components/ImportarExportar";
 import { Estado } from "../components/ui";
 import { useAuth } from "../lib/auth";
 import {
   calcularPosicoes, hojeIso, primeiraVendaSemCotas, rendimentosRecebidos, resultadoTotal, resumirCarteira, resumirRendimentos,
-  type Operacao, type ProventoFundo,
+  type Operacao,
 } from "../lib/carteira";
+import { useProventos } from "../lib/useProventos";
 import { excluirOperacao, useOperacoes } from "../lib/carteiraApi";
 import { brl, data, inteiro } from "../lib/format";
 import { useAsync } from "../lib/useAsync";
@@ -19,6 +22,7 @@ import { useAsync } from "../lib/useAsync";
  * Bloco 2: lançar, editar e excluir compras e vendas; posição e preço médio.
  * Bloco 3: valor atual, resultado, renda, yield on cost e divisão por segmento/tipo.
  * Bloco 4: rendimentos recebidos e resultado total (cotas + vendas + rendimentos).
+ * Bloco 5: importar/exportar planilha e excluir a conta.
  */
 export default function Carteira() {
   const auth = useAuth();
@@ -36,17 +40,7 @@ export default function Carteira() {
   const temPosicao = resumo.linhas.length > 0;
 
   // Rendimentos de cada fundo que já passou pela carteira (mesmo os vendidos)
-  const tickersOps = useMemo(() => [...new Set(ops.map((o) => o.ticker))].sort().join(","), [ops]);
-  const [proventos, setProventos] = useState<Map<string, ProventoFundo[]> | null>(null);
-  useEffect(() => {
-    if (!tickersOps) { setProventos(new Map()); return; }
-    let vivo = true;
-    setProventos(null);
-    Promise.all(tickersOps.split(",").map((t) =>
-      api.dividendos(t).then((d) => [t, d.map((x) => ({ dataEx: x.data_ex, valor: x.valor }))] as const).catch(() => [t, []] as const),
-    )).then((pares) => { if (vivo) setProventos(new Map(pares.map(([t, d]) => [t, [...d]]))); });
-    return () => { vivo = false; };
-  }, [tickersOps]);
+  const proventos = useProventos(ops);
   const recebidosLista = useMemo(() => (proventos ? rendimentosRecebidos(ops, proventos, hojeIso()) : []), [ops, proventos]);
   const primeiraOp = useMemo(() => ops.reduce<string | null>((m, o) => (!m || o.data < m ? o.data : m), null), [ops]);
   const rend = useMemo(() => resumirRendimentos(recebidosLista, primeiraOp, hojeIso()), [recebidosLista, primeiraOp]);
@@ -85,6 +79,7 @@ export default function Carteira() {
           <p>Conectado como <b>{auth.usuario.email}</b>. Lance cada compra e venda; o site calcula a posição e o preço médio.</p>
         </div>
         <div className="head-acoes">
+          <Link className="btn" to="/carteira/ir">Imposto de Renda</Link>
           <button className="btn" onClick={() => auth.sair()}>Sair</button>
         </div>
       </div>
@@ -167,6 +162,11 @@ export default function Carteira() {
             </div>
           )}
         </div>
+      </section>
+      <section className="carteira-grid carteira-grid-fim">
+        <ImportarExportar ops={ops} posicoes={resumo.linhas} tickers={new Set(porTicker.keys())}
+          onImportado={async (n) => { setAviso(`${n} operaç${n === 1 ? "ão importada" : "ões importadas"}.`); await recarregar(); }} />
+        <ContaCard email={auth.usuario.email ?? ""} ops={ops} />
       </section>
     </>
   );

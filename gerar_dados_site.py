@@ -101,24 +101,39 @@ def classificar_liquidez(serie_volume_financeiro_medio: pd.Series) -> pd.Series:
     return serie_volume_financeiro_medio.apply(rotulo)
 
 
+# Janelas das métricas do snapshot. O histórico pode ter anos (carga
+# retroativa de 5 anos), mas liquidez e volatilidade precisam ser RECENTES e a
+# "variação do período" é sempre dos últimos 12 meses.
+JANELA_PERIODO_DIAS = 365
+JANELA_LIQUIDEZ_DIAS = 90
+
+
 def montar_snapshot(df: pd.DataFrame) -> pd.DataFrame:
-    """Uma linha por ticker com a foto mais recente + métricas agregadas do
-    período todo coletado (não só do último dia)."""
+    """Uma linha por ticker com a foto mais recente + métricas agregadas:
+    - variação, mínimo e máximo de preço: últimos 12 meses (JANELA_PERIODO_DIAS);
+    - volume financeiro médio e volatilidade: últimos 90 dias (JANELA_LIQUIDEZ_DIAS);
+    - Qtde_Pregoes_Coletados: o histórico todo.
+    As janelas contam a partir do último pregão da base."""
     ultima_data = df["Data_Pregao"].max()
     df_ultimo = df[df["Data_Pregao"] == df.groupby("Ticker")["Data_Pregao"].transform("max")]
+    periodo = df[df["Data_Pregao"] > ultima_data - pd.Timedelta(days=JANELA_PERIODO_DIAS)]
+    recente = df[df["Data_Pregao"] > ultima_data - pd.Timedelta(days=JANELA_LIQUIDEZ_DIAS)]
 
-    agregados = df.groupby("Ticker").agg(
+    agregados = periodo.groupby("Ticker").agg(
         Preco_Min_Periodo=("Preco_Fechamento_R$", "min"),
         Preco_Max_Periodo=("Preco_Fechamento_R$", "max"),
+    )
+    agregados = agregados.join(recente.groupby("Ticker").agg(
         Volume_Financeiro_Medio=("Volume_Financeiro_R$", "mean"),
         Volatilidade_Retorno_Diario_pct=("Variacao_Dia_%", "std"),
-        Qtde_Pregoes_Coletados=("Data_Pregao", "nunique"),
-    )
+    ), how="outer")
+    agregados = agregados.join(df.groupby("Ticker").agg(Qtde_Pregoes_Coletados=("Data_Pregao", "nunique")), how="outer")
 
-    primeiro_preco = df.sort_values("Data_Pregao").groupby("Ticker")["Preco_Fechamento_R$"].first()
-    ultimo_preco = df.sort_values("Data_Pregao").groupby("Ticker")["Preco_Fechamento_R$"].last()
-    variacao_periodo = ((ultimo_preco / primeiro_preco - 1) * 100).round(2)
-    agregados["Variacao_Periodo_%"] = variacao_periodo
+    ordenado = periodo.dropna(subset=["Preco_Fechamento_R$"]).sort_values("Data_Pregao")
+    primeiro_preco = ordenado.groupby("Ticker")["Preco_Fechamento_R$"].first()
+    ultimo_preco = ordenado.groupby("Ticker")["Preco_Fechamento_R$"].last()
+    agregados["Variacao_Periodo_%"] = ((ultimo_preco / primeiro_preco - 1) * 100).round(2)
+    agregados = agregados.reset_index()
 
     snapshot = df_ultimo.merge(agregados, on="Ticker")
     snapshot["Classificacao_Liquidez"] = classificar_liquidez(snapshot["Volume_Financeiro_Medio"])
@@ -315,7 +330,7 @@ def anexar_fundamentos(snapshot: pd.DataFrame, cvm: pd.DataFrame, fundamentus: p
     out = snapshot.copy()
     novas = ["VP_Cota", "Data_Ref_VP", "P_VP", "Fonte_P_VP", "VP_Var_12m_%", "Patrimonio_Liquido",
              "Cotistas", "Cotistas_Var_12m_%", "Vacancia_%", "Cap_Rate_%", "Qtd_Imoveis", "FFO_Yield_%",
-             "Spread_CDI_Liquido_pp", "DY_Real_%", "P_VP_Mediana_Pares", "P_VP_vs_Pares"]
+             "Spread_CDI_Liquido_pp", "DY_Real_%", "P_VP_Mediana_Pares", "P_VP_vs_Pares", "CNPJ"]
     for c in novas:
         out[c] = None
 
@@ -344,6 +359,8 @@ def anexar_fundamentos(snapshot: pd.DataFrame, cvm: pd.DataFrame, fundamentus: p
                     out.at[i, "VP_Var_12m_%"] = round((float(u["VP_Cota"]) / vp_ant - 1) * 100, 2)
             if len(c):
                 u = c.iloc[-1]
+                if pd.notna(u.get("CNPJ")):
+                    out.at[i, "CNPJ"] = str(u["CNPJ"])   # declaração de IR (Bens e Direitos, rendimentos)
                 if pd.notna(u.get("Patrimonio_Liquido")):
                     out.at[i, "Patrimonio_Liquido"] = float(u["Patrimonio_Liquido"])
                 c_ct = c.dropna(subset=["Cotistas"])

@@ -10,6 +10,8 @@ export interface Fundo {
   segmento: string | null;
   /** Segmento de uma lista curta (Logística, Shoppings, Recebíveis (CRI)...), usado nos pares e no filtro */
   segmento_padrao?: string | null;
+  /** CNPJ do fundo (informe da CVM), para a declaração de IR */
+  cnpj?: string | null;
 }
 
 export interface Meta {

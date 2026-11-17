@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../lib/auth";
 import { senhaValida } from "../lib/authUtil";
 import { GOOGLE_CLIENT_ID, carregarGoogle, novoNonce } from "../lib/googleGis";
+import { CHAVE_CONTA_EXCLUIDA } from "../components/ContaCard";
 
 type Aba = "entrar" | "criar" | "esqueci";
 
@@ -18,6 +19,14 @@ export default function Entrar() {
   const [enviando, setEnviando] = useState(false);
 
   useEffect(() => { setErro(null); setAviso(null); }, [aba]);
+  // Acabou de excluir a conta: confirma na tela de entrar
+  useEffect(() => {
+    if (auth.usuario || auth.carregando) return;   // só depois que a sessão já foi encerrada
+    try {
+      const email = sessionStorage.getItem(CHAVE_CONTA_EXCLUIDA);
+      if (email) { sessionStorage.removeItem(CHAVE_CONTA_EXCLUIDA); setAviso(`Conta ${email} excluída, com todas as operações.`); }
+    } catch { /* navegação privada */ }
+  }, [auth.usuario, auth.carregando]);
   useEffect(() => {
     if (auth.erroRetorno) { setErro(auth.erroRetorno); auth.limparErroRetorno(); }
   }, [auth.erroRetorno]); // eslint-disable-line react-hooks/exhaustive-deps

@@ -17,6 +17,8 @@ export default function Metodologia() {
       <p><b>DY 12m</b> é a soma dos rendimentos com data-ex nos últimos 12 meses dividida pelo preço atual da cota.
         <b> DY do mês</b> é só o último rendimento dividido pelo preço atual. Os dois usam o último pregão como
         referência, então sobem quando o preço cai (sem o fundo pagar mais).</p>
+      <p>A <b>variação</b>, o preço mínimo e o máximo da tabela são dos <b>últimos 12 meses</b>; a liquidez média e a
+        volatilidade, dos <b>últimos 90 dias</b>, mesmo quando o histórico de preços é mais longo.</p>
       <p>A comparação com <b>os pares</b> usa a mediana do DY 12m do mesmo segmento padronizado (Logística,
         Shoppings, Recebíveis (CRI), Lajes corporativas...). Quando o segmento tem menos de 3 fundos, a régua passa a
         ser o tipo de gestão (Papel, Tijolo...).</p>

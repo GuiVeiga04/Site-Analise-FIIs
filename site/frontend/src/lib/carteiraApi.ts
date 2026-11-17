@@ -36,6 +36,33 @@ export async function incluirOperacao(op: Operacao): Promise<Operacao> {
   return normalizar(data);
 }
 
+/** Várias de uma vez (importação), em lotes de 500. */
+export async function incluirOperacoes(ops: Operacao[]): Promise<number> {
+  let total = 0;
+  for (let i = 0; i < ops.length; i += 500) {
+    const { data, error } = await supabase.from("operacoes").insert(ops.slice(i, i + 500).map(semId)).select("id");
+    if (error) throw new Error(traduzirErro(error.message) + (total ? ` (${total} já tinham sido importadas)` : ""));
+    total += data?.length ?? 0;
+  }
+  return total;
+}
+
+/**
+ * Apaga a conta e todas as operações. Quem faz isso é a função
+ * public.excluir_minha_conta() no banco (security definer): o navegador não tem
+ * permissão de apagar usuários, e a função só apaga o usuário que a chamou.
+ */
+export async function excluirConta(): Promise<void> {
+  const { error } = await supabase.rpc("excluir_minha_conta");
+  if (error) {
+    if (/could not find the function|does not exist|PGRST202/i.test(error.message + (error.code ?? "")))
+      throw new Error("A função de exclusão ainda não foi criada no Supabase (falta rodar o SQL do bloco 5).");
+    throw new Error(traduzirErro(error.message));
+  }
+  // O usuário já não existe: só limpa a sessão guardada neste navegador
+  await supabase.auth.signOut({ scope: "local" });
+}
+
 export async function atualizarOperacao(op: Operacao): Promise<Operacao> {
   if (op.id == null) throw new Error("Operação sem id");
   const { data, error } = await supabase.from("operacoes").update(semId(op)).eq("id", op.id).select(COLUNAS).single();

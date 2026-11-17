@@ -57,6 +57,7 @@ class FundoSnapshot(BaseModel):
     tipo_gestao: str | None
     segmento: str | None
     segmento_padrao: str | None = None
+    cnpj: str | None = None
     data_pregao: str
     preco: float | None
     variacao_dia_pct: float | None
